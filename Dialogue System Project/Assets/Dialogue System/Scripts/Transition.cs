@@ -5,11 +5,10 @@ using UnityEngine;
 namespace Dialogue
 {
     [System.Serializable]
-    public class Response
+    public class Transition
     {
-        public string Text;
-        public int selectedEntry;//HACK
-        public TransitionList transitions;
+        public int TargetID;
+        // TODO include OnTransition event
+        
     }
-
 }

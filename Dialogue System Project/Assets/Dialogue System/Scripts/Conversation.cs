@@ -9,5 +9,18 @@ namespace Dialogue
     {
         //HACK maybe write a serializable dictionary?
         public List<DialogueEntry> Entries;
+
+
+        public DialogueEntry FindEntry(int id)
+        {
+            DialogueEntry entry = Entries.Find(e => e.ID == id);
+            return entry;
+        }
+
+        public DialogueEntry FindEntry(string title)
+        {
+            DialogueEntry entry = Entries.Find(e => e.Title == title);
+            return entry;
+        }
     }
 }

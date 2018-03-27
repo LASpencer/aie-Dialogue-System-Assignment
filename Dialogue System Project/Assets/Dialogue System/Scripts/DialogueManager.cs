@@ -27,28 +27,30 @@ namespace Dialogue
         // Update is called once per frame
         void Update()
         {
-            
+
         }
 
         public void StartConversation()
         {
             // TODO will need to be told which conversation to start
+            // TODO maybe get entry titled START?
             current = conversation.Entries[0];
             UISystem.OnConversationStart();
         }
 
         public void NextEntry()
         {
-            if(current != null)
+            if (current != null)
             {
                 // HACK 
-                if(current.isEnd)
+                if (current.isEnd)
                 {
                     EndConversation();
                 }
                 else
                 {
-                    current = conversation.Entries[current.Next];
+                    Transition selectedTransition = current.transitions.SelectTransition(this);
+                    current = conversation.FindEntry(selectedTransition.TargetID);
                     UISystem.SetDialogueEntry(current);
                 }
             }
@@ -62,11 +64,15 @@ namespace Dialogue
 
         public void ResponseSelected(int id)
         {
-            if(id >= 0 && id < current.Responses.Count)
+            //HACK might replace argument with response, and have UI manager know about responses?
+            if (id >= 0 && id < current.Responses.Count)
             {
-                current = conversation.Entries[current.Responses[id].selectedEntry];
+                Transition selectedTransition = current.Responses[id].transitions.SelectTransition(this);
+
+                current = conversation.FindEntry(selectedTransition.TargetID);
                 UISystem.SetDialogueEntry(current);
             }
         }
+
     }
 }

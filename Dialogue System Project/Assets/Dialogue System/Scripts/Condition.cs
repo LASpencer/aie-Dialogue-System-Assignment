@@ -6,21 +6,8 @@ namespace Dialogue
 {
     public class Condition : ScriptableObject
     {
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         // TODO figure out what should be passed
-        virtual public bool Evaluate()
+        virtual public bool Evaluate(DialogueManager dialogue)
         {
 
             return true;
