@@ -2,54 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldManager {
-
-    HashSet<string> flags;
-    // Might change all fields to a single hashtable, do boxing/unboxing here?
-    // What to do about collisions though?
-    Dictionary<string, float> numbers;
-
-    public FieldManager()
+namespace Dialogue
+{
+    public class FieldManager
     {
-        flags = new HashSet<string>();
-        numbers = new Dictionary<string, float>();
-    }
 
-    public void SetFlag(string flag)
-    {
-        flags.Add(flag);
-    }
+        HashSet<string> flags;
+        // Might change all fields to a single hashtable, do boxing/unboxing here?
+        // What to do about collisions though?
+        Dictionary<string, float> numbers;
 
-    public void UnsetFlag(string flag)
-    {
-        flags.Remove(flag);
-    }
+        public FieldManager()
+        {
+            flags = new HashSet<string>();
+            numbers = new Dictionary<string, float>();
+        }
 
-    public bool CheckFlag(string flag)
-    {
-        return flags.Contains(flag);
-    }
+        public void SetFlag(string flag)
+        {
+            flags.Add(flag);
+        }
 
-    public void ClearFlags()
-    {
-        flags.Clear();
-    }
+        public void UnsetFlag(string flag)
+        {
+            flags.Remove(flag);
+        }
 
-    public void SetNumber(string name, float value)
-    {
-        numbers[name] = value;
-    }
+        public bool CheckFlag(string flag)
+        {
+            return flags.Contains(flag);
+        }
 
-    public float GetNumber(string name)
-    {
-        //HACK figure out how to deal with null values
-        float value;
-        numbers.TryGetValue(name, out value);
-        return value;
-    }
+        public void ClearFlags()
+        {
+            flags.Clear();
+        }
 
-    public void ClearNumbers()
-    {
-        numbers.Clear();
+        public void SetNumber(string name, float value)
+        {
+            numbers[name] = value;
+        }
+
+        public float GetNumber(string name)
+        {
+            //HACK figure out how to deal with null values
+            float value;
+            numbers.TryGetValue(name, out value);
+            return value;
+        }
+
+        public void ClearNumbers()
+        {
+            numbers.Clear();
+        }
     }
 }

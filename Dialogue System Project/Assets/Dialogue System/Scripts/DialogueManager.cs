@@ -20,6 +20,16 @@ namespace Dialogue
         //TODO have some way to save fields between scenes?
         FieldManager fields;
 
+        private void Awake()
+        {
+            fields = new FieldManager();
+        }
+
+        private void Reset()
+        {
+            fields = new FieldManager();
+        }
+
         // Use this for initialization
         void Start()
         {
@@ -70,6 +80,12 @@ namespace Dialogue
             //HACK might replace argument with response, and have UI manager know about responses?
             if (id >= 0 && id < current.Responses.Count)
             {
+                DialogueEvent e = current.Responses[id].OnChosen;
+                if(e != null)
+                {
+                    e.Execute(this);
+                }
+
                 Transition selectedTransition = current.Responses[id].transitions.SelectTransition(this);
 
                 current = conversation.FindEntry(selectedTransition.TargetID);

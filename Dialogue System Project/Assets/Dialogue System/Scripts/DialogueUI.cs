@@ -33,7 +33,11 @@ namespace Dialogue {
                 {
                     if (Input.GetKeyDown("" + i))
                     {
-                        manager.ResponseSelected(i);
+                        //HACK
+                        if (manager.current.Responses[i].CheckPrerequisite(manager))
+                        {
+                            manager.ResponseSelected(i);
+                        }
                     }
                 }
             } else
@@ -62,8 +66,12 @@ namespace Dialogue {
                 System.Text.StringBuilder responseTextBuilder = new System.Text.StringBuilder();
                 for (int i = 0; i < entry.Responses.Count; ++i)
                 {
-                    responseTextBuilder.Append(i);
-                    responseTextBuilder.Append(": " + entry.Responses[i].Text + "\n");
+                    //HACK
+                    if (entry.Responses[i].CheckPrerequisite(manager))
+                    {
+                        responseTextBuilder.Append(i);
+                        responseTextBuilder.Append(": " + entry.Responses[i].Text + "\n");
+                    }
                 }
                 responseText.text = responseTextBuilder.ToString();
             }

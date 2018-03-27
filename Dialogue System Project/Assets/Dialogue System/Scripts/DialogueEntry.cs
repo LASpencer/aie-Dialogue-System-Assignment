@@ -10,7 +10,6 @@ namespace Dialogue {
         public string Title;
         public Actor Speaker;
         public string Text;     // HACK Replace with LocalizedString when created
-        public int Next;        // HACK replace with collection of transition, figure out what part of transition has conditions
         public TransitionList transitions;
         public bool isEnd;
 
