@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0dfc4cdfbc336499a7ace2cc0f2a68, type: 3}
   m_Name: Aurora Date Asked
   m_EditorClassIdentifier: 
-  Not: 0
-  Flag: 
+  Not: 1
+  Flag: Aurora Date Asked

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e0dfc4cdfbc336499a7ace2cc0f2a68, type: 3}
-  m_Name: New Flag Set Condition
+  m_Name: Aurora Location Asked
   m_EditorClassIdentifier: 
-  Not: 0
-  Flag: 
+  Not: 1
+  Flag: Aurora Location Asked

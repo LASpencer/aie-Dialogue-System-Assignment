@@ -17,7 +17,6 @@ MonoBehaviour:
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Doh, no, I said steamed hams. That's what I call hamburgers! It's a regional
       dialect.
-    Next: 1
     transitions:
       transitions: []
       defaultTransition:
@@ -25,19 +24,22 @@ MonoBehaviour:
     isEnd: 0
     Responses:
     - Text: Obviously grilled?
-      selectedEntry: 4
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
           TargetID: 4
     - Text: What region?
-      selectedEntry: 1
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
           TargetID: 1
     - Text: These taste familiar...
-      selectedEntry: 14
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
@@ -46,7 +48,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: Uh huh. What region?
-    Next: 2
     transitions:
       transitions: []
       defaultTransition:
@@ -57,7 +58,6 @@ MonoBehaviour:
     Title: START
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Upstate New York.
-    Next: 3
     transitions:
       transitions: []
       defaultTransition:
@@ -65,19 +65,22 @@ MonoBehaviour:
     isEnd: 0
     Responses:
     - Text: I'm from Utica
-      selectedEntry: 13
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
           TargetID: 13
     - Text: They're not steamed
-      selectedEntry: 5
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
           TargetID: 5
     - Text: I smell smoke!
-      selectedEntry: 11
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
@@ -86,7 +89,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Oh, not in Utica, no. It's an Albany expression
-    Next: 14
     transitions:
       transitions: []
       defaultTransition:
@@ -98,7 +100,6 @@ MonoBehaviour:
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: And you call them "Steamed Hams" despite the fact that they are obviously
       grilled.
-    Next: 5
     transitions:
       transitions: []
       defaultTransition:
@@ -109,7 +110,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Uh, um, er...
-    Next: 6
     transitions:
       transitions: []
       defaultTransition:
@@ -120,7 +120,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: well, the thing is...
-    Next: 7
     transitions:
       transitions: []
       defaultTransition:
@@ -131,7 +130,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Excuse me for one second.
-    Next: 8
     transitions:
       transitions: []
       defaultTransition:
@@ -142,7 +140,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: Of course.
-    Next: 9
     transitions:
       transitions: []
       defaultTransition:
@@ -153,7 +150,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: '*yawns* That was wonderful. A good time was had by all, I''m pooped.'
-    Next: 10
     transitions:
       transitions: []
       defaultTransition:
@@ -164,7 +160,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: Yes, I should be...
-    Next: 11
     transitions:
       transitions: []
       defaultTransition:
@@ -175,7 +170,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: Good lord, what is happening in there?
-    Next: 12
     transitions:
       transitions: []
       defaultTransition:
@@ -186,19 +180,17 @@ MonoBehaviour:
     Title: END
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Aurora Borealis.
-    Next: 13
     transitions:
       transitions: []
       defaultTransition:
-        TargetID: 0
-    isEnd: 1
+        TargetID: 18
+    isEnd: 0
     Responses: []
   - ID: 13
     Title: Utica
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: Really. Well I'm from Utica and I've never heard anyone use the phrase "Steamed
       Hams"
-    Next: 3
     transitions:
       transitions: []
       defaultTransition:
@@ -209,7 +201,6 @@ MonoBehaviour:
     Title: Krustyburgers
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: These hamburgers are quite similar to the ones they have at Krustyburger
-    Next: 15
     transitions:
       transitions: []
       defaultTransition:
@@ -220,7 +211,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Oh ho ho, no. Patented Skinnerburgers! Old family recipe.
-    Next: 16
     transitions:
       transitions: []
       defaultTransition:
@@ -231,7 +221,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
     Text: For steamed hams.
-    Next: 17
     transitions:
       transitions: []
       defaultTransition:
@@ -242,7 +231,6 @@ MonoBehaviour:
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Yes!
-    Next: 0
     transitions:
       transitions: []
       defaultTransition:
@@ -250,36 +238,84 @@ MonoBehaviour:
     isEnd: 0
     Responses:
     - Text: But they're grilled
-      selectedEntry: 4
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
           TargetID: 4
     - Text: Is that fire?
-      selectedEntry: 11
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
       transitions:
         transitions: []
         defaultTransition:
           TargetID: 11
   - ID: 18
-    Title: END
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
-    Text: Aurora Borealis.
-    Next: 13
+    Title: Aurora Borealis?
+    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    Text: Aurora Borealis?
     transitions:
       transitions: []
       defaultTransition:
         TargetID: 0
+    isEnd: 0
+    Responses:
+    - Text: At this time of day?
+      OnChosen: {fileID: 11400000, guid: b955ca02180b8854ea12dd86ac96ac9e, type: 2}
+      Prerequisite: {fileID: 11400000, guid: 9836a0b1e5364d9419537923a53afd5e, type: 2}
+      transitions:
+        transitions: []
+        defaultTransition:
+          TargetID: 18
+    - Text: At this time of year?
+      OnChosen: {fileID: 11400000, guid: 712f4c4db85761046a36ff765a3f028a, type: 2}
+      Prerequisite: {fileID: 11400000, guid: 7ee580c99ed852f48a51f35bbc66fac9, type: 2}
+      transitions:
+        transitions: []
+        defaultTransition:
+          TargetID: 18
+    - Text: In this part of the country?
+      OnChosen: {fileID: 11400000, guid: d0fa49f2120cf6e44b42d92e173f8832, type: 2}
+      Prerequisite: {fileID: 11400000, guid: 9e4c738877dd0fb42bbb8e203cf73a41, type: 2}
+      transitions:
+        transitions: []
+        defaultTransition:
+          TargetID: 18
+    - Text: Localized entirely in your kitchen?
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
+      transitions:
+        transitions: []
+        defaultTransition:
+          TargetID: 19
+  - ID: 19
+    Title: 
+    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    Text: Yes.
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 20
     isEnd: 0
     Responses: []
-  - ID: 19
-    Title: END
+  - ID: 20
+    Title: 
+    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    Text: May I see it?
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 21
+    isEnd: 0
+    Responses: []
+  - ID: 21
+    Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
-    Text: Aurora Borealis.
-    Next: 13
+    Text: No.
     transitions:
       transitions: []
       defaultTransition:
         TargetID: 0
-    isEnd: 0
+    isEnd: 1
     Responses: []
