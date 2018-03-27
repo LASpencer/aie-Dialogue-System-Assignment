@@ -17,6 +17,9 @@ namespace Dialogue
         public Text actorName;
         public Text responseText;
 
+        //TODO have some way to save fields between scenes?
+        FieldManager fields;
+
         // Use this for initialization
         void Start()
         {
@@ -74,5 +77,19 @@ namespace Dialogue
             }
         }
 
+        public void SetFlag(string flag)
+        {
+            fields.SetFlag(flag);
+        }
+
+        public void UnsetFlag(string flag)
+        {
+            fields.UnsetFlag(flag);
+        }
+
+        public bool CheckFlag(string flag)
+        {
+            return fields.CheckFlag(flag);
+        }
     }
 }
