@@ -15,7 +15,7 @@ namespace Dialogue
 
         Conversation conversation;
 
-        List<DialogueEditNode> nodes;
+        List<EditorNode> nodes;
 
         Rect nodePanel;
         Rect editPanel;
@@ -54,6 +54,7 @@ namespace Dialogue
             DrawEditPanel();
             DrawResizeBar();
 
+            ProcessNodeEvents(Event.current);
             ProcessEvents(Event.current);
             if (GUI.changed)
             {
@@ -63,8 +64,8 @@ namespace Dialogue
 
         private void DrawNodePanel()
         {
-            editPanel = new Rect(0, 0, position.width * nodePanelWidth, position.height);
-            GUILayout.BeginArea(editPanel);
+            nodePanel = new Rect(0, 0, position.width * nodePanelWidth, position.height);
+            GUILayout.BeginArea(nodePanel);
             DrawNodes();
             GUILayout.EndArea();
         }
@@ -74,7 +75,7 @@ namespace Dialogue
             //TODO
             if(nodes != null)
             {
-                foreach(DialogueEditNode node in nodes)
+                foreach(EditorNode node in nodes)
                 {
                     node.Draw();
                 }
@@ -101,7 +102,7 @@ namespace Dialogue
 
         private void ProcessEvents(Event e)
         {
-            switch(e.type)
+            switch (e.type)
             {
                 case EventType.MouseDown:
                     if (e.button == 0 && resizeBar.Contains(e.mousePosition))
@@ -109,6 +110,8 @@ namespace Dialogue
                         isResizing = true;
                     } else if (e.button == 1)
                     {
+
+                        Debug.Log("RMB down");
                         // Dropdown menu on right click
                         ProcessContextMenu(e.mousePosition);
                     }
@@ -124,6 +127,20 @@ namespace Dialogue
                         ResizePanels(e);
                     }
                     break;
+                    // HACK add an EventType.Used to jump to for used event
+            }
+        }
+
+        private void ProcessNodeEvents(Event e)
+        {
+            if(nodes != null)
+            {
+                // Going backwards so last drawn is selected first
+                for(int i = nodes.Count - 1; i >= 0; --i)
+                {
+                    nodes[i].ProcessEvents(e);
+                    // HACK if e.type = EventType.Used, break loop
+                }
             }
         }
 
@@ -135,13 +152,19 @@ namespace Dialogue
 
         private void ProcessContextMenu(Vector2 mousePos)
         {
+
+            Debug.Log("Process context menu");
+            Debug.Log("Mousepos = " + mousePos.ToString() + "; nodePanel = " + nodePanel.ToString() + "; position = " + position.ToString());
             GenericMenu menu = new GenericMenu();
             // Set items based on area clicked
             if (nodePanel.Contains(mousePos))
             {
+
+                Debug.Log("Mouse with nodePanel, making nodePanel menu");
                 menu.AddItem(new GUIContent("Add dialogue entry"), false, () => OnClickAddNode(mousePos));
                 // TODO check if right clicked on node, do its menu instead
             }
+            menu.ShowAsContext();
         }
 
         private void OnClickAddNode(Vector2 pos)
@@ -149,10 +172,10 @@ namespace Dialogue
             // HACK will need to change once binding data to conversation entries
             if(nodes == null)
             {
-                nodes = new List<DialogueEditNode>();
+                nodes = new List<EditorNode>();
             }
 
-            nodes.Add(new DialogueEditNode(pos, NODE_WIDTH, NODE_HEIGHT, nodeStyle));
+            nodes.Add(new EditorNode(pos, NODE_WIDTH, NODE_HEIGHT, nodeStyle));
         }
     }
 }
