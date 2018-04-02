@@ -6,22 +6,29 @@ using System;
 
 namespace Dialogue
 {
-    class EditorNode
+    public class EditorNode
     {
         public Rect rect;
 
         public string title;
 
-        public GUIStyle style;
+        public GUIStyle Style;
+        public GUIStyle SelectedStyle;
 
-        //TODO figure out how best to display, link nodes with dialogue entries
+        public Action<EditorNode> OnRemove;
+
+        //TODO figure out how best to display, link nodes with dialogue entries + responses
 
         public bool isDragged;
 
-        public EditorNode(Vector2 position, float width, float height, GUIStyle nodeStyle)
+        public List<EditorConnector> Connections;
+
+        public EditorNode(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle)
         {
             rect = new Rect(position.x, position.y, width, height);
-            style = nodeStyle;
+            Style = nodeStyle;
+            SelectedStyle = selectedStyle;
+            Connections = new List<EditorConnector>();
         }
 
         public void Drag(Vector2 delta)
@@ -29,37 +36,59 @@ namespace Dialogue
             rect.position += delta;
         }
 
-        public void Draw()
+        public void Draw(bool selected)
         {
-            GUI.Box(rect, title, style);
+            if (selected)
+            {
+                GUI.Box(rect, title, SelectedStyle);
+            }
+            else
+            {
+                GUI.Box(rect, title, Style);
+            }
         }
 
-        public bool ProcessEvents(Event e)
+        public void ProcessEvents(Event e, DialogueEditorWindow window)
         {
-            bool consumed = false;
             // TODO clicking starts dragging , unclick stops, drag while dragging moves by delta
             switch (e.type)
             {
                 case EventType.MouseDown:
-                    if(e.button == 0)   //LMB
+                    if (rect.Contains(e.mousePosition))
                     {
-                        GUI.changed = true;// HACK not sure we need this?
-                        if (rect.Contains(e.mousePosition))
+                        switch (e.button)
                         {
-                            isDragged = true;
-                            //consumed = true //HACK I think we may need this?
+                            case 0://LMB
+                                GUI.changed = true;
+                                isDragged = true;
+                                window.SelectNode(this);
+                                e.Use();
+                                break;
+                            case 1: //RMB
+                                // Create dropdown menu
+                                ProcessContextMenu();
+                                e.Use();
+                                break;
+                            default:
+                                break;
                         }
                     }
                     break;
                 case EventType.MouseUp:
-                    isDragged = false;
+                    switch (e.button)
+                    {
+                        case 0: //LMB up
+                            isDragged = false;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case EventType.MouseDrag:
                     if(e.button == 0 && isDragged)  // LMB
                     {
                         Drag(e.delta);
                         e.Use();
-                        consumed = true;
                         GUI.changed = true;
                     }
                     break;
@@ -67,8 +96,21 @@ namespace Dialogue
                     break;
             }
             // Returns whether event consumed by node
-            return consumed;
         }
 
+        private void ProcessContextMenu()
+        {
+            GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Delete"), false, OnClickDelete);
+            menu.ShowAsContext();
+        }
+
+        private void OnClickDelete()
+        {
+            if(OnRemove != null)
+            {
+                OnRemove(this);
+            }
+        }
     }
 }
