@@ -310,6 +310,7 @@ namespace Dialogue
         {
             selectedNode = node;
             //TODO deselect connection if one selected
+            
         }
 
         private void OnRemoveNode(EditorNode node)

@@ -1,19 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Dialogue { 
 
     [System.Serializable]
-    public class DialogueEntry {
+    public class DialogueEntry  {
         public int ID;          //HACK needs some system to detect/resolve collisions
         public string Title;
-        public Actor Speaker;
+        public Actor Speaker;   //HACK might change to string, with conversation holding map of names to actor object
         public string Text;     // HACK Replace with LocalizedString when created
         public TransitionList transitions;
         public bool isEnd;
 
         [Header("Responses")]
         public List<Response> Responses;
+
+        public string Name()
+        {
+            if(!(string.IsNullOrEmpty(Title)))
+            {
+                return Title;
+            } else if (!string.IsNullOrEmpty(Text))
+            {
+                return Text;
+            } else
+            {
+                return "ID #" + ID.ToString();
+            }
+        }
 	}
 }
