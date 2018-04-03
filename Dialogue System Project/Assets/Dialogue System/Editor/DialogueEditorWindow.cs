@@ -23,6 +23,10 @@ namespace Dialogue
 
         EditorNode selectedNode;
 
+        EditorConnector selectedConnector;
+
+        public EditorConnector SelectedConnector { get { return selectedConnector; } }
+
         Rect nodePanel;
         Rect editPanel;
         Rect resizeBar;
@@ -34,6 +38,7 @@ namespace Dialogue
         
         // TODO maybe use an enum of states instead?
         bool isResizing;
+        bool isMovingCanvas;
 
         // HACK maybe edit panel should have absolute width?
         float nodePanelWidth = 0.8f;
@@ -58,10 +63,23 @@ namespace Dialogue
             selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
             selectedNodeStyle.border = new RectOffset(NODE_BORDER, NODE_BORDER, NODE_BORDER, NODE_BORDER);
 
+            // Test displaying connection
+            OnClickAddNode(new Vector2(100, 50));
+            OnClickAddNode(new Vector2(100, 450));
+            EditorConnector connection = new EditorConnector();
+            connection.Parent = nodes[0];
+            connection.Target = nodes[1];
+            nodes[0].Connections.Add(connection);
         }
 
         private void OnGUI()
         {
+            if(selectedConnector != null)
+            {
+                selectedConnector.FollowMouse(Event.current);
+                GUI.changed = true;
+            }
+
             DrawNodePanel();
             DrawEditPanel();
             DrawResizeBar();
@@ -87,7 +105,14 @@ namespace Dialogue
             //TODO drawing connections
             if(nodes != null)
             {
-                foreach(EditorNode node in nodes)
+                foreach (EditorNode node in nodes)
+                {
+                    foreach(EditorConnector connector in node.Connections)
+                    {
+                        connector.Draw();
+                    }
+                }
+                foreach (EditorNode node in nodes)
                 {
                     node.Draw(node == selectedNode);
                 }
@@ -115,6 +140,19 @@ namespace Dialogue
 
         private void ProcessEvents(Event e)
         {
+            switch (e.type)
+            {
+                case EventType.MouseDown:
+                    switch (e.button)
+                    {
+                        case 1:
+                            // Right click anywhere cancels make transition
+                            OnCancelMakeTransition();
+                            break;
+                    }
+                    break;
+            }
+
             ProcessResizeBarEvents(e);
             ProcessEditPanelEvents(e);
             ProcessNodeEvents(e);
@@ -175,7 +213,8 @@ namespace Dialogue
                                 e.Use();
                                 break;
                             case 2: //Middle
-                                // TODO start dragging canvas
+                                isMovingCanvas = true;
+                                e.Use();
                                 //TODO drag applies offset to grid
                                 break;
                         }
@@ -190,12 +229,18 @@ namespace Dialogue
                             // Don't think these matter to it
                             break;
                         case 2:
-                            //TODO stop dragging canvas
+                            // stop dragging canvas
+                            isMovingCanvas = false;
                             break;
                     }
                     break;
                 case EventType.MouseDrag:
                     // TODO if dragging with button 2, drag each node with negative delta
+                    foreach(EditorNode node in nodes)
+                    {
+                        node.Drag(e.delta);
+                        e.Use();
+                    }
                     break;
                 case EventType.Used:
                 default:
@@ -254,7 +299,7 @@ namespace Dialogue
             }
 
             EditorNode newNode = new EditorNode(pos, NODE_WIDTH, NODE_HEIGHT, nodeStyle, selectedNodeStyle);
-            newNode.OnRemove = OnRemoveNode;
+            SetupNodeActions(newNode);
             
             // TODO add to coversation
 
@@ -272,8 +317,38 @@ namespace Dialogue
             //TODO save current state to allow undoing?
 
             // TODO find all incoming connections to node and delete them
+            foreach(EditorNode otherNode in nodes)
+            {
+                otherNode.Connections.RemoveAll(c => c.Target == node);
+            }
             // TODO remove from conversation
             nodes.Remove(node);
+        }
+
+
+        void OnStartMakeTransition(EditorConnector connector)
+        {
+            selectedConnector = connector;
+        }
+
+        void OnCancelMakeTransition()
+        {
+            if (selectedConnector != null)
+            {
+                selectedConnector.Parent.Connections.Remove(selectedConnector);
+                selectedConnector = null;
+            }
+        }
+
+        public void OnFinishMakeTransition(EditorNode target)
+        {
+            selectedConnector = null;
+        }
+
+        void SetupNodeActions(EditorNode node)
+        {
+            node.OnRemove = OnRemoveNode;
+            node.OnStartMakeTransition = OnStartMakeTransition;
         }
     }
 }

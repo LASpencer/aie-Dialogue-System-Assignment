@@ -16,6 +16,7 @@ namespace Dialogue
         public GUIStyle SelectedStyle;
 
         public Action<EditorNode> OnRemove;
+        public Action<EditorConnector> OnStartMakeTransition;
 
         //TODO figure out how best to display, link nodes with dialogue entries + responses
 
@@ -59,10 +60,19 @@ namespace Dialogue
                         switch (e.button)
                         {
                             case 0://LMB
-                                GUI.changed = true;
-                                isDragged = true;
-                                window.SelectNode(this);
-                                e.Use();
+                                if (window.SelectedConnector == null)
+                                {
+                                    // If not making connection, select node
+                                    GUI.changed = true;
+                                    isDragged = true;
+                                    window.SelectNode(this);
+                                    e.Use();
+                                } else
+                                {
+                                    // If making connection, connect to this
+                                    OnClickAsTarget(window, window.SelectedConnector);
+                                    e.Use();
+                                }
                                 break;
                             case 1: //RMB
                                 // Create dropdown menu
@@ -101,6 +111,7 @@ namespace Dialogue
         private void ProcessContextMenu()
         {
             GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Add Transition"), false, OnClickNewTransition);
             menu.AddItem(new GUIContent("Delete"), false, OnClickDelete);
             menu.ShowAsContext();
         }
@@ -111,6 +122,24 @@ namespace Dialogue
             {
                 OnRemove(this);
             }
+        }
+
+        private void OnClickNewTransition()
+        {
+            if(OnStartMakeTransition != null)
+            {
+                EditorConnector newConnection = new EditorConnector();
+                newConnection.Parent = this;
+                Connections.Add(newConnection);
+                OnStartMakeTransition(newConnection);
+            }
+        }
+
+        private void OnClickAsTarget(DialogueEditorWindow window, EditorConnector connector)
+        {
+            //TODO check is valid target for connector (response not to response, transition can't already exist)
+            connector.Target = this;
+            window.OnFinishMakeTransition(this);
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace Dialogue
 {
     [System.Serializable]
-    public class Response
+    public class Response : Object
     {
         public string Text;
         public DialogueEvent OnChosen; //HACK maybe make a collection?
