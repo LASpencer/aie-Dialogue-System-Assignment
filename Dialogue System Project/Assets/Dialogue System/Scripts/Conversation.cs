@@ -10,6 +10,7 @@ namespace Dialogue
         //HACK maybe write a serializable dictionary?
         public List<DialogueEntry> Entries;
 
+        public DialogueEntry Start;
 
         public DialogueEntry FindEntry(int id)
         {

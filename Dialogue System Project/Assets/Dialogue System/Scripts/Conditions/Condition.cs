@@ -11,7 +11,7 @@ namespace Dialogue
         virtual public bool Evaluate(DialogueManager dialogue)
         {
 
-            return true;
+            return true != Not;
         }
     }
 }
