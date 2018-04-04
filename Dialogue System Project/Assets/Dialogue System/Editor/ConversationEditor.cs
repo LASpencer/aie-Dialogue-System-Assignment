@@ -27,7 +27,7 @@ namespace Dialogue
             selectedEntry = entries.GetArrayElementAtIndex(entrySelectedIndex);
             //entries = (target as Conversation).Entries;
             entrySelectedIndex = DialogueEntryPopup();
-            EditorGUILayout.PropertyField(selectedEntry, true);
+            EditorGUILayout.PropertyField(selectedEntry, GUIContent.none, true);
             // Do I need to use SerializedProperty/ApplyModifiedProperties?
             serializedObject.ApplyModifiedProperties();
             //base.OnInspectorGUI();

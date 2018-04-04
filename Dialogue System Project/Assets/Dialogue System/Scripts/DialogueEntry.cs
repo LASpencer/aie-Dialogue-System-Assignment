@@ -10,6 +10,7 @@ namespace Dialogue {
         public int ID;          //HACK needs some system to detect/resolve collisions
         public string Title;
         public Actor Speaker;   //HACK might change to string, with conversation holding map of names to actor object
+        [TextArea]
         public string Text;     // HACK Replace with LocalizedString when created
         public TransitionList transitions;
         public bool isEnd;
