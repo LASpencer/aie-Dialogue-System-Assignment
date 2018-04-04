@@ -22,7 +22,14 @@ namespace Dialogue
 
         public Transition SelectTransition(DialogueManager dialogue)
         {
-            // TODO go through list, select first which succeeds
+            // Return first transition to succeed
+            foreach(TransitionOption option in transitions)
+            {
+                if(option.condition == null || option.condition.Evaluate(dialogue))
+                {
+                    return option.transition;
+                }
+            }
             return defaultTransition;
         }
     }
