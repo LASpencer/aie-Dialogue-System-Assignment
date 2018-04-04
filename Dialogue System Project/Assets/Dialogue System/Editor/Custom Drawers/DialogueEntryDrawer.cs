@@ -7,12 +7,21 @@ using UnityEngine;
 
 namespace Dialogue
 {
+    enum ListActions
+    {
+        Nothing,
+        MoveUp,
+        MoveDown,
+        Delete
+    }
+
     [CustomPropertyDrawer(typeof(DialogueEntry))]
     class DialogueEntryEditor : PropertyDrawer
     {
         const float ID_LABEL_HEIGHT = 15;
         const float ID_LABEL_WIDTH = 25;
         const float LINE_MARGIN = 2;
+        const float MOVE_BUTTON_WIDTH = 20;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -27,7 +36,8 @@ namespace Dialogue
             SerializedProperty isEnd = property.FindPropertyRelative("isEnd");
             SerializedProperty text = property.FindPropertyRelative("Text");
             SerializedProperty transitions = property.FindPropertyRelative("transitions");
-            SerializedProperty responses = property.FindPropertyRelative("Responses");
+            SerializedProperty responsesList = property.FindPropertyRelative("Responses");
+            SerializedProperty response;
 
             //EditorGUI.BeginProperty(position, label, property);
 
@@ -53,16 +63,99 @@ namespace Dialogue
             //EditorGUI.PropertyField(responseRect, responses,true);
 
             EditorGUILayout.BeginVertical();
+
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("ID: ");
             EditorGUILayout.SelectableLabel(id.intValue.ToString());
             EditorGUILayout.EndHorizontal();
+
             EditorGUILayout.PropertyField(title);
             EditorGUILayout.PropertyField(speaker);
             EditorGUILayout.PropertyField(isEnd);
             EditorGUILayout.PropertyField(text);
+            EditorGUILayout.Separator();
             EditorGUILayout.PropertyField(transitions,true);
-            EditorGUILayout.PropertyField(responses,true);
+
+            EditorGUILayout.Separator();
+
+            // Responses list area
+            int responsesSize = responsesList.arraySize;
+            ListActions action = ListActions.Nothing;
+            int selectedIndex = -1;
+            //EditorGUILayout.LabelField("Responses", EditorStyles.boldLabel);
+            responsesList.isExpanded = EditorGUILayout.Foldout(responsesList.isExpanded, "Responses", true, EditorStyles.boldLabel);
+            if (responsesList.isExpanded)
+            {
+                for (int i = 0; i < responsesSize; ++i)
+                {
+                    response = responsesList.GetArrayElementAtIndex(i);
+
+                    string responseTitle = response.FindPropertyRelative("Text").stringValue;
+                    if (string.IsNullOrEmpty(responseTitle))
+                    {
+                        responseTitle = "Response " + i.ToString();
+                    }
+
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.BeginVertical();
+                    EditorGUILayout.PropertyField(response, new GUIContent(responseTitle), true); //TODO get text from response, use as label
+                    EditorGUILayout.EndVertical();
+                    bool moveUp = GUILayout.Button("^", GUILayout.Width(MOVE_BUTTON_WIDTH));     //TODO grey if i = 0
+                    bool moveDown = GUILayout.Button("v", GUILayout.Width(MOVE_BUTTON_WIDTH));   //TODO grey if i+1 = optionSize
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.Separator();
+
+                    if (moveUp)
+                    {
+                        action = ListActions.MoveUp;
+                        selectedIndex = i;
+                    }
+                    else if (moveDown)
+                    {
+                        action = ListActions.MoveDown;
+                        selectedIndex = i;
+                    }
+                }
+                //TODO put buttons to expand list here
+                GUILayout.BeginHorizontal();
+                bool addItem = GUILayout.Button("Add Response");
+                bool clearItems = GUILayout.Button("Clear Responses");
+                GUILayout.EndHorizontal();
+                if (addItem)
+                {
+                    responsesList.InsertArrayElementAtIndex(responsesSize);
+                }
+                if (clearItems)
+                {
+                    responsesList.arraySize = 0;
+                }
+                switch (action)
+                {
+                    case ListActions.MoveUp:
+                        if (selectedIndex > 0)
+                        {
+                            responsesList.MoveArrayElement(selectedIndex, selectedIndex - 1);
+                        }
+                        break;
+                    case ListActions.MoveDown:
+                        if (selectedIndex >= 0 && selectedIndex < (responsesSize - 1))
+                        {
+                            responsesList.MoveArrayElement(selectedIndex, selectedIndex + 1);
+                        }
+                        break;
+                    case ListActions.Delete:
+                        //TODO delete at selected index
+                        break;
+                    case ListActions.Nothing:
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                responsesList.isExpanded = GUILayout.Button("Show");
+            }
 
             EditorGUILayout.EndVertical();
 

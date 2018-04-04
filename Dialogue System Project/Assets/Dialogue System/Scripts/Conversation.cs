@@ -23,5 +23,7 @@ namespace Dialogue
             DialogueEntry entry = Entries.Find(e => e.Title == title);
             return entry;
         }
+
+        // TODO AddEntry to create a new entry with unique ID, add to end of list
     }
 }

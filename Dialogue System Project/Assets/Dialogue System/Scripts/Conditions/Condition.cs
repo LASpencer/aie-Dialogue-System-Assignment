@@ -13,5 +13,10 @@ namespace Dialogue
 
             return true != Not;
         }
+
+        virtual public string Describe()
+        {
+            return (!Not).ToString();
+        }
     }
 }

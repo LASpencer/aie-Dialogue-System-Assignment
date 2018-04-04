@@ -25,22 +25,26 @@ namespace Dialogue
         {
             serializedObject.Update();
             selectedEntry = entries.GetArrayElementAtIndex(entrySelectedIndex);
+            //TODO popup to select start dialogue
             //entries = (target as Conversation).Entries;
-            entrySelectedIndex = DialogueEntryPopup();
+            entrySelectedIndex = DialogueEntryPopup(entrySelectedIndex);
+            //TODO add/remove entries buttons
+
+            // TODO expand or hide selectedEntry
             EditorGUILayout.PropertyField(selectedEntry, GUIContent.none, true);
             // Do I need to use SerializedProperty/ApplyModifiedProperties?
             serializedObject.ApplyModifiedProperties();
             //base.OnInspectorGUI();
         }
 
-        private int DialogueEntryPopup()
+        private int DialogueEntryPopup(int index)
         {
             List<String> entryNames = new List<string>();
             foreach(DialogueEntry entry in ((target as Conversation).Entries))
             {
                 entryNames.Add(entry.Name());
             }
-            return EditorGUILayout.Popup(entrySelectedIndex, entryNames.ToArray());
+            return EditorGUILayout.Popup(index, entryNames.ToArray());
         }
     }
 }

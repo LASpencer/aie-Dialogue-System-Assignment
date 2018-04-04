@@ -14,6 +14,7 @@ namespace Dialogue {
         public string Text;     // HACK Replace with LocalizedString when created
         public TransitionList transitions;
         public bool isEnd;
+        public Conversation parent;
 
         [Header("Responses")]
         public List<Response> Responses;
