@@ -7,6 +7,11 @@ namespace Dialogue
     [CreateAssetMenu(menuName ="Dialogue/Conversation")]
     public class Conversation : ScriptableObject
     {
+        [SerializeField]//[HideInInspector]
+        int nextID = 0;
+
+        public int NextID { get { return nextID; } }
+
         //HACK maybe write a serializable dictionary?
         public List<DialogueEntry> Entries;
 
@@ -24,6 +29,24 @@ namespace Dialogue
             return entry;
         }
 
+        public DialogueEntry AddEntry()
+        {
+            DialogueEntry newEntry = new DialogueEntry(this, nextID);
+            if (Entries == null)
+            {
+                Entries = new List<DialogueEntry>();
+            }
+            ++nextID;
+            Entries.Add(newEntry);
+            return newEntry;
+        }
         // TODO AddEntry to create a new entry with unique ID, add to end of list
+
+        public void RemoveEntry(DialogueEntry entry)
+        {
+            Entries.Remove(entry);
+        }
+
+
     }
 }

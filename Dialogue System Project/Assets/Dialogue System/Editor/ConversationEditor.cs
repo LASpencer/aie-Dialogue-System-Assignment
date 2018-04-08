@@ -24,15 +24,42 @@ namespace Dialogue
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            selectedEntry = entries.GetArrayElementAtIndex(entrySelectedIndex);
-            //TODO popup to select start dialogue
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("nextID"));//HACK
+            
+            // popup to select start dialogue
             //entries = (target as Conversation).Entries;
             entrySelectedIndex = DialogueEntryPopup(entrySelectedIndex);
-            //TODO add/remove entries buttons
 
-            // TODO expand or hide selectedEntry
-            EditorGUILayout.PropertyField(selectedEntry, GUIContent.none, true);
-            // Do I need to use SerializedProperty/ApplyModifiedProperties?
+            // add/remove entries buttons
+            EditorGUILayout.BeginHorizontal();
+            bool addEntry = GUILayout.Button("Add Entry");
+            bool removeEntry = GUILayout.Button("Remove Entry");//TODO disable if empty
+            EditorGUILayout.EndHorizontal();
+            if (addEntry)
+            {
+                DialogueEntry newEntry = (target as Conversation).AddEntry();
+                entrySelectedIndex = (target as Conversation).Entries.IndexOf(newEntry);    //HACK
+            }
+            else if (removeEntry)
+            {
+                if (entries.arraySize != 0)
+                {
+                    entries.DeleteArrayElementAtIndex(entrySelectedIndex);
+                    entrySelectedIndex = Mathf.Min(entrySelectedIndex, entries.arraySize - 1);
+                }
+            }
+
+            // Show selected entry
+            if (entries.arraySize != 0)
+            {
+                selectedEntry = entries.GetArrayElementAtIndex(entrySelectedIndex);
+                // TODO expand or hide selectedEntry
+                EditorGUILayout.PropertyField(selectedEntry, GUIContent.none, true);
+                // Do I need to use SerializedProperty/ApplyModifiedProperties?
+            } else
+            {
+                EditorGUILayout.LabelField("No Entries");
+            }
             serializedObject.ApplyModifiedProperties();
             //base.OnInspectorGUI();
         }
@@ -40,11 +67,15 @@ namespace Dialogue
         private int DialogueEntryPopup(int index)
         {
             List<String> entryNames = new List<string>();
-            foreach(DialogueEntry entry in ((target as Conversation).Entries))
+            if (entries.arraySize != 0)
             {
-                entryNames.Add(entry.Name());
+                foreach (DialogueEntry entry in ((target as Conversation).Entries))
+                {
+                    entryNames.Add(entry.Name());
+                }
             }
             return EditorGUILayout.Popup(index, entryNames.ToArray());
+            //TODO figure out what to do in case of empty list
         }
     }
 }

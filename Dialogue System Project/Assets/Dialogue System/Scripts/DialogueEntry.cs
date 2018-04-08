@@ -19,6 +19,12 @@ namespace Dialogue {
         [Header("Responses")]
         public List<Response> Responses;
 
+        public DialogueEntry(Conversation parent, int id)
+        {
+            this.parent = parent;
+            this.ID = id;
+        }
+
         public string Name()
         {
             if(!(string.IsNullOrEmpty(Title)))
