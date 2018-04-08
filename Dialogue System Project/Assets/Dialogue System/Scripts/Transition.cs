@@ -9,6 +9,5 @@ namespace Dialogue
     {
         public int TargetID;
         // TODO include OnTransition event
-        
     }
 }

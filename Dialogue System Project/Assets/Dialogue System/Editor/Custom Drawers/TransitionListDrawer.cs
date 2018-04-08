@@ -11,6 +11,7 @@ namespace Dialogue
     class TransitionListDrawer : PropertyDrawer
     {
         const float MOVE_BUTTON_WIDTH = 20;
+        const int MAX_DIALOGUE_NAME_LENGTH = 25;
         
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -24,11 +25,16 @@ namespace Dialogue
             SerializedProperty defaultTransition = property.FindPropertyRelative("defaultTransition");
             int optionSize = optionsList.arraySize;
 
+            //HACK if transitions can ever be displayed outside a conversation being selected this will have to change
+            Conversation conversation = Selection.activeObject as Conversation;
+
             ListActions action = ListActions.Nothing;
             int selectedIndex = -1;
 
             //TODO figure out good place to extract out this list drawing code (have attribute to use?)
             SerializedProperty option;
+            SerializedProperty targetID;
+            SerializedProperty condition;
             EditorGUILayout.BeginVertical();
             //EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
             optionsList.isExpanded = EditorGUILayout.Foldout(optionsList.isExpanded, label,true, EditorStyles.boldLabel);   //TODO create "Bold Foldout style"
@@ -37,8 +43,28 @@ namespace Dialogue
                 for (int i = 0; i < optionSize; ++i)
                 {
                     option = optionsList.GetArrayElementAtIndex(i);
+                    targetID = option.FindPropertyRelative("transition.TargetID");
+                    condition = option.FindPropertyRelative("condition");
+                    // Get name of 
+                    int optionTarget = targetID.intValue;
+                    DialogueEntry targetEntry = conversation.FindEntry(optionTarget);
+                    
+                    string targetName = "Dialogue entry not found";
+                    if(targetEntry != null)
+                    {
+                        targetName = "To \"" + targetEntry.Name() + "\"";
+                        if(targetName.Length > MAX_DIALOGUE_NAME_LENGTH)
+                        {
+                            targetName = targetName.Substring(0, MAX_DIALOGUE_NAME_LENGTH) + "...\"";
+                        }
+                    }
+
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.PropertyField(option, true); //TODO come up with better name than "Element i" to pass as label
+                    EditorGUILayout.BeginVertical();
+                    EditorGUILayout.PropertyField(option, new GUIContent(targetName), true);
+                    //EditorGUILayout.PropertyField(condition, true);
+                    //EditorGUILayout.PropertyField(targetID, true);
+                    EditorGUILayout.EndVertical();
                     bool moveUp = GUILayout.Button("^", GUILayout.Width(MOVE_BUTTON_WIDTH));    //TODO grey if i=0
                     bool moveDown = GUILayout.Button("v", GUILayout.Width(MOVE_BUTTON_WIDTH));  //TODO grey if i+1 = optionSize
                                                                                                 //bool remove = GUILayout.Button("X");
@@ -97,8 +123,6 @@ namespace Dialogue
                     default:
                         break;
                 }
-
-                EditorGUILayout.PropertyField(defaultTransition, true);
             } else
             {
                 optionsList.isExpanded = GUILayout.Button("Show");
@@ -124,11 +148,14 @@ namespace Dialogue
     //        SerializedProperty transition = property.FindPropertyRelative("transition");
     //        SerializedProperty condition = property.FindPropertyRelative("condition");
     //        EditorGUILayout.BeginVertical();
-    //        EditorGUILayout.PropertyField(condition, true);
-    //        EditorGUILayout.PropertyField(transition, true);
+    //        property.isExpanded = EditorGUILayout.Foldout(property.isExpanded, label);
+    //        if (property.isExpanded)
+    //        {
+    //            EditorGUILayout.PropertyField(condition, true);
+    //            EditorGUILayout.PropertyField(transition, true);
+    //        }
     //        EditorGUILayout.EndVertical();
     //    }
     //}
-
 
 }

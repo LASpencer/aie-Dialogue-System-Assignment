@@ -17,9 +17,6 @@ namespace Dialogue
     {
         public List<TransitionOption> transitions;
 
-        // Chosen if none in list succeed
-        public Transition defaultTransition;
-
         public Transition SelectTransition(DialogueManager dialogue)
         {
             // Return first transition to succeed
@@ -30,7 +27,7 @@ namespace Dialogue
                     return option.transition;
                 }
             }
-            return defaultTransition;
+            return null;
         }
     }
 }

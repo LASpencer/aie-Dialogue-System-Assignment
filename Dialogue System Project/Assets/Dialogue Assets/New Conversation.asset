@@ -11,8 +11,140 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4885efe881bb0794b8c9439ff478a019, type: 3}
   m_Name: New Conversation
   m_EditorClassIdentifier: 
-  nextID: 0
-  Entries: []
+  nextID: 18
+  Entries:
+  - ID: 4
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions:
+      - transition:
+          TargetID: 6
+        condition: {fileID: 0}
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses:
+    - Text: 
+      OnChosen: {fileID: 0}
+      Prerequisite: {fileID: 0}
+      transitions:
+        transitions:
+        - transition:
+            TargetID: 0
+          condition: {fileID: 0}
+        - transition:
+            TargetID: 0
+          condition: {fileID: 0}
+        defaultTransition:
+          TargetID: 0
+  - ID: 5
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 6
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions:
+      - transition:
+          TargetID: 4
+        condition: {fileID: 0}
+      - transition:
+          TargetID: 5
+        condition: {fileID: 0}
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 7
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 8
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 13
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 14
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 15
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 3
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 16
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+  - ID: 17
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+      defaultTransition:
+        TargetID: 0
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
   Start:
     ID: 0
     Title: 
