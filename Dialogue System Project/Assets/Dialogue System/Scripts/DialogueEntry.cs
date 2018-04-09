@@ -19,24 +19,45 @@ namespace Dialogue {
         [Header("Responses")]
         public List<Response> Responses;
 
+        [HideInInspector]
+        public Vector3 position; // Used to place node in editor window
+
         public DialogueEntry(Conversation parent, int id)
         {
             this.parent = parent;
             this.ID = id;
         }
 
-        public string Name()
+        /// <summary>
+        /// Returns a name for the 
+        /// </summary>
+        /// <param name="maxChars">If greater than zero, truncate if more than this many characters</param>
+        /// <param name="truncator">Appended to show name is truncated</param>
+        /// <returns></returns>
+        public string Name(int maxChars = 0, string truncator = "...")
         {
+            string name;
+            bool quotes = false;
             if(!(string.IsNullOrEmpty(Title)))
             {
-                return Title;
+                name = Title;
             } else if (!string.IsNullOrEmpty(Text))
             {
-                return Text;
+                name = Text;
+                quotes = true;
             } else
             {
-                return "ID #" + ID.ToString();
+                name = "ID #" + ID.ToString();
             }
+            if(maxChars > 0 && name.Length > maxChars)
+            {
+                name = name.Substring(0, maxChars) + truncator;
+                if (quotes)
+                {
+                    name = "\"" + name + "\"";
+                }
+            }
+            return name;
         }
 	}
 }
