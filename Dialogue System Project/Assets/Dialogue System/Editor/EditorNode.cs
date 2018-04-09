@@ -15,8 +15,6 @@ namespace Dialogue
         public GUIStyle Style;
         public GUIStyle SelectedStyle;
 
-        public static GUIStyle LabelStyle;
-
         public Action<EditorNode> OnRemove;
         public Action<EditorConnector> OnStartMakeTransition;
 
@@ -31,11 +29,7 @@ namespace Dialogue
             rect = new Rect(position.x, position.y, width, height);
             Style = nodeStyle;
             SelectedStyle = selectedStyle;
-            if(LabelStyle == null)
-            {
-                LabelStyle = new GUIStyle(EditorStyles.largeLabel);
-                LabelStyle.alignment = TextAnchor.MiddleCenter;
-            }
+ 
             Connections = new List<EditorConnector>();
         }
 
@@ -54,7 +48,6 @@ namespace Dialogue
             {
                 GUI.Box(rect, title, Style);
             }
-            GUI.Label(rect, title, LabelStyle);
         }
 
         public void ProcessEvents(Event e, DialogueEditorWindow window)
@@ -138,7 +131,6 @@ namespace Dialogue
             {
                 EditorConnector newConnection = new EditorConnector();
                 newConnection.Parent = this;
-                Connections.Add(newConnection);
                 OnStartMakeTransition(newConnection);
             }
         }
@@ -146,6 +138,8 @@ namespace Dialogue
         private void OnClickAsTarget(DialogueEditorWindow window, EditorConnector connector)
         {
             //TODO check is valid target for connector (response not to response, transition can't already exist)
+
+            connector.Parent.Connections.Add(connector);
             connector.Target = this;
             window.OnFinishMakeTransition(this);
         }

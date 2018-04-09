@@ -8,7 +8,7 @@ namespace Dialogue
 {
     public class EditorConnector
     {
-        public EditorNode Parent;//HACK should be set in constructor and private
+        public EditorNode Parent;
         public EditorNode Target;
 
         Vector2 start;

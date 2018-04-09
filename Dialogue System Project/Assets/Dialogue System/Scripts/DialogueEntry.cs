@@ -26,6 +26,7 @@ namespace Dialogue {
         {
             this.parent = parent;
             this.ID = id;
+            transitions = new TransitionList();
         }
 
         /// <summary>

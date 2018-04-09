@@ -17,6 +17,11 @@ namespace Dialogue
     {
         public List<TransitionOption> transitions;
 
+        public TransitionList()
+        {
+            transitions = new List<TransitionOption>();
+        }
+
         public Transition SelectTransition(DialogueManager dialogue)
         {
             // Return first transition to succeed

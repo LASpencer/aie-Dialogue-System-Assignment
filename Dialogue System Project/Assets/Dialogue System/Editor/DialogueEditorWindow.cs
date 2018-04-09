@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 
 // TODO implementing undo/redo
 
@@ -16,6 +17,7 @@ namespace Dialogue
         const int NODE_BORDER = 12;
         const float NODE_WIDTH = 200.0f;
         const float NODE_HEIGHT = 50.0f;
+        const int NODE_FONT_SIZE = 14;
 
         Conversation conversation;
 
@@ -34,6 +36,8 @@ namespace Dialogue
         GUIStyle resizerStyle;
         GUIStyle dialogueNodeStyle;
         GUIStyle dialogueSelectedNodeStyle;
+        GUIStyle responseNodeStyle;
+        GUIStyle responseSelectedNodeStyle;
         // TODO will need to have styles for different types of node? 
         
         // TODO maybe use an enum of states instead?
@@ -58,10 +62,26 @@ namespace Dialogue
             dialogueNodeStyle = new GUIStyle();
             dialogueNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
             dialogueNodeStyle.border = new RectOffset(NODE_BORDER, NODE_BORDER, NODE_BORDER, NODE_BORDER);
+            dialogueNodeStyle.alignment = TextAnchor.MiddleCenter;
+            dialogueNodeStyle.fontSize = NODE_FONT_SIZE;
 
             dialogueSelectedNodeStyle = new GUIStyle();
             dialogueSelectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
             dialogueSelectedNodeStyle.border = new RectOffset(NODE_BORDER, NODE_BORDER, NODE_BORDER, NODE_BORDER);
+            dialogueSelectedNodeStyle.alignment = TextAnchor.MiddleCenter;
+            dialogueSelectedNodeStyle.fontSize = NODE_FONT_SIZE;
+
+            responseNodeStyle = new GUIStyle();
+            responseNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node2.png") as Texture2D;
+            responseNodeStyle.border = new RectOffset(NODE_BORDER, NODE_BORDER, NODE_BORDER, NODE_BORDER);
+            responseNodeStyle.alignment = TextAnchor.MiddleCenter;
+            responseNodeStyle.fontSize = NODE_FONT_SIZE;
+
+            responseSelectedNodeStyle = new GUIStyle();
+            responseSelectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node2 on.png") as Texture2D;
+            responseSelectedNodeStyle.border = new RectOffset(NODE_BORDER, NODE_BORDER, NODE_BORDER, NODE_BORDER);
+            responseSelectedNodeStyle.alignment = TextAnchor.MiddleCenter;
+            responseSelectedNodeStyle.fontSize = NODE_FONT_SIZE;
 
             ChangeConversation(conversation);
         }
@@ -72,13 +92,16 @@ namespace Dialogue
 
             if(selectedConversation == null)
             {
-                // TODO dealing with no conversation selected
+                // TODO dealing with no conversation selected (clear everything?)
+                nodes.Clear();
+                conversation = null;
             } else if (selectedConversation != conversation)
             {
                 ChangeConversation(selectedConversation);
             } else
             {
                 // figure out if anything needs doing here
+                UpdateNodes();
             }
 
             if(selectedConnector != null)
@@ -103,21 +126,32 @@ namespace Dialogue
             nodePanel = new Rect(0, 0, position.width * nodePanelWidth, position.height);
             GUILayout.BeginArea(nodePanel);
             // TODO draw grid
-            DrawNodes();
+            if (conversation != null)
+            {
+                DrawNodes();
+            }
+            else
+            {
+                GUILayout.Label("No Conversation Selected", EditorStyles.boldLabel);
+            }
             GUILayout.EndArea();
         }
 
         private void DrawNodes()
         {
             //TODO drawing connections
-            if(nodes != null)
+            if (nodes != null)
             {
                 foreach (EditorNode node in nodes)
                 {
-                    foreach(EditorConnector connector in node.Connections)
+                    foreach (EditorConnector connector in node.Connections)
                     {
                         connector.Draw();
                     }
+                }
+                if (selectedConnector != null)
+                {
+                    selectedConnector.Draw();
                 }
                 foreach (EditorNode node in nodes)
                 {
@@ -131,6 +165,19 @@ namespace Dialogue
             editPanel = new Rect((position.width * nodePanelWidth) + 5, 0, position.width * (1 - nodePanelWidth) - (RESIZER_WIDTH * 0.5f), position.height);
             GUILayout.BeginArea(editPanel);
             conversation = (Conversation)EditorGUILayout.ObjectField("Conversation", conversation, typeof(Conversation), false);
+            if (conversation == null) {
+                //todo maybe say something?
+            }
+            else {
+                if (selectedNode != null)
+                {
+                    DialogueEntryEditorNode dialogueNode = selectedNode as DialogueEntryEditorNode;
+                    if(dialogueNode != null)
+                    {
+                        //TODO get SerializedObject of conversation, find serializedproperty corresponding to node, display here
+                    }
+                }
+            }
             GUILayout.EndArea();
         }
 
@@ -243,10 +290,13 @@ namespace Dialogue
                     break;
                 case EventType.MouseDrag:
                     // TODO if dragging with button 2, drag each node with negative delta
-                    foreach(EditorNode node in nodes)
+                    if (isMovingCanvas)
                     {
-                        node.Drag(e.delta);
-                        e.Use();
+                        foreach (EditorNode node in nodes)
+                        {
+                            node.Drag(e.delta);
+                            e.Use();
+                        }
                     }
                     break;
                 case EventType.Used:
@@ -343,7 +393,6 @@ namespace Dialogue
         {
             if (selectedConnector != null)
             {
-                selectedConnector.Parent.Connections.Remove(selectedConnector);
                 selectedConnector = null;
             }
         }
@@ -373,35 +422,103 @@ namespace Dialogue
                 conversation = newConversation;
                 foreach(DialogueEntry entry in conversation.Entries)
                 {
-                    DialogueEntryEditorNode node = new DialogueEntryEditorNode(entry.position, NODE_WIDTH, NODE_HEIGHT, dialogueNodeStyle, dialogueSelectedNodeStyle);
-                    node.conversation = conversation;
-                    node.entryID = entry.ID;
-                    node.entry = entry;
-                    SetupNodeActions(node);
-                    nodes.Add(node);
-
-                    //TODO set up response nodes for node
+                    AddNode(entry);
                 }
                 foreach(DialogueEntry entry in conversation.Entries)
                 {
-                    // Find corresponding node
-                    DialogueEntryEditorNode startNode = FindDialogueNode(entry.ID);
-                    if(startNode != null)
+                    SetupNodeConnections(entry);
+                }
+            }
+        }
+
+        void UpdateNodes()
+        {
+            //TODO check if any nodes need to be created or destroyed
+            //TODO check if any transitions were changed
+            HashSet<int> seenIDs = new HashSet<int>();
+            List<EditorNode> toRemove = new List<EditorNode>();
+            foreach(EditorNode node in nodes)
+            {
+                DialogueEntryEditorNode dialogueNode = node as DialogueEntryEditorNode;
+                if(dialogueNode != null)
+                {
+                    seenIDs.Add(dialogueNode.entryID);
+                    DialogueEntry entry = conversation.FindEntry(dialogueNode.entryID);
+                    if(entry == null)
                     {
-                        foreach(TransitionOption o in entry.transitions.transitions)
+                        //TODO dialogueNode to be destroyed
+                        toRemove.Add(node);
+                        //TODO also add any responses if they exist?
+                    } else
+                    {
+                        dialogueNode.entry = entry;
+                        //todo check if there's responses to remove?
+                    }
+                }
+            }
+            // Remove nodes and any connections to them
+            nodes.RemoveAll(n => toRemove.Contains(n));
+            if (selectedConnector != null && toRemove.Contains(selectedConnector.Parent))
+            {
+                selectedConnector = null;
+            }
+            if (toRemove.Contains(selectedNode))
+            {
+                selectedNode = null;
+            }
+            foreach (EditorNode node in nodes)
+            {
+                node.Connections.RemoveAll(c => toRemove.Contains(c.Target));
+            }
+            // Create new nodes for any dialogue entries not already seen
+            List<DialogueEntry> toAdd = conversation.Entries.Where(e => !seenIDs.Contains(e.ID)).ToList();
+            foreach(DialogueEntry entry in toAdd)
+            {
+                AddNode(entry);
+            }
+            // Now all nodes exist (or don't) check all transitions
+            foreach (EditorNode node in nodes)
+            {
+                DialogueEntryEditorNode dialogueNode = node as DialogueEntryEditorNode;
+                List<int> targetsRequired;
+                List<EditorConnector> connectorToRemove = new List<EditorConnector>();
+                if (dialogueNode != null)
+                {
+                    targetsRequired = dialogueNode.entry.transitions.transitions.Select(o => o.transition.TargetID).ToList();
+                } else
+                {
+                    //TODO if node is response instead get values from that
+                    targetsRequired = new List<int>();
+                }
+
+
+                foreach (EditorConnector connection in node.Connections)
+                {
+                    DialogueEntryEditorNode targetDialogue = connection.Target as DialogueEntryEditorNode;
+                    if (targetDialogue != null)
+                    {
+                        if (targetsRequired.Contains(targetDialogue.entryID))
                         {
-                            DialogueEntryEditorNode endNode = FindDialogueNode(o.transition.TargetID);
-                            if(endNode != null)
-                            {
-                                EditorConnector connector = new EditorConnector();
-                                connector.Parent = startNode;
-                                connector.Target = endNode;
-                                startNode.Connections.Add(connector);
-                            }
+                            targetsRequired.Remove(targetDialogue.entryID);
+                        }
+                        else
+                        {
+                            connectorToRemove.Add(connection);
                         }
                     }
-                    
-                    //TODO connections from responses to nodes
+                }
+                node.Connections.RemoveAll(c => connectorToRemove.Contains(c));
+                // Create required connections
+                foreach (int targetID in targetsRequired)
+                {
+                    DialogueEntryEditorNode targetNode = FindDialogueNode(targetID);
+                    if (targetNode != null)
+                    {
+                        EditorConnector newConnector = new EditorConnector();
+                        newConnector.Parent = node;
+                        newConnector.Target = targetNode;
+                        node.Connections.Add(newConnector);
+                    }
                 }
             }
         }
@@ -425,6 +542,41 @@ namespace Dialogue
                 }
             }
             return found;
+        }
+
+        DialogueEntryEditorNode AddNode(DialogueEntry entry)
+        {
+            DialogueEntryEditorNode node = new DialogueEntryEditorNode(entry.position, NODE_WIDTH, NODE_HEIGHT, dialogueNodeStyle, dialogueSelectedNodeStyle);
+            node.conversation = conversation;
+            node.entryID = entry.ID;
+            node.entry = entry;
+            SetupNodeActions(node);
+            nodes.Add(node);
+
+            //TODO set up response nodes for node
+            return node;
+        }
+
+        DialogueEntryEditorNode SetupNodeConnections(DialogueEntry entry)
+        {
+            // Find corresponding node
+            DialogueEntryEditorNode startNode = FindDialogueNode(entry.ID);
+            if (startNode != null)
+            {
+                foreach (TransitionOption o in entry.transitions.transitions)
+                {
+                    DialogueEntryEditorNode endNode = FindDialogueNode(o.transition.TargetID);
+                    if (endNode != null)
+                    {
+                        EditorConnector connector = new EditorConnector();
+                        connector.Parent = startNode;
+                        connector.Target = endNode;
+                        startNode.Connections.Add(connector);
+                    }
+                }
+            }
+            return startNode;
+            //TODO connections from responses to nodes
         }
     }
 }
