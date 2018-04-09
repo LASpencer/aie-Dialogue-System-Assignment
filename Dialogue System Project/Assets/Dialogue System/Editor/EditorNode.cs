@@ -15,6 +15,8 @@ namespace Dialogue
         public GUIStyle Style;
         public GUIStyle SelectedStyle;
 
+        public static GUIStyle LabelStyle;
+
         public Action<EditorNode> OnRemove;
         public Action<EditorConnector> OnStartMakeTransition;
 
@@ -29,15 +31,20 @@ namespace Dialogue
             rect = new Rect(position.x, position.y, width, height);
             Style = nodeStyle;
             SelectedStyle = selectedStyle;
+            if(LabelStyle == null)
+            {
+                LabelStyle = new GUIStyle(EditorStyles.largeLabel);
+                LabelStyle.alignment = TextAnchor.MiddleCenter;
+            }
             Connections = new List<EditorConnector>();
         }
 
-        public void Drag(Vector2 delta)
+        public virtual void Drag(Vector2 delta)
         {
             rect.position += delta;
         }
 
-        public void Draw(bool selected)
+        public virtual void Draw(bool selected)
         {
             if (selected)
             {
@@ -47,6 +54,7 @@ namespace Dialogue
             {
                 GUI.Box(rect, title, Style);
             }
+            GUI.Label(rect, title, LabelStyle);
         }
 
         public void ProcessEvents(Event e, DialogueEditorWindow window)

@@ -52,11 +52,7 @@ namespace Dialogue
                     string targetName = "Dialogue entry not found";
                     if(targetEntry != null)
                     {
-                        targetName = "To \"" + targetEntry.Name() + "\"";
-                        if(targetName.Length > MAX_DIALOGUE_NAME_LENGTH)
-                        {
-                            targetName = targetName.Substring(0, MAX_DIALOGUE_NAME_LENGTH) + "...\"";
-                        }
+                        targetName = "To " + targetEntry.Name(MAX_DIALOGUE_NAME_LENGTH);
                     }
 
                     EditorGUILayout.BeginHorizontal();

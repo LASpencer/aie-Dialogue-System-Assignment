@@ -20,7 +20,7 @@ namespace Dialogue {
         public List<Response> Responses;
 
         [HideInInspector]
-        public Vector3 position; // Used to place node in editor window
+        public Vector2 position; // Used to place node in editor window
 
         public DialogueEntry(Conversation parent, int id)
         {
