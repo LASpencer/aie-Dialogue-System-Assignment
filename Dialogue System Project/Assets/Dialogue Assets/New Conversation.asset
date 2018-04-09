@@ -11,140 +11,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4885efe881bb0794b8c9439ff478a019, type: 3}
   m_Name: New Conversation
   m_EditorClassIdentifier: 
-  nextID: 18
+  nextID: 40
   Entries:
-  - ID: 4
+  - ID: 31
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+    position: {x: 226, y: 312}
+  - ID: 32
+    Title: 
+    Speaker: {fileID: 0}
+    Text: 
+    transitions:
+      transitions: []
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+    position: {x: 359, y: 235}
+  - ID: 33
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions:
       - transition:
-          TargetID: 6
-        condition: {fileID: 0}
-      defaultTransition:
-        TargetID: 0
-    isEnd: 0
-    parent: {fileID: 11400000}
-    Responses:
-    - Text: 
-      OnChosen: {fileID: 0}
-      Prerequisite: {fileID: 0}
-      transitions:
-        transitions:
-        - transition:
-            TargetID: 0
-          condition: {fileID: 0}
-        - transition:
-            TargetID: 0
-          condition: {fileID: 0}
-        defaultTransition:
           TargetID: 0
-  - ID: 5
-    Title: 
-    Speaker: {fileID: 0}
-    Text: 
-    transitions:
-      transitions: []
-      defaultTransition:
-        TargetID: 0
-    isEnd: 0
-    parent: {fileID: 11400000}
-    Responses: []
-  - ID: 6
-    Title: 
-    Speaker: {fileID: 0}
-    Text: 
-    transitions:
-      transitions:
-      - transition:
-          TargetID: 4
         condition: {fileID: 0}
-      - transition:
-          TargetID: 5
-        condition: {fileID: 0}
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 7
+    position: {x: 813, y: 216}
+  - ID: 34
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 8
+    position: {x: 206, y: 98}
+  - ID: 35
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 13
+    position: {x: 718, y: 102}
+  - ID: 36
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 14
+    position: {x: 796, y: 372}
+  - ID: 37
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 15
+    position: {x: 474, y: 93}
+  - ID: 38
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 3
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 16
+    position: {x: 105, y: 192}
+  - ID: 39
     Title: 
     Speaker: {fileID: 0}
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-  - ID: 17
-    Title: 
-    Speaker: {fileID: 0}
-    Text: 
-    transitions:
-      transitions: []
-      defaultTransition:
-        TargetID: 0
-    isEnd: 0
-    parent: {fileID: 11400000}
-    Responses: []
+    position: {x: 580, y: 245}
   Start:
     ID: 0
     Title: 
@@ -152,8 +113,7 @@ MonoBehaviour:
     Text: 
     transitions:
       transitions: []
-      defaultTransition:
-        TargetID: 0
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
+    position: {x: 0, y: 0}
