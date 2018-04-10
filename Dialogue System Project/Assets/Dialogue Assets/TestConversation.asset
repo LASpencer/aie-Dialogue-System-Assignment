@@ -34,6 +34,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
+      Position: {x: 0, y: 0}
     - Text: What region?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -42,6 +43,7 @@ MonoBehaviour:
         - transition:
             TargetID: 1
           condition: {fileID: 0}
+      Position: {x: 0, y: 0}
     - Text: These taste familiar...
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -50,7 +52,8 @@ MonoBehaviour:
         - transition:
             TargetID: 14
           condition: {fileID: 0}
-    position: {x: 41, y: 30}
+      Position: {x: 0, y: 0}
+    position: {x: 34, y: 8}
   - ID: 1
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -63,9 +66,9 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 296, y: 31}
+    position: {x: 285, y: 16}
   - ID: 2
-    Title: START
+    Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
     Text: Upstate New York.
     transitions:
@@ -78,17 +81,20 @@ MonoBehaviour:
       Prerequisite: {fileID: 0}
       transitions:
         transitions: []
+      Position: {x: 0, y: 0}
     - Text: They're not steamed
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
       transitions:
         transitions: []
+      Position: {x: 0, y: 0}
     - Text: I smell smoke!
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
       transitions:
         transitions: []
-    position: {x: 980, y: 50}
+      Position: {x: 0, y: 0}
+    position: {x: 94, y: 189}
   - ID: 3
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -101,7 +107,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 137, y: 109}
+    position: {x: 143, y: 105}
   - ID: 4
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -115,7 +121,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 37, y: 249}
+    position: {x: 51, y: 264}
   - ID: 5
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -128,7 +134,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 339, y: 274}
+    position: {x: 316, y: 286}
   - ID: 6
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -141,7 +147,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 584, y: 265}
+    position: {x: 625, y: 288}
   - ID: 7
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -154,7 +160,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 865, y: 287}
+    position: {x: 726, y: 348}
   - ID: 8
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -167,7 +173,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 101, y: 345}
+    position: {x: 85, y: 361}
   - ID: 9
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -180,7 +186,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 375, y: 371}
+    position: {x: 359, y: 387}
   - ID: 10
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -193,7 +199,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 615, y: 374}
+    position: {x: 599, y: 390}
   - ID: 11
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -206,7 +212,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 838, y: 416}
+    position: {x: 822, y: 432}
   - ID: 12
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -219,7 +225,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 36, y: 445}
+    position: {x: 20, y: 461}
   - ID: 13
     Title: Utica
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -233,7 +239,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 769, y: 44}
+    position: {x: 800, y: 59}
   - ID: 14
     Title: Krustyburgers
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -246,7 +252,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 428, y: 128}
+    position: {x: 330, y: 168}
   - ID: 15
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -259,7 +265,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 662, y: 149}
+    position: {x: 628, y: 134}
   - ID: 16
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -272,7 +278,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 909, y: 180}
+    position: {x: 781, y: 190}
   - ID: 17
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -290,6 +296,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
+      Position: {x: 0, y: 0}
     - Text: Is that fire?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -298,7 +305,8 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-    position: {x: 671, y: 212}
+      Position: {x: 0, y: 0}
+    position: {x: 554, y: 223}
   - ID: 18
     Title: Aurora Borealis?
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -316,6 +324,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
+      Position: {x: 0, y: 0}
     - Text: At this time of year?
       OnChosen: {fileID: 11400000, guid: 712f4c4db85761046a36ff765a3f028a, type: 2}
       Prerequisite: {fileID: 11400000, guid: 7ee580c99ed852f48a51f35bbc66fac9, type: 2}
@@ -324,6 +333,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
+      Position: {x: 0, y: 0}
     - Text: In this part of the country?
       OnChosen: {fileID: 11400000, guid: d0fa49f2120cf6e44b42d92e173f8832, type: 2}
       Prerequisite: {fileID: 11400000, guid: 9e4c738877dd0fb42bbb8e203cf73a41, type: 2}
@@ -332,6 +342,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
+      Position: {x: 0, y: 0}
     - Text: Localized entirely in your kitchen?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -340,7 +351,8 @@ MonoBehaviour:
         - transition:
             TargetID: 19
           condition: {fileID: 0}
-    position: {x: 384, y: 487}
+      Position: {x: 0, y: 0}
+    position: {x: 368, y: 503}
   - ID: 19
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -353,7 +365,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 51, y: 533}
+    position: {x: 35, y: 549}
   - ID: 20
     Title: 
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -366,7 +378,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 0}
     Responses: []
-    position: {x: 353, y: 564}
+    position: {x: 337, y: 580}
   - ID: 21
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -376,7 +388,7 @@ MonoBehaviour:
     isEnd: 1
     parent: {fileID: 0}
     Responses: []
-    position: {x: 622, y: 510}
+    position: {x: 606, y: 526}
   - ID: 22
     Title: 
     Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
@@ -389,7 +401,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 526, y: 29}
+    position: {x: 544, y: 26}
   - ID: 23
     Title: Compliment Hams
     Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
@@ -402,7 +414,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 865, y: 477}
+    position: {x: 811, y: 493}
   - ID: 24
     Title: Mother calls for help
     Speaker: {fileID: 0}
@@ -412,7 +424,7 @@ MonoBehaviour:
     isEnd: 1
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 839, y: 594}
+    position: {x: 850, y: 575}
   Start:
     ID: 0
     Title: 

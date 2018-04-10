@@ -12,7 +12,6 @@ namespace Dialogue
         public static SerializedProperty AddEntry(SerializedObject serialConversation)
         {
             SerializedProperty dialogueEntry = null;
-            // Check object is a conversation
             Conversation conversation = serialConversation.targetObject as Conversation;
             if(conversation != null)
             {
@@ -25,6 +24,22 @@ namespace Dialogue
                 nextID.intValue = nextID.intValue + 1;
             }
             return dialogueEntry;
+        }
+
+        public static SerializedProperty FindEntry(SerializedObject serialConversation, int ID)
+        {
+            SerializedProperty dialogueEntry = null;
+            if(IsConversation(serialConversation))
+            {
+                dialogueEntry = SerializedArrayUtility.FindPropertyByValue(serialConversation.FindProperty("Entries"), "ID", ID);
+            }
+            return dialogueEntry;
+        }
+
+        public static bool IsConversation(SerializedObject serializedObject)
+        {
+            return serializedObject.targetObject as Conversation != null;
+            //HACK look into 
         }
     }
 }

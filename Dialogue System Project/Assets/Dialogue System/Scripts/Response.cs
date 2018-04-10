@@ -13,6 +13,8 @@ namespace Dialogue
         public Condition Prerequisite;
         public TransitionList transitions;
 
+        public Vector2 Position;// For display in editor
+
         public bool CheckPrerequisite(DialogueManager manager)
         {
             if(Prerequisite == null)

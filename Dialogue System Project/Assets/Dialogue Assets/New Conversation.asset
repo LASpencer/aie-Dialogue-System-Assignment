@@ -18,11 +18,14 @@ MonoBehaviour:
     Speaker: {fileID: 0}
     Text: 
     transitions:
-      transitions: []
+      transitions:
+      - transition:
+          TargetID: 32
+        condition: {fileID: 0}
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 226, y: 312}
+    position: {x: 185, y: 323}
   - ID: 32
     Title: 
     Speaker: {fileID: 0}
@@ -32,7 +35,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 359, y: 235}
+    position: {x: 537, y: 330}
   - ID: 33
     Title: 
     Speaker: {fileID: 0}
@@ -45,7 +48,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 813, y: 216}
+    position: {x: 767, y: 378}
   - ID: 34
     Title: 
     Speaker: {fileID: 0}
@@ -55,7 +58,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 206, y: 98}
+    position: {x: 240, y: 89}
   - ID: 35
     Title: 
     Speaker: {fileID: 0}
@@ -65,7 +68,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 718, y: 102}
+    position: {x: 734, y: 168}
   - ID: 36
     Title: 
     Speaker: {fileID: 0}
@@ -75,7 +78,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 796, y: 372}
+    position: {x: 606, y: 462}
   - ID: 37
     Title: 
     Speaker: {fileID: 0}
@@ -85,7 +88,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 474, y: 93}
+    position: {x: 517, y: 110}
   - ID: 38
     Title: 
     Speaker: {fileID: 0}
@@ -95,17 +98,17 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 105, y: 192}
+    position: {x: 81, y: 178}
   - ID: 39
-    Title: 
+    Title: number 39
     Speaker: {fileID: 0}
-    Text: 
+    Text: this is the last entry in the list
     transitions:
       transitions: []
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 580, y: 245}
+    position: {x: 596, y: 311}
   Start:
     ID: 0
     Title: 

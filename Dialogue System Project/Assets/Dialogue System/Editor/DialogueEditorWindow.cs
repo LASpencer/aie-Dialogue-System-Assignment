@@ -5,7 +5,9 @@ using UnityEditor;
 using System;
 using System.Linq;
 
-// TODO implementing undo/redo
+// TODO setup nodes/update nodes also creates response nodes
+// TODO test REsponseEditorNode functionality once displayed
+// TODO expand/collapse response nodes?
 
 namespace Dialogue
 {

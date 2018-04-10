@@ -8,6 +8,8 @@ namespace Dialogue
 {
     public abstract class EditorNode
     {
+        public const int MAX_TITLE_CHARACTERS = 20;
+
         public Rect rect;
 
         public string title;
