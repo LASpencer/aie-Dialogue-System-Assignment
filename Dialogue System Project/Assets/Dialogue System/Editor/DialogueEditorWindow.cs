@@ -20,6 +20,7 @@ namespace Dialogue
         const int NODE_FONT_SIZE = 14;
 
         Conversation conversation;
+        SerializedObject serializedConversation;
 
         List<EditorNode> nodes;
 
@@ -95,6 +96,7 @@ namespace Dialogue
                 // TODO dealing with no conversation selected (clear everything?)
                 nodes.Clear();
                 conversation = null;
+                serializedConversation = null;
             } else if (selectedConversation != conversation)
             {
                 ChangeConversation(selectedConversation);
@@ -169,14 +171,24 @@ namespace Dialogue
                 //todo maybe say something?
             }
             else {
+                serializedConversation.Update();
+                SerializedProperty selectedProperty = null;
                 if (selectedNode != null)
                 {
                     DialogueEntryEditorNode dialogueNode = selectedNode as DialogueEntryEditorNode;
                     if(dialogueNode != null)
                     {
                         //TODO get SerializedObject of conversation, find serializedproperty corresponding to node, display here
+                        selectedProperty = SerializedArrayUtility.FindPropertyByValue(serializedConversation.FindProperty("Entries"), "ID", dialogueNode.entryID);
                     }
+
+                    
                 }
+                if (selectedProperty != null)
+                {
+                    EditorGUILayout.PropertyField(selectedProperty);
+                }
+                serializedConversation.ApplyModifiedProperties();
             }
             GUILayout.EndArea();
         }
@@ -245,7 +257,7 @@ namespace Dialogue
 
         private void ProcessEditPanelEvents(Event e)
         {
-            //TODO edit panel uses event
+            //TODO edit panel uses mouse click events on it
         }
 
         private void ProcessNodePanelEvents(Event e)
@@ -420,6 +432,7 @@ namespace Dialogue
             if(newConversation  != null)
             {
                 conversation = newConversation;
+                serializedConversation = new SerializedObject(conversation);
                 foreach(DialogueEntry entry in conversation.Entries)
                 {
                     AddNode(entry);

@@ -22,7 +22,7 @@ namespace Dialogue
 
         public override void Draw(bool selected)
         {
-            title = entry.Name(MAX_TITLE_CHARACTERS);//HACK may belong in OnGUI?
+            title = StringUtility.TruncateString(entry.Name(), MAX_TITLE_CHARACTERS);//HACK may belong in OnGUI?
             base.Draw(selected);
             // Now a box is drawn, draw the rest
         }

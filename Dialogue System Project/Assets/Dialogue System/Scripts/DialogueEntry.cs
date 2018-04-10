@@ -35,28 +35,24 @@ namespace Dialogue {
         /// <param name="maxChars">If greater than zero, truncate if more than this many characters</param>
         /// <param name="truncator">Appended to show name is truncated</param>
         /// <returns></returns>
-        public string Name(int maxChars = 0, string truncator = "...")
+        public string Name(bool prependID = false)
         {
             string name;
-            bool quotes = false;
+            bool usedID = false;
             if(!(string.IsNullOrEmpty(Title)))
             {
                 name = Title;
             } else if (!string.IsNullOrEmpty(Text))
             {
-                name = Text;
-                quotes = true;
+                name = "\"" + Text + "\"";
             } else
             {
                 name = "ID #" + ID.ToString();
+                usedID = true;
             }
-            if(maxChars > 0 && name.Length > maxChars)
+            if(prependID && !usedID)
             {
-                name = name.Substring(0, maxChars) + truncator;
-                if (quotes)
-                {
-                    name = "\"" + name + "\"";
-                }
+                name = "ID #" + ID.ToString() + ": " + name;
             }
             return name;
         }

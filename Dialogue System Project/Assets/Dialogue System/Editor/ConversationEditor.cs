@@ -72,7 +72,8 @@ namespace Dialogue
             {
                 foreach (DialogueEntry entry in ((target as Conversation).Entries))
                 {
-                    entryNames.Add(entry.Name());
+                    // Prepend ID to force uniqueness, due to popup not showing duplicates
+                    entryNames.Add(entry.Name(true));
                 }
             }
             return EditorGUILayout.Popup(index, entryNames.ToArray());
