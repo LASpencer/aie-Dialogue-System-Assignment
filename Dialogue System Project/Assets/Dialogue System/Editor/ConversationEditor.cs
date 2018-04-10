@@ -37,8 +37,7 @@ namespace Dialogue
             EditorGUILayout.EndHorizontal();
             if (addEntry)
             {
-                DialogueEntry newEntry = (target as Conversation).AddEntry();
-                entrySelectedIndex = (target as Conversation).Entries.IndexOf(newEntry);    //HACK
+                SerializedConversationUtility.AddEntry(serializedObject);
             }
             else if (removeEntry)
             {
