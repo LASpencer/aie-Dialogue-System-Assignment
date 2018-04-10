@@ -19,8 +19,10 @@ namespace Dialogue
         const float NODE_HEIGHT = 50.0f;
         const int NODE_FONT_SIZE = 14;
 
-        Conversation conversation;
-        SerializedObject serializedConversation;
+        Conversation conversation;                  // Conversation selected in Unity Editor
+        public Conversation SelectedConversation { get { return SelectedConversation; } }
+        SerializedObject serializedConversation;    // Serialized object created from conversation
+        public SerializedObject SerializedConversation { get { return serializedConversation; } }
 
         List<EditorNode> nodes;
 
@@ -33,6 +35,8 @@ namespace Dialogue
         Rect nodePanel;
         Rect editPanel;
         Rect resizeBar;
+
+        Vector2 editScrollPosition;
 
         GUIStyle resizerStyle;
         GUIStyle dialogueNodeStyle;
@@ -57,6 +61,7 @@ namespace Dialogue
 
         private void OnEnable()
         {
+            // Setup GUI styles
             resizerStyle = new GUIStyle();
             resizerStyle.normal.background = EditorGUIUtility.Load("icons/d_AvatarBlendBackground.png") as Texture2D;
 
@@ -84,39 +89,53 @@ namespace Dialogue
             responseSelectedNodeStyle.alignment = TextAnchor.MiddleCenter;
             responseSelectedNodeStyle.fontSize = NODE_FONT_SIZE;
 
-            ChangeConversation(conversation);
+            nodes = new List<EditorNode>();
+            conversation = null;
+            serializedConversation = null;
         }
 
+        // OnGUI is called whenever a GUI event occurs and the window is in focus
         private void OnGUI()
         {
+            // Get currently selected object in unity
             Conversation selectedConversation = Selection.activeObject as Conversation;
+
+            //HACK maybe this stuff with drawing nodes should be moved to Update or OnInspectorUpdate
+            // If so, UpdateNodes should return whether anything changed/set a dirty flag, which is used to decide if repainting needed
 
             if(selectedConversation == null)
             {
+                // If it's not a conversation, clear everything
                 // TODO dealing with no conversation selected (clear everything?)
                 nodes.Clear();
                 conversation = null;
                 serializedConversation = null;
             } else if (selectedConversation != conversation)
             {
+                // If a new conversation is selected, change to it
                 ChangeConversation(selectedConversation);
             } else
             {
-                // figure out if anything needs doing here
+                // If it's the same, update nodes to reflect any changes
                 UpdateNodes();
             }
 
             if(selectedConnector != null)
             {
+                // If creating a new connection, move the connection's end to the mouse cursor
                 selectedConnector.FollowMouse(Event.current);
                 GUI.changed = true;
             }
 
+            // Draw each panel of the window
             DrawNodePanel();
             DrawEditPanel();
             DrawResizeBar();
             
+            // Handle current GUI event
             ProcessEvents(Event.current);
+
+            // Repaint window on GUI change
             if (GUI.changed)
             {
                 Repaint();
@@ -126,6 +145,7 @@ namespace Dialogue
         private void DrawNodePanel()
         {
             nodePanel = new Rect(0, 0, position.width * nodePanelWidth, position.height);
+            // Begins a GUILayout block for the Node panel
             GUILayout.BeginArea(nodePanel);
             // TODO draw grid
             if (conversation != null)
@@ -141,9 +161,9 @@ namespace Dialogue
 
         private void DrawNodes()
         {
-            //TODO drawing connections
             if (nodes != null)
             {
+                // Draw connections between nodes underneath them
                 foreach (EditorNode node in nodes)
                 {
                     foreach (EditorConnector connector in node.Connections)
@@ -151,61 +171,77 @@ namespace Dialogue
                         connector.Draw();
                     }
                 }
+
+                // SelectedConnector doesn't belong to any node yet so draw it here
                 if (selectedConnector != null)
                 {
                     selectedConnector.Draw();
                 }
+
+                // Draw each node
                 foreach (EditorNode node in nodes)
                 {
-                    node.Draw(node == selectedNode);
+                    node.Draw(node == selectedNode);    // passing true makes node draw with Selected style
                 }
             }
         }
 
         private void DrawEditPanel()
         {
+            // Begins GUI layout area for edit panel
             editPanel = new Rect((position.width * nodePanelWidth) + 5, 0, position.width * (1 - nodePanelWidth) - (RESIZER_WIDTH * 0.5f), position.height);
             GUILayout.BeginArea(editPanel);
-            conversation = (Conversation)EditorGUILayout.ObjectField("Conversation", conversation, typeof(Conversation), false);
+            // Begins a Scroll View area. This takes the current scroll position and returns the new position scrolled to
+            editScrollPosition = GUILayout.BeginScrollView(editScrollPosition);
+            // HACK display conversation selected some other way
+            EditorGUILayout.ObjectField("Conversation", conversation, typeof(Conversation), false);
             if (conversation == null) {
                 //todo maybe say something?
             }
             else {
+                // Draws the property for the selected node
+                // As with custom inspectors, the SerializedObject representing the Conversation needs to be updated and modified
                 serializedConversation.Update();
+                // Get the property from the serializedConversation corresponding to the selected node
                 SerializedProperty selectedProperty = null;
                 if (selectedNode != null)
                 {
                     DialogueEntryEditorNode dialogueNode = selectedNode as DialogueEntryEditorNode;
                     if(dialogueNode != null)
                     {
-                        //TODO get SerializedObject of conversation, find serializedproperty corresponding to node, display here
+                        // Searches the Entries property for a property whose ID property matches the selected node
                         selectedProperty = SerializedArrayUtility.FindPropertyByValue(serializedConversation.FindProperty("Entries"), "ID", dialogueNode.entryID);
                     }
-
-                    
                 }
                 if (selectedProperty != null)
                 {
+                    // Displays the selected property using the appropriate custom drawer
                     EditorGUILayout.PropertyField(selectedProperty);
                 }
+                // End by applying any modifications to the SerializedObject
                 serializedConversation.ApplyModifiedProperties();
             }
+            // Close ScrollView and Area
+            GUILayout.EndScrollView();
             GUILayout.EndArea();
         }
 
         private void DrawResizeBar()
         {
             resizeBar = new Rect((position.width * nodePanelWidth) - (0.5f * RESIZER_WIDTH), 0, RESIZER_WIDTH, position.height);
-
             GUILayout.BeginArea(new Rect(resizeBar.position + (Vector2.right * 0.5f * RESIZER_WIDTH), new Vector2(2, position.height)), resizerStyle);
             GUILayout.EndArea();
-
-            // HACK maybe don't add this rect if we're dragging a node?
+            
+            // Change mouse cursor while over resize bar
             EditorGUIUtility.AddCursorRect(resizeBar, MouseCursor.ResizeHorizontal);
         }
 
         private void ProcessEvents(Event e)
         {
+            // Events are produced for user input
+            // Calling e.Use changes the event's type to Used, so other objects know it's already been handled
+
+            // Block for things that should happen regardless of mouse position
             switch (e.type)
             {
                 case EventType.MouseDown:
@@ -221,34 +257,45 @@ namespace Dialogue
 
             ProcessResizeBarEvents(e);
             ProcessEditPanelEvents(e);
-            ProcessNodeEvents(e);
-            ProcessNodePanelEvents(e);
+            // HACK skipping processing for later events without consuming so property drawer can use event
+            if (!(e.isMouse && editPanel.Contains(e.mousePosition)))
+            {
+                ProcessNodeEvents(e);
+                ProcessNodePanelEvents(e);
+            }
         }
 
         private void ProcessResizeBarEvents(Event e)
         {
+            // 
             switch (e.type)
             {
                 case EventType.MouseDown:
                     if (e.button == 0 && resizeBar.Contains(e.mousePosition))
                     {
+                        // LMB click inside resize bar starts resizing
                         isResizing = true;
-                        e.Use();
+                        e.Use();    // Consumes the event
                     }
                     break;
 
                 case EventType.MouseUp:
-                    isResizing = false;
+                    // Stop resizing on mouse up
+                    if (e.button == 0)
+                    {
+                        isResizing = false;
+                    }
                     break;
 
                 case EventType.MouseDrag:
                     if (isResizing)
                     {
+                        // If resizing, resize panels when mouse dragged
                         ResizePanels(e);
-                        e.Use();
+                        e.Use();    // Consumes the event
                     }
                     break;
-                // Jump here if already used
+                // Jump here if already used (not sure if this is actually helpful though)
                 case EventType.Used:
                 default:
                     break;
@@ -257,7 +304,26 @@ namespace Dialogue
 
         private void ProcessEditPanelEvents(Event e)
         {
-            //TODO edit panel uses mouse click events on it
+            switch (e.type)
+            {
+                case EventType.MouseUp:
+                    switch (e.button) {
+                        case 0:
+                        if (selectedNode != null)
+                        {
+                            selectedNode.isDragged = false;
+                        }
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            isMovingCanvas = false;
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void ProcessNodePanelEvents(Event e)
@@ -272,16 +338,17 @@ namespace Dialogue
                             case 0: //LMB
                                 // Deselect node
                                 SelectNode(null);
-                                e.Use();
+                                e.Use();    //Consumes the event
                                 break;
                             case 1: //RMB
+                                // Show a menu on right clicking
                                 ProcessContextMenu(e.mousePosition);
-                                e.Use();
+                                e.Use();    // Consumes the event
                                 break;
                             case 2: //Middle
+                                // Start dragging canvas on middle click
                                 isMovingCanvas = true;
-                                e.Use();
-                                //TODO drag applies offset to grid
+                                e.Use(); // Consumes the event
                                 break;
                         }
                         
@@ -294,21 +361,23 @@ namespace Dialogue
                         case 1: //RMB
                             // Don't think these matter to it
                             break;
-                        case 2:
+                        case 2: // middle
                             // stop dragging canvas
                             isMovingCanvas = false;
                             break;
                     }
                     break;
                 case EventType.MouseDrag:
-                    // TODO if dragging with button 2, drag each node with negative delta
                     if (isMovingCanvas)
                     {
+                        // If canvas being dragged, move the nodes
+
+                        //TODO drag applies offset to grid
                         foreach (EditorNode node in nodes)
                         {
                             node.Drag(e.delta);
-                            e.Use();
                         }
+                        e.Use();    // Consumes the event
                     }
                     break;
                 case EventType.Used:
@@ -321,7 +390,8 @@ namespace Dialogue
         {
             if(nodes != null)
             {
-                // Going backwards so last drawn is selected first
+                // Going backwards so last drawn is checked first
+                // This ensures the node clicked on is the one the user can actually see
                 for(int i = nodes.Count - 1; i >= 0; --i)
                 {
                     nodes[i].ProcessEvents(e, this);
@@ -338,41 +408,43 @@ namespace Dialogue
 
         private void ResizePanels(Event e)
         {
+            // Sets panel width as proportion of total window width
             nodePanelWidth = Mathf.Clamp(e.mousePosition.x / position.width, PANEL_MIN_WIDTH, 1.0f - PANEL_MIN_WIDTH);
             Repaint();
         }
 
         private void ProcessContextMenu(Vector2 mousePos)
         {
-
-            Debug.Log("Process context menu");
-            Debug.Log("Mousepos = " + mousePos.ToString() + "; nodePanel = " + nodePanel.ToString() + "; position = " + position.ToString());
+            // Creates and displays a context menu
             GenericMenu menu = new GenericMenu();
             // Set items based on area clicked
             if (nodePanel.Contains(mousePos))
             {
-
-                Debug.Log("Mouse with nodePanel, making nodePanel menu");
+                // Add menu items with functions to be called on clicking item
                 menu.AddItem(new GUIContent("Add dialogue entry"), false, () => OnClickAddNode(mousePos));
-                // TODO check if right clicked on node, do its menu instead
             }
+            // Show the menu
             menu.ShowAsContext();
         }
 
         private void OnClickAddNode(Vector2 pos)
         {
             // HACK will need to change once binding data to conversation entries
-            if(nodes == null)
+            if(serializedConversation != null)
             {
-                nodes = new List<EditorNode>();
+                serializedConversation.Update();
+                // Add DialogueEntry to serialized conversation
+                SerializedProperty newEntry = SerializedConversationUtility.AddEntry(serializedConversation);
+                newEntry.FindPropertyRelative("position").vector2Value = pos;
+                serializedConversation.ApplyModifiedProperties();
             }
 
-            EditorNode newNode = new EditorNode(pos, NODE_WIDTH, NODE_HEIGHT, dialogueNodeStyle, dialogueSelectedNodeStyle);
-            SetupNodeActions(newNode);
+            //EditorNode newNode = new EditorNode(pos, NODE_WIDTH, NODE_HEIGHT, dialogueNodeStyle, dialogueSelectedNodeStyle);
+            //SetupNodeActions(newNode);
             
-            // TODO add to coversation
+            //// TODO add to coversation
 
-            nodes.Add(newNode);
+            //nodes.Add(newNode);
         }
 
         public void SelectNode(EditorNode node)
@@ -380,19 +452,6 @@ namespace Dialogue
             selectedNode = node;
             //TODO deselect connection if one selected
             
-        }
-
-        private void OnRemoveNode(EditorNode node)
-        {
-            //TODO save current state to allow undoing?
-
-            // TODO find all incoming connections to node and delete them
-            foreach(EditorNode otherNode in nodes)
-            {
-                otherNode.Connections.RemoveAll(c => c.Target == node);
-            }
-            // TODO remove from conversation
-            nodes.Remove(node);
         }
 
 
@@ -409,14 +468,13 @@ namespace Dialogue
             }
         }
 
-        public void OnFinishMakeTransition(EditorNode target)
+        public void OnFinishMakeTransition()
         {
             selectedConnector = null;
         }
 
         void SetupNodeActions(EditorNode node)
         {
-            node.OnRemove = OnRemoveNode;
             node.OnStartMakeTransition = OnStartMakeTransition;
         }
 

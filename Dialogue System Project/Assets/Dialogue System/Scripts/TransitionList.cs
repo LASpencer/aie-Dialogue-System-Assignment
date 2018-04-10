@@ -29,6 +29,7 @@ namespace Dialogue
             {
                 if(option.condition == null || option.condition.Evaluate(dialogue))
                 {
+                    //TODO check transition goes somewhere valid
                     return option.transition;
                 }
             }

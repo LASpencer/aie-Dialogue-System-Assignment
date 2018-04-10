@@ -6,7 +6,7 @@ using System;
 
 namespace Dialogue
 {
-    public class EditorNode
+    public abstract class EditorNode
     {
         public Rect rect;
 
@@ -14,8 +14,7 @@ namespace Dialogue
 
         public GUIStyle Style;
         public GUIStyle SelectedStyle;
-
-        public Action<EditorNode> OnRemove;
+        
         public Action<EditorConnector> OnStartMakeTransition;
 
         //TODO figure out how best to display, link nodes with dialogue entries + responses
@@ -72,12 +71,13 @@ namespace Dialogue
                                 {
                                     // If making connection, connect to this
                                     OnClickAsTarget(window, window.SelectedConnector);
+                                    window.OnFinishMakeTransition();
                                     e.Use();
                                 }
                                 break;
                             case 1: //RMB
                                 // Create dropdown menu
-                                ProcessContextMenu();
+                                ProcessContextMenu(window);
                                 e.Use();
                                 break;
                             default:
@@ -109,23 +109,11 @@ namespace Dialogue
             // Returns whether event consumed by node
         }
 
-        private void ProcessContextMenu()
-        {
-            GenericMenu menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Add Transition"), false, OnClickNewTransition);
-            menu.AddItem(new GUIContent("Delete"), false, OnClickDelete);
-            menu.ShowAsContext();
-        }
+        protected abstract void ProcessContextMenu(DialogueEditorWindow window);
 
-        private void OnClickDelete()
-        {
-            if(OnRemove != null)
-            {
-                OnRemove(this);
-            }
-        }
+        protected abstract void OnClickDelete(DialogueEditorWindow window);
 
-        private void OnClickNewTransition()
+        protected void OnClickNewTransition()
         {
             if(OnStartMakeTransition != null)
             {
@@ -135,13 +123,8 @@ namespace Dialogue
             }
         }
 
-        private void OnClickAsTarget(DialogueEditorWindow window, EditorConnector connector)
-        {
-            //TODO check is valid target for connector (response not to response, transition can't already exist)
+        protected abstract void OnClickAsTarget(DialogueEditorWindow window, EditorConnector connector);
 
-            connector.Parent.Connections.Add(connector);
-            connector.Target = this;
-            window.OnFinishMakeTransition(this);
-        }
+        protected internal abstract bool ConnectObjectToDialogueEntry(DialogueEditorWindow window, int targetID);
     }
 }

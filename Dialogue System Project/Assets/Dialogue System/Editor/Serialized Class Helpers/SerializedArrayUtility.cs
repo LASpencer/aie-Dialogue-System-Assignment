@@ -26,5 +26,22 @@ namespace Dialogue
             }
             return null;
         }
+
+        public static int FindIndexByValue(SerializedProperty array, string relativePath, int intValue)
+        {
+            SerializedProperty currentElement;
+            if (array.isArray)
+            {
+                for(int i = 0; i < array.arraySize; ++i)
+                {
+                    currentElement = array.GetArrayElementAtIndex(i);
+                    if (currentElement.FindPropertyRelative(relativePath).intValue == intValue)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
     }
 }
