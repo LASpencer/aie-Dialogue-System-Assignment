@@ -208,12 +208,7 @@ namespace Dialogue
                 SerializedProperty selectedProperty = null;
                 if (selectedNode != null)
                 {
-                    DialogueEntryEditorNode dialogueNode = selectedNode as DialogueEntryEditorNode;
-                    if(dialogueNode != null)
-                    {
-                        // Searches the Entries property for a property whose ID property matches the selected node
-                        selectedProperty = SerializedArrayUtility.FindPropertyByValue(serializedConversation.FindProperty("Entries"), "ID", dialogueNode.entryID);
-                    }
+                    selectedProperty = selectedNode.ContentsAsProperty(serializedConversation);
                 }
                 if (selectedProperty != null)
                 {
@@ -510,23 +505,69 @@ namespace Dialogue
             //TODO check if any transitions were changed
             HashSet<int> seenIDs = new HashSet<int>();
             List<EditorNode> toRemove = new List<EditorNode>();
+            List<EditorNode> nodeToAdd = new List<EditorNode>();
             foreach(EditorNode node in nodes)
             {
                 DialogueEntryEditorNode dialogueNode = node as DialogueEntryEditorNode;
+                ResponseEditorNode responseNode = node as ResponseEditorNode;
                 if(dialogueNode != null)
                 {
                     seenIDs.Add(dialogueNode.entryID);
                     DialogueEntry entry = conversation.FindEntry(dialogueNode.entryID);
-                    if(entry == null)
+                    if (entry == null)
                     {
-                        //TODO dialogueNode to be destroyed
                         toRemove.Add(node);
-                        //TODO also add any responses if they exist?
-                    } else
+                        // Remove any responses from destroyed node
+                        foreach (EditorConnector connection in dialogueNode.Connections)
+                        {
+                            if (connection.Target as ResponseEditorNode != null)
+                            {
+                                toRemove.Add(connection.Target);
+                            }
+                        }
+
+                    }
+                    else
                     {
                         dialogueNode.entry = entry;
-                        //todo check if there's responses to remove?
+                        int maxIndexSeen = -1;
+                        foreach (EditorConnector connection in dialogueNode.Connections)
+                        {
+                            //todo check if there's responses to remove?
+                            ResponseEditorNode childNode = connection.Target as ResponseEditorNode;
+                            if(childNode != null)
+                            {
+                                if(childNode.index < entry.Responses.Count)
+                                {
+                                    maxIndexSeen = Mathf.Max(maxIndexSeen, childNode.index);
+                                    childNode.response = entry.Responses[childNode.index];
+
+                                } else
+                                {
+                                    // Node has out of range index
+                                    toRemove.Add(childNode);
+                                }
+                            }
+                        }
+                        // Add any needed responses
+                        for(int i = maxIndexSeen + 1; i < entry.Responses.Count(); ++i)
+                        {
+                            Response response = entry.Responses[i];
+                            ResponseEditorNode newNode = new ResponseEditorNode(response.Position, NODE_WIDTH, NODE_HEIGHT, responseNodeStyle, responseSelectedNodeStyle);
+                            newNode.response = response;
+                            newNode.entryID = entry.ID;
+                            newNode.index = i;
+                            SetupNodeActions(newNode);
+                            EditorConnector connector = new EditorConnector();
+                            connector.Parent = dialogueNode;
+                            connector.Target = newNode;
+                            dialogueNode.Connections.Add(connector);
+                            nodeToAdd.Add(newNode);
+                        }
                     }
+                } else if (responseNode != null)
+                {
+                    //TODO maybe response needs removing if parent not found?
                 }
             }
             // Remove nodes and any connections to them
@@ -549,16 +590,22 @@ namespace Dialogue
             {
                 AddNode(entry);
             }
+            // Add new response nodes to list
+            nodes.AddRange(nodeToAdd);
             // Now all nodes exist (or don't) check all transitions
             foreach (EditorNode node in nodes)
             {
                 DialogueEntryEditorNode dialogueNode = node as DialogueEntryEditorNode;
+                ResponseEditorNode responseNode = node as ResponseEditorNode;
                 List<int> targetsRequired;
                 List<EditorConnector> connectorToRemove = new List<EditorConnector>();
                 if (dialogueNode != null)
                 {
                     targetsRequired = dialogueNode.entry.transitions.transitions.Select(o => o.transition.TargetID).ToList();
-                } else
+                } else if(responseNode != null)
+                {
+                    targetsRequired = responseNode.response.transitions.transitions.Select(o => o.transition.TargetID).ToList();
+                } else 
                 {
                     //TODO if node is response instead get values from that
                     targetsRequired = new List<int>();
@@ -617,16 +664,54 @@ namespace Dialogue
             return found;
         }
 
+        ResponseEditorNode FindResponseNode(int ID, int index)
+        {
+            ResponseEditorNode found = null;
+            if(nodes != null)
+            {
+                foreach(EditorNode n in nodes)
+                {
+                    ResponseEditorNode responseNode = n as ResponseEditorNode;
+                    if(responseNode != null)
+                    {
+                        if(responseNode.entryID == ID && responseNode.index == index)
+                        {
+                            found = responseNode;
+                            break;
+                        }
+                    }
+                }
+            }
+            return found;
+        }
+
         DialogueEntryEditorNode AddNode(DialogueEntry entry)
         {
             DialogueEntryEditorNode node = new DialogueEntryEditorNode(entry.position, NODE_WIDTH, NODE_HEIGHT, dialogueNodeStyle, dialogueSelectedNodeStyle);
+            Response response;
+            EditorConnector connector;
             node.conversation = conversation;
             node.entryID = entry.ID;
             node.entry = entry;
             SetupNodeActions(node);
             nodes.Add(node);
-
-            //TODO set up response nodes for node
+            
+            // Setup response nodes for node
+            for(int i = 0; i < entry.Responses.Count; ++i)
+            {
+                response = entry.Responses[i];
+                ResponseEditorNode responseNode = new ResponseEditorNode(response.Position, NODE_WIDTH, NODE_HEIGHT, responseNodeStyle, responseSelectedNodeStyle);
+                responseNode.conversation = conversation;
+                responseNode.entryID = entry.ID;
+                responseNode.index = i;
+                responseNode.response = response;
+                SetupNodeActions(responseNode);
+                nodes.Add(responseNode);
+                connector = new EditorConnector();
+                connector.Parent = node;
+                connector.Target = responseNode;
+                node.Connections.Add(connector);
+            }
             return node;
         }
 
@@ -645,6 +730,23 @@ namespace Dialogue
                         connector.Parent = startNode;
                         connector.Target = endNode;
                         startNode.Connections.Add(connector);
+                    }
+                }
+
+                for(int i = 0; i < entry.Responses.Count; ++i)
+                {
+                    Response response = entry.Responses[i];
+                    ResponseEditorNode responseNode = FindResponseNode(entry.ID, i);
+                    foreach(TransitionOption o in response.transitions.transitions)
+                    {
+                        DialogueEntryEditorNode endNode = FindDialogueNode(o.transition.TargetID);
+                        if (endNode != null)
+                        {
+                            EditorConnector connector = new EditorConnector();
+                            connector.Parent = responseNode;
+                            connector.Target = endNode;
+                            responseNode.Connections.Add(connector);
+                        }
                     }
                 }
             }

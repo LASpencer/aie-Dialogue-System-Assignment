@@ -51,6 +51,8 @@ namespace Dialogue
             }
         }
 
+        public abstract SerializedProperty ContentsAsProperty(SerializedObject conversation);
+
         public void ProcessEvents(Event e, DialogueEditorWindow window)
         {
             // TODO clicking starts dragging , unclick stops, drag while dragging moves by delta

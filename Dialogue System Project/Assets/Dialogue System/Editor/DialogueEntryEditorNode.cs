@@ -94,5 +94,10 @@ namespace Dialogue
             }
             return success;
         }
+
+        public override SerializedProperty ContentsAsProperty(SerializedObject conversation)
+        {
+            return SerializedArrayUtility.FindPropertyByValue(conversation.FindProperty("Entries"), "ID", entryID);
+        }
     }
 }

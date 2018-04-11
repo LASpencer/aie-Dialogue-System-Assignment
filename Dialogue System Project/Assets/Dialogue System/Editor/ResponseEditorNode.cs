@@ -18,6 +18,12 @@ namespace Dialogue
         {
         }
 
+        public override SerializedProperty ContentsAsProperty(SerializedObject conversation)
+        {
+            SerializedProperty entry = SerializedArrayUtility.FindPropertyByValue(conversation.FindProperty("Entries"), "ID", entryID);
+            return entry.FindPropertyRelative("Responses").GetArrayElementAtIndex(index);
+        }
+
         public override void Drag(Vector2 delta)
         {
             base.Drag(delta);
