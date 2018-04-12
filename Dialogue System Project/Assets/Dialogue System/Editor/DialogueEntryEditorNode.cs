@@ -36,8 +36,26 @@ namespace Dialogue
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Add Transition"), false, OnClickNewTransition);
             //TODO add response option
+            menu.AddItem(new GUIContent("Add Response"), false, () => OnClickAddResponse(window));
+            menu.AddSeparator("");
             menu.AddItem(new GUIContent("Delete"), false, () => OnClickDelete(window));
             menu.ShowAsContext();
+        }
+
+        protected void OnClickAddResponse(DialogueEditorWindow window)
+        {
+            SerializedObject conversation = window.SerializedConversation;
+            if(conversation != null)
+            {
+                conversation.Update();
+                // Get serialized property for this node
+                SerializedProperty serialEntry = SerializedConversationUtility.FindEntry(conversation, entryID);
+                if(serialEntry != null)
+                {
+                    SerializedDialogueEntryUtility.AddResponse(serialEntry);
+                }
+                conversation.ApplyModifiedProperties();
+            }
         }
 
         protected override void OnClickDelete(DialogueEditorWindow window)

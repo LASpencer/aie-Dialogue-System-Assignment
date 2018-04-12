@@ -98,10 +98,22 @@ namespace Dialogue
 
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.BeginVertical();
-                    EditorGUILayout.PropertyField(response, new GUIContent(responseTitle), true); //TODO get text from response, use as label
+                    response.isExpanded = EditorGUILayout.Foldout(response.isExpanded, responseTitle);
+                    if (response.isExpanded)
+                    {
+                        EditorGUILayout.PropertyField(response, new GUIContent(responseTitle), true); //TODO get text from response, use as label
+                    }
                     EditorGUILayout.EndVertical();
-                    bool moveUp = GUILayout.Button("^", GUILayout.Width(MOVE_BUTTON_WIDTH));     //TODO grey if i = 0
-                    bool moveDown = GUILayout.Button("v", GUILayout.Width(MOVE_BUTTON_WIDTH));   //TODO grey if i+1 = optionSize
+                    bool moveUp = false, moveDown = false, deleteResponse = false;
+                    using (new EditorGUI.DisabledScope(i <= 0))     // Disable if first in array
+                    {
+                        moveUp = GUILayout.Button("^", GUILayout.Width(MOVE_BUTTON_WIDTH));
+                    }
+                    using (new EditorGUI.DisabledScope(i + 1 >= responsesSize))
+                    {
+                        moveDown = GUILayout.Button("v", GUILayout.Width(MOVE_BUTTON_WIDTH));
+                    }
+                    deleteResponse = GUILayout.Button("X", GUILayout.Width(MOVE_BUTTON_WIDTH));
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.Separator();
@@ -114,6 +126,10 @@ namespace Dialogue
                     else if (moveDown)
                     {
                         action = ListActions.MoveDown;
+                        selectedIndex = i;
+                    } else if (deleteResponse)
+                    {
+                        action = ListActions.Delete;
                         selectedIndex = i;
                     }
                 }
@@ -146,6 +162,10 @@ namespace Dialogue
                         break;
                     case ListActions.Delete:
                         //TODO delete at selected index
+                        if(selectedIndex >= 0 && selectedIndex < (responsesSize))
+                        {
+                            responsesList.DeleteArrayElementAtIndex(selectedIndex);
+                        }
                         break;
                     case ListActions.Nothing:
                     default:

@@ -32,7 +32,14 @@ namespace Dialogue
 
         public override void Draw(bool selected)
         {
-            title = StringUtility.TruncateString(response.Text, MAX_TITLE_CHARACTERS);
+            if (string.IsNullOrEmpty(response.Text))
+            {
+                title = "Response " + index.ToString();
+            }
+            else
+            {
+                title = StringUtility.TruncateString(response.Text, MAX_TITLE_CHARACTERS);
+            }
             base.Draw(selected);
         }
 

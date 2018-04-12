@@ -27,13 +27,16 @@ namespace Dialogue
             EditorGUILayout.PropertyField(serializedObject.FindProperty("nextID"));//HACK
             
             // popup to select start dialogue
-            //entries = (target as Conversation).Entries;
             entrySelectedIndex = DialogueEntryPopup(entrySelectedIndex);
 
             // add/remove entries buttons
             EditorGUILayout.BeginHorizontal();
-            bool addEntry = GUILayout.Button("Add Entry");
-            bool removeEntry = GUILayout.Button("Remove Entry");//TODO disable if empty
+            bool addEntry = false, removeEntry = false;
+            addEntry = GUILayout.Button("Add Entry");
+            using (new EditorGUI.DisabledScope(entrySelectedIndex >= entries.arraySize)) //disable if index out of range
+            {
+                removeEntry = GUILayout.Button("Remove Entry");
+            }
             EditorGUILayout.EndHorizontal();
             if (addEntry)
             {
@@ -41,10 +44,10 @@ namespace Dialogue
             }
             else if (removeEntry)
             {
-                if (entries.arraySize != 0)
+                if (entrySelectedIndex < entries.arraySize)
                 {
                     entries.DeleteArrayElementAtIndex(entrySelectedIndex);
-                    entrySelectedIndex = Mathf.Min(entrySelectedIndex, entries.arraySize - 1);
+                    entrySelectedIndex = Mathf.Clamp(entrySelectedIndex,0, entries.arraySize - 1);
                 }
             }
 
@@ -55,13 +58,11 @@ namespace Dialogue
                 selectedEntry = entries.GetArrayElementAtIndex(entrySelectedIndex);
                 // TODO expand or hide selectedEntry
                 EditorGUILayout.PropertyField(selectedEntry, GUIContent.none, true);
-                // Do I need to use SerializedProperty/ApplyModifiedProperties?
             } else
             {
                 EditorGUILayout.LabelField("No Entries");
             }
             serializedObject.ApplyModifiedProperties();
-            //base.OnInspectorGUI();
         }
 
         private int DialogueEntryPopup(int index)

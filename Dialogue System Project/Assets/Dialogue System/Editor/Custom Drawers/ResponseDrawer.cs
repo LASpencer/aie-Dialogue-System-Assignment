@@ -17,7 +17,9 @@ namespace Dialogue
             EditorGUILayout.PropertyField(property.FindPropertyRelative("Text"));
             EditorGUILayout.PropertyField(property.FindPropertyRelative("OnChosen"));
             EditorGUILayout.PropertyField(property.FindPropertyRelative("Prerequisite"));
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(property.FindPropertyRelative("transitions"));
+            EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
         }
     }

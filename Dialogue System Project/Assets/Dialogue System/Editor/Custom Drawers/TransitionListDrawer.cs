@@ -61,12 +61,18 @@ namespace Dialogue
                     //EditorGUILayout.PropertyField(condition, true);
                     //EditorGUILayout.PropertyField(targetID, true);
                     EditorGUILayout.EndVertical();
-                    bool moveUp = GUILayout.Button("^", GUILayout.Width(MOVE_BUTTON_WIDTH));    //TODO grey if i=0
-                    bool moveDown = GUILayout.Button("v", GUILayout.Width(MOVE_BUTTON_WIDTH));  //TODO grey if i+1 = optionSize
-                                                                                                //bool remove = GUILayout.Button("X");
+                    bool moveUp = false, moveDown = false, remove = false;
+                    using (new EditorGUI.DisabledScope(i == 0))     // Disable if already first
+                    {
+                        moveUp = GUILayout.Button("^", GUILayout.Width(MOVE_BUTTON_WIDTH));
+                    }
+                    using (new EditorGUI.DisabledScope(i + 1 >= optionSize))    // Disable if last
+                    {
+                        moveDown = GUILayout.Button("v", GUILayout.Width(MOVE_BUTTON_WIDTH));  
+                    }
+                    // remove = GUILayout.Button("X", GUILayout.Width(MOVE_BUTTON_WIDTH));
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.Separator();
-                    //TODO button value causes move up or down
                     if (moveUp)
                     {
                         action = ListActions.MoveUp;
@@ -76,17 +82,20 @@ namespace Dialogue
                     {
                         action = ListActions.MoveDown;
                         selectedIndex = i;
-                    }/* else if (remove)
-                //{
-                //    action = ListActions.Delete;
-                //    selectedIndex = i;
-                }*/
+                    } else if (remove)
+                    {
+                        action = ListActions.Delete;
+                        selectedIndex = i;
+                    }
 
                 }
-                //TODO put buttons to expand list here
                 GUILayout.BeginHorizontal();
-                bool addItem = GUILayout.Button("Add Transition");
-                bool clearItems = GUILayout.Button("Clear Transtions");
+                bool addItem = false, clearItems = false;
+                addItem = GUILayout.Button("Add Transition");
+                using (new EditorGUI.DisabledScope(optionSize == 0))
+                {
+                    clearItems = GUILayout.Button("Clear Transtions");
+                }
                 GUILayout.EndHorizontal();
                 if (addItem)
                 {
@@ -94,7 +103,7 @@ namespace Dialogue
                 }
                 if (clearItems)
                 {
-                    optionsList.arraySize = 0;
+                    optionsList.ClearArray();
                 }
 
                 // Handle choice
@@ -113,7 +122,10 @@ namespace Dialogue
                         }
                         break;
                     case ListActions.Delete:
-                        //TODO delete at selected index
+                        if(selectedIndex >= 0 && selectedIndex < optionSize)
+                        {
+                            optionsList.DeleteArrayElementAtIndex(selectedIndex);
+                        }
                         break;
                     case ListActions.Nothing:
                     default:
@@ -130,28 +142,5 @@ namespace Dialogue
             //base.OnGUI(position, property, label);
         }
     }
-
-    //[CustomPropertyDrawer(typeof(TransitionOption))]
-    //class TransitionOptionDrawer : PropertyDrawer
-    //{
-    //    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    //    {
-    //        return base.GetPropertyHeight(property, label);
-    //    }
-    //    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    //    {
-    //        //base.OnGUI(position, property, label);
-    //        SerializedProperty transition = property.FindPropertyRelative("transition");
-    //        SerializedProperty condition = property.FindPropertyRelative("condition");
-    //        EditorGUILayout.BeginVertical();
-    //        property.isExpanded = EditorGUILayout.Foldout(property.isExpanded, label);
-    //        if (property.isExpanded)
-    //        {
-    //            EditorGUILayout.PropertyField(condition, true);
-    //            EditorGUILayout.PropertyField(transition, true);
-    //        }
-    //        EditorGUILayout.EndVertical();
-    //    }
-    //}
 
 }
