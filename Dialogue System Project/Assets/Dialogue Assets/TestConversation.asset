@@ -15,13 +15,13 @@ MonoBehaviour:
   Entries:
   - ID: 0
     Title: START
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Doh, no, I said steamed hams. That's what I call hamburgers! It's a regional
       dialect.
     transitions:
       transitions: []
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses:
     - Text: What region?
       OnChosen: {fileID: 0}
@@ -31,7 +31,7 @@ MonoBehaviour:
         - transition:
             TargetID: 1
           condition: {fileID: 0}
-      Position: {x: 529, y: 199}
+      Position: {x: 29, y: 51}
     - Text: These taste familiar...
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
         - transition:
             TargetID: 14
           condition: {fileID: 0}
-      Position: {x: 455, y: 277}
+      Position: {x: -45, y: 129}
     - Text: Obviously grilled?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -49,11 +49,11 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 234, y: 266}
-    position: {x: 292, y: 108}
+      Position: {x: -266, y: 118}
+    position: {x: -208, y: -40}
   - ID: 1
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: Uh huh. What region?
     transitions:
       transitions:
@@ -61,17 +61,17 @@ MonoBehaviour:
           TargetID: 2
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 786, y: 179}
+    position: {x: 286, y: 31}
   - ID: 2
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Upstate New York.
     transitions:
       transitions: []
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses:
     - Text: I'm from Utica
       OnChosen: {fileID: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
         - transition:
             TargetID: 13
           condition: {fileID: 0}
-      Position: {x: 1002, y: 271}
+      Position: {x: 502, y: 123}
     - Text: They're not steamed
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 780, y: 272}
+      Position: {x: 280, y: 124}
     - Text: I smell smoke!
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -99,11 +99,11 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-      Position: {x: 1204, y: 285}
-    position: {x: 1025, y: 187}
+      Position: {x: 704, y: 137}
+    position: {x: 525, y: 39}
   - ID: 3
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Oh, not in Utica, no. It's an Albany expression
     transitions:
       transitions:
@@ -111,12 +111,12 @@ MonoBehaviour:
           TargetID: 14
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 870, y: 409}
+    position: {x: 370, y: 261}
   - ID: 4
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: And you call them "Steamed Hams" despite the fact that they are obviously
       grilled.
     transitions:
@@ -125,12 +125,12 @@ MonoBehaviour:
           TargetID: 5
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 261, y: 422}
+    position: {x: -239, y: 274}
   - ID: 5
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Uh, um, er...
     transitions:
       transitions:
@@ -138,12 +138,12 @@ MonoBehaviour:
           TargetID: 6
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 243, y: 486}
+    position: {x: -257, y: 338}
   - ID: 6
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: well, the thing is...
     transitions:
       transitions:
@@ -151,12 +151,12 @@ MonoBehaviour:
           TargetID: 7
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 246, y: 540}
+    position: {x: -254, y: 392}
   - ID: 7
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Excuse me for one second.
     transitions:
       transitions:
@@ -164,12 +164,12 @@ MonoBehaviour:
           TargetID: 8
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 267, y: 598}
+    position: {x: -233, y: 450}
   - ID: 8
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 1
     Text: Of course.
     transitions:
       transitions:
@@ -177,12 +177,12 @@ MonoBehaviour:
           TargetID: 9
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 277, y: 653}
+    position: {x: -223, y: 505}
   - ID: 9
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: '*yawns* That was wonderful. A good time was had by all, I''m pooped.'
     transitions:
       transitions:
@@ -190,12 +190,12 @@ MonoBehaviour:
           TargetID: 10
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 285, y: 714}
+    position: {x: -215, y: 566}
   - ID: 10
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: Yes, I should be...
     transitions:
       transitions:
@@ -203,12 +203,12 @@ MonoBehaviour:
           TargetID: 11
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 286, y: 775}
+    position: {x: -214, y: 627}
   - ID: 11
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: Good lord, what is happening in there?
     transitions:
       transitions:
@@ -216,12 +216,12 @@ MonoBehaviour:
           TargetID: 12
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 833, y: 765}
+    position: {x: 333, y: 616}
   - ID: 12
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Aurora Borealis.
     transitions:
       transitions:
@@ -229,12 +229,12 @@ MonoBehaviour:
           TargetID: 18
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1207, y: 450}
+    position: {x: 707, y: 301}
   - ID: 13
     Title: Utica
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: Really. Well I'm from Utica and I've never heard anyone use the phrase "Steamed
       Hams"
     transitions:
@@ -243,12 +243,12 @@ MonoBehaviour:
           TargetID: 3
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 875, y: 344}
+    position: {x: 375, y: 196}
   - ID: 14
     Title: Krustyburgers
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: These hamburgers are quite similar to the ones they have at Krustyburger
     transitions:
       transitions:
@@ -256,12 +256,12 @@ MonoBehaviour:
           TargetID: 15
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 515, y: 400}
+    position: {x: 15, y: 252}
   - ID: 15
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Oh ho ho, no. Patented Skinnerburgers! Old family recipe.
     transitions:
       transitions:
@@ -269,12 +269,12 @@ MonoBehaviour:
           TargetID: 16
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 520, y: 454}
+    position: {x: 20, y: 306}
   - ID: 16
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: For steamed hams.
     transitions:
       transitions:
@@ -282,17 +282,17 @@ MonoBehaviour:
           TargetID: 17
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 527, y: 509}
+    position: {x: 27, y: 361}
   - ID: 17
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Yes!
     transitions:
       transitions: []
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses:
     - Text: But they're grilled
       OnChosen: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 521, y: 651}
+      Position: {x: 21, y: 503}
     - Text: Is that fire?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -311,16 +311,16 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-      Position: {x: 760, y: 633}
-    position: {x: 534, y: 565}
+      Position: {x: 260, y: 485}
+    position: {x: 34, y: 417}
   - ID: 18
     Title: Aurora Borealis?
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: Aurora Borealis?
     transitions:
       transitions: []
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses:
     - Text: At this time of day?
       OnChosen: {fileID: 11400000, guid: b955ca02180b8854ea12dd86ac96ac9e, type: 2}
@@ -330,7 +330,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1421, y: 464}
+      Position: {x: 921, y: 316}
     - Text: At this time of year?
       OnChosen: {fileID: 11400000, guid: 712f4c4db85761046a36ff765a3f028a, type: 2}
       Prerequisite: {fileID: 11400000, guid: 7ee580c99ed852f48a51f35bbc66fac9, type: 2}
@@ -339,7 +339,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1433, y: 528}
+      Position: {x: 933, y: 380}
     - Text: In this part of the country?
       OnChosen: {fileID: 11400000, guid: d0fa49f2120cf6e44b42d92e173f8832, type: 2}
       Prerequisite: {fileID: 11400000, guid: 9e4c738877dd0fb42bbb8e203cf73a41, type: 2}
@@ -348,7 +348,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1438, y: 603}
+      Position: {x: 938, y: 455}
     - Text: Localized entirely in your kitchen?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -357,11 +357,11 @@ MonoBehaviour:
         - transition:
             TargetID: 19
           condition: {fileID: 0}
-      Position: {x: 1174, y: 595}
-    position: {x: 1196, y: 525}
+      Position: {x: 674, y: 447}
+    position: {x: 696, y: 377}
   - ID: 19
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: Yes.
     transitions:
       transitions:
@@ -369,12 +369,12 @@ MonoBehaviour:
           TargetID: 20
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1167, y: 659}
+    position: {x: 667, y: 511}
   - ID: 20
     Title: 
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: May I see it?
     transitions:
       transitions:
@@ -382,12 +382,12 @@ MonoBehaviour:
           TargetID: 21
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1158, y: 712}
+    position: {x: 658, y: 564}
   - ID: 21
     Title: 
-    Speaker: {fileID: 11400000, guid: fe28596d6380f97489c974d621f930fa, type: 2}
+    speakerIndex: 1
     Text: No.
     transitions:
       transitions:
@@ -395,12 +395,12 @@ MonoBehaviour:
           TargetID: 23
         condition: {fileID: 0}
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1173, y: 771}
+    position: {x: 673, y: 623}
   - ID: 23
     Title: Compliment Hams
-    Speaker: {fileID: 11400000, guid: 2e506a452ca8b704488e7628d3229c82, type: 2}
+    speakerIndex: 0
     Text: Well Seymore you are an odd fellow but I must say you steam a good ham.
     transitions:
       transitions:
@@ -410,25 +410,29 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1164, y: 820}
+    position: {x: 664, y: 672}
   - ID: 24
     Title: Mother calls for help
-    Speaker: {fileID: 0}
+    speakerIndex: 2
     Text: Help! Help!
     transitions:
       transitions: []
     isEnd: 1
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1179, y: 875}
+    position: {x: 679, y: 727}
+  Speakers:
+  - Chalmers
+  - Skinner
+  - Mother
   Start:
     ID: 0
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
     isEnd: 0
-    parent: {fileID: 0}
+    parent: {fileID: 11400000}
     Responses: []
     position: {x: 0, y: 0}

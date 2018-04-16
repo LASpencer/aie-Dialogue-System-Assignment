@@ -32,35 +32,13 @@ namespace Dialogue
         {
             SerializedProperty id = property.FindPropertyRelative("ID");
             SerializedProperty title = property.FindPropertyRelative("Title");
-            SerializedProperty speaker = property.FindPropertyRelative("Speaker");
+            SerializedProperty speaker = property.FindPropertyRelative("speakerIndex");
             SerializedProperty isEnd = property.FindPropertyRelative("isEnd");
             SerializedProperty text = property.FindPropertyRelative("Text");
             SerializedProperty transitions = property.FindPropertyRelative("transitions");
             SerializedProperty responsesList = property.FindPropertyRelative("Responses");
             SerializedProperty response;
-
-            //EditorGUI.BeginProperty(position, label, property);
-
-            //// Setup layout rects
-            //Rect idLabelRect = new Rect(position.x, position.y, ID_LABEL_WIDTH, EditorGUI.GetPropertyHeight(id));
-            //Rect idFieldRect = new Rect(position.x + ID_LABEL_WIDTH, position.y, position.width - ID_LABEL_WIDTH, EditorGUI.GetPropertyHeight(id));
-            //Rect titleRect = new Rect(position.x, idFieldRect.yMax + LINE_MARGIN, position.width, EditorGUI.GetPropertyHeight(title));
-            //Rect speakerRect = new Rect(position.x, titleRect.yMax + LINE_MARGIN, position.width, EditorGUI.GetPropertyHeight(speaker));
-            //Rect isEndRect = new Rect(position.x, speakerRect.yMax + LINE_MARGIN, position.width, EditorGUI.GetPropertyHeight(isEnd));
-            //Rect textRect = new Rect(position.x, isEndRect.yMax + LINE_MARGIN, position.width, EditorGUI.GetPropertyHeight(text));
-            //// HACK may need to change when transition drawer made
-            //Rect transitionsRect = new Rect(position.x, textRect.yMax + LINE_MARGIN, position.width, EditorGUI.GetPropertyHeight(transitions, true));
-            //// HACK may need to change when response drawer made
-            //Rect responseRect = new Rect(position.x, transitionsRect.yMax + LINE_MARGIN, position.width, EditorGUI.GetPropertyHeight(responses, true));
-            //// Show fields
-            //EditorGUI.LabelField(idLabelRect, "ID: ");
-            //EditorGUI.SelectableLabel(idFieldRect, id.intValue.ToString());
-            //EditorGUI.PropertyField(titleRect, title);
-            //EditorGUI.PropertyField(speakerRect, speaker);
-            //EditorGUI.PropertyField(isEndRect, isEnd);
-            //EditorGUI.PropertyField(textRect, text);
-            //EditorGUI.PropertyField(transitionsRect, transitions,true);
-            //EditorGUI.PropertyField(responseRect, responses,true);
+            SerializedObject parent = property.serializedObject;//TODO instead use serialized property, and get conversation from that
 
             EditorGUILayout.BeginVertical();
 
@@ -70,7 +48,11 @@ namespace Dialogue
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.PropertyField(title);
-            EditorGUILayout.PropertyField(speaker);
+            // Display possible speakers as popup
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel("Speaker: ");
+            speaker.intValue = EditorGUILayout.Popup(speaker.intValue, (parent.targetObject as Conversation).Speakers.ToArray());
+            EditorGUILayout.EndHorizontal();
             EditorGUILayout.PropertyField(isEnd);
             EditorGUILayout.PropertyField(text);
             EditorGUILayout.Separator();

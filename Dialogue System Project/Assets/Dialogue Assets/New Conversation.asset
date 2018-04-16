@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Name: New Conversation
   m_EditorClassIdentifier: 
   nextID: 40
+  startingID: 31
   Entries:
   - ID: 31
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions:
@@ -28,7 +29,7 @@ MonoBehaviour:
     position: {x: 185, y: 323}
   - ID: 32
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
@@ -38,7 +39,7 @@ MonoBehaviour:
     position: {x: 537, y: 330}
   - ID: 33
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions:
@@ -51,7 +52,7 @@ MonoBehaviour:
     position: {x: 767, y: 378}
   - ID: 34
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
@@ -61,7 +62,7 @@ MonoBehaviour:
     position: {x: 240, y: 89}
   - ID: 35
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
@@ -71,7 +72,7 @@ MonoBehaviour:
     position: {x: 734, y: 168}
   - ID: 36
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
@@ -81,7 +82,7 @@ MonoBehaviour:
     position: {x: 606, y: 462}
   - ID: 37
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
@@ -91,7 +92,7 @@ MonoBehaviour:
     position: {x: 517, y: 110}
   - ID: 38
     Title: 
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: 
     transitions:
       transitions: []
@@ -101,7 +102,7 @@ MonoBehaviour:
     position: {x: 81, y: 178}
   - ID: 39
     Title: number 39
-    Speaker: {fileID: 0}
+    speakerIndex: 0
     Text: this is the last entry in the list
     transitions:
       transitions: []
@@ -109,14 +110,4 @@ MonoBehaviour:
     parent: {fileID: 11400000}
     Responses: []
     position: {x: 596, y: 311}
-  Start:
-    ID: 0
-    Title: 
-    Speaker: {fileID: 0}
-    Text: 
-    transitions:
-      transitions: []
-    isEnd: 0
-    parent: {fileID: 0}
-    Responses: []
-    position: {x: 0, y: 0}
+  Speakers: []

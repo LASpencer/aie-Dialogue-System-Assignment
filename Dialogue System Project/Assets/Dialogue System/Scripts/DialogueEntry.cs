@@ -9,7 +9,20 @@ namespace Dialogue {
     public class DialogueEntry  {
         public int ID;          //HACK needs some system to detect/resolve collisions
         public string Title;
-        public Actor Speaker;   //HACK might change to string, with conversation holding map of names to actor object
+        [SerializeField]
+        private int speakerIndex;
+
+        public int SpeakerIndex { get { return speakerIndex; } set { speakerIndex = value; } }
+        public string Speaker { get {
+                if(speakerIndex >= 0 && speakerIndex < parent.Speakers.Count)
+                {
+                    return parent.Speakers[speakerIndex];
+                } else
+                {
+                    return "";
+                }
+            } }
+
         [TextArea]
         public string Text;     // HACK Replace with LocalizedString when created
         public TransitionList transitions;

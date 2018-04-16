@@ -7,6 +7,12 @@ using UnityEngine;
 
 namespace Dialogue
 {
+    public struct NameIDListPair
+    {
+        public List<string> Names;
+        public List<int> IDs;
+    }
+
     class SerializedConversationUtility
     {
         public static SerializedProperty AddEntry(SerializedObject serialConversation)
@@ -36,10 +42,23 @@ namespace Dialogue
             return dialogueEntry;
         }
 
+        public static NameIDListPair GetEntryNameAndID(SerializedObject serialConversation, bool prependID = false)
+        {
+            NameIDListPair listPair = new NameIDListPair();
+            listPair.Names = new List<string>();
+            listPair.IDs = new List<int>();
+            Conversation conversation = serialConversation.targetObject as Conversation;
+            foreach(DialogueEntry entry in conversation.Entries)
+            {
+                listPair.Names.Add(entry.Name(prependID));
+                listPair.IDs.Add(entry.ID);
+            }
+            return listPair;
+        }
+
         public static bool IsConversation(SerializedObject serializedObject)
         {
             return serializedObject.targetObject as Conversation != null;
-            //HACK look into 
         }
     }
 }

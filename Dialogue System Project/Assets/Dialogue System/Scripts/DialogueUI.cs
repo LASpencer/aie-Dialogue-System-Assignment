@@ -59,7 +59,7 @@ namespace Dialogue {
         public void SetDialogueEntry(DialogueEntry entry)
         {
             dialogueText.text = entry.Text;
-            actorName.text = entry.Speaker.Name;
+            actorName.text = entry.Speaker; //TODO get actor from map of speaker name to actor
             if (entry.Responses.Count > 0)
             {
                 // HACK do something better than this

@@ -204,6 +204,16 @@ namespace Dialogue
                 // Draws the property for the selected node
                 // As with custom inspectors, the SerializedObject representing the Conversation needs to be updated and modified
                 serializedConversation.Update();
+
+                SerializedProperty startingID = serializedConversation.FindProperty("startingID");
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PrefixLabel("Starting Entry");
+                NameIDListPair popupLists = SerializedConversationUtility.GetEntryNameAndID(serializedConversation, true);
+                startingID.intValue = EditorGUILayout.IntPopup(startingID.intValue, popupLists.Names.ToArray(), popupLists.IDs.ToArray());
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.PropertyField(serializedConversation.FindProperty("Speakers"), true);
+                EditorGUILayout.Separator();
                 // Get the property from the serializedConversation corresponding to the selected node
                 SerializedProperty selectedProperty = null;
                 if (selectedNode != null)

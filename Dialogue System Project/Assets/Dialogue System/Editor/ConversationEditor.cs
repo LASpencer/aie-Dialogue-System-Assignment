@@ -14,18 +14,31 @@ namespace Dialogue
         //private List<DialogueEntry> entries;
         SerializedProperty entries;
         SerializedProperty selectedEntry;
-
+        SerializedProperty startingID;
 
         private void OnEnable()
         {
             entries = serializedObject.FindProperty("Entries");
+            startingID = serializedObject.FindProperty("startingID");
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+
             EditorGUILayout.PropertyField(serializedObject.FindProperty("nextID"));//HACK
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel("Starting Entry");
+            NameIDListPair popupLists = SerializedConversationUtility.GetEntryNameAndID(serializedObject, true);
+            startingID.intValue = EditorGUILayout.IntPopup(startingID.intValue, popupLists.Names.ToArray(), popupLists.IDs.ToArray());
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("Speakers"),true);
             
+
+            EditorGUILayout.Separator();
+            EditorGUILayout.LabelField("Dialogue Entries");
             // popup to select start dialogue
             entrySelectedIndex = DialogueEntryPopup(entrySelectedIndex);
 

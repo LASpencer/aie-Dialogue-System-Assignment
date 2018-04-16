@@ -17,7 +17,7 @@ namespace Dialogue
             entry.FindPropertyRelative("parent").objectReferenceValue = parent;
             entry.FindPropertyRelative("ID").intValue = ID;
             entry.FindPropertyRelative("Title").stringValue = "";
-            //TODO when Speaker is string, make empty string
+            entry.FindPropertyRelative("speakerIndex").intValue = 0;
             entry.FindPropertyRelative("Text").stringValue = "";
             entry.FindPropertyRelative("isEnd").boolValue = false;
             if (transitions.isArray) {

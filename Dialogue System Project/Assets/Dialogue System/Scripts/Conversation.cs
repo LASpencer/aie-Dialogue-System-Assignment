@@ -12,10 +12,15 @@ namespace Dialogue
 
         public int NextID { get { return nextID; } }
 
+        [SerializeField]
+        private int startingID;
+
         //HACK maybe write a serializable dictionary?
         public List<DialogueEntry> Entries;
 
-        public DialogueEntry Start;
+        public List<string> Speakers;
+
+        public DialogueEntry Start { get { return FindEntry(startingID); } }
 
         public DialogueEntry FindEntry(int id)
         {

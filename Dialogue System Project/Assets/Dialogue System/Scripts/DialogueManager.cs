@@ -10,6 +10,7 @@ namespace Dialogue
         public DialogueUI UISystem;
         //HACK will later have multiple conversations to choose from
         public Conversation conversation;
+        [HideInInspector] //HACK figure out how to display normally
         public DialogueEntry current;
 
         //TODO make more flexible system for displaying dialogue
@@ -46,25 +47,33 @@ namespace Dialogue
         public void StartConversation()
         {
             // TODO will need to be told which conversation to start
-            // TODO maybe get entry titled START?
-            current = conversation.Entries[0];
+            current = conversation.Start;
             UISystem.OnConversationStart();
         }
 
         public void NextEntry()
         {
+            bool entryFound = false;
             if (current != null)
             {
                 // HACK 
-                if (current.isEnd)
-                {
-                    EndConversation();
-                }
-                else
+                if (!current.isEnd)
                 {
                     Transition selectedTransition = current.transitions.SelectTransition(this);
-                    current = conversation.FindEntry(selectedTransition.TargetID);
-                    UISystem.SetDialogueEntry(current);
+                    if(selectedTransition != null){
+                        DialogueEntry nextEntry = conversation.FindEntry(selectedTransition.TargetID);
+                        if(nextEntry != null)
+                        {
+                            current = nextEntry;
+                            UISystem.SetDialogueEntry(current);
+                            entryFound = true;
+                        }
+                    }
+                    
+                }
+                if (!entryFound)
+                {
+                    EndConversation();
                 }
             }
         }
