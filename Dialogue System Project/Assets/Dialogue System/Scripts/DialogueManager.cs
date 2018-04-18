@@ -13,22 +13,21 @@ namespace Dialogue
         [HideInInspector] //HACK figure out how to display normally
         public DialogueEntry current;
 
-        //TODO make more flexible system for displaying dialogue
-        public Text dialogueText;
-        public Text actorName;
-        public Text responseText;
-
         //TODO have some way to save fields between scenes?
         FieldManager fields;
+        //TODO figure out proper way to access name->actor map
+        public Dictionary<string, DialogueActor> actors;
 
         private void Awake()
         {
             fields = new FieldManager();
+            actors = new Dictionary<string, DialogueActor>();
         }
 
         private void Reset()
         {
             fields = new FieldManager();
+            actors = new Dictionary<string, DialogueActor>();
         }
 
         // Use this for initialization

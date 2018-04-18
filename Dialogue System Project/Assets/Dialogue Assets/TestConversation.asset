@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: TestConversation
   m_EditorClassIdentifier: 
   nextID: 25
+  startingID: 0
   Entries:
   - ID: 0
     Title: START
@@ -425,14 +426,3 @@ MonoBehaviour:
   - Chalmers
   - Skinner
   - Mother
-  Start:
-    ID: 0
-    Title: 
-    speakerIndex: 0
-    Text: 
-    transitions:
-      transitions: []
-    isEnd: 0
-    parent: {fileID: 11400000}
-    Responses: []
-    position: {x: 0, y: 0}
