@@ -12,6 +12,10 @@ namespace Dialogue
         const float COL_MARGIN = 2f;
         const float ROW_HEIGHT = 17f;
 
+        const float ADD_BUTTON_WIDTH = 100f;
+        const float CLEAR_BUTTON_WIDTH = 120f;
+        const float BUTTON_MARGIN = 40f;
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             float height = ROW_HEIGHT;
@@ -78,10 +82,10 @@ namespace Dialogue
                         deletedIndex = i;
                     }
                 }
-
-                //TODO spread these out a bit
-                Rect AddButtonRect = new Rect(position.x, currentY, position.width * 0.5f, ROW_HEIGHT);
-                Rect ClearButtonRect = new Rect(position.x + position.width * 0.5f, currentY, position.width * 0.5f, ROW_HEIGHT);
+                
+                float buttonStartX = position.x + (position.width - (ADD_BUTTON_WIDTH + CLEAR_BUTTON_WIDTH + BUTTON_MARGIN)) * 0.5f;
+                Rect AddButtonRect = new Rect(buttonStartX, currentY, ADD_BUTTON_WIDTH, ROW_HEIGHT);
+                Rect ClearButtonRect = new Rect(buttonStartX + ADD_BUTTON_WIDTH + BUTTON_MARGIN, currentY, CLEAR_BUTTON_WIDTH, ROW_HEIGHT);
 
                 if (GUI.Button(AddButtonRect, "Add Pair"))
                 {
@@ -119,4 +123,7 @@ namespace Dialogue
             property.FindPropertyRelative("values").ClearArray();
         }
     }
+
+    [CustomPropertyDrawer(typeof(StringActorDict))]
+    public class StringActorDictDrawer : SerializedDictionaryDrawer { }
 }
