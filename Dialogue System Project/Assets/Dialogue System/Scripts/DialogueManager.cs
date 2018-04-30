@@ -22,6 +22,7 @@ namespace Dialogue
         {
             fields = new FieldManager();
             actors = new Dictionary<string, DialogueActor>();
+            UISystem.manager = this;
         }
 
         private void Reset()
@@ -33,8 +34,6 @@ namespace Dialogue
         // Use this for initialization
         void Start()
         {
-            UISystem.manager = this;
-            StartConversation();
         }
 
         // Update is called once per frame
@@ -85,20 +84,40 @@ namespace Dialogue
 
         public void ResponseSelected(int id)
         {
-            //HACK might replace argument with response, and have UI manager know about responses?
             if (id >= 0 && id < current.Responses.Count)
             {
-                DialogueEvent e = current.Responses[id].OnChosen;
-                if(e != null)
+                Response response = current.Responses[id];
+                if (response.CheckPrerequisite(this))
                 {
-                    e.Execute(this);
+                    DialogueEvent e = response.OnChosen;
+                    if (e != null)
+                    {
+                        e.Execute(this);
+                    }
+
+                    Transition selectedTransition = response.transitions.SelectTransition(this);
+
+                    current = conversation.FindEntry(selectedTransition.TargetID);
+                    UISystem.SetDialogueEntry(current);
                 }
-
-                Transition selectedTransition = current.Responses[id].transitions.SelectTransition(this);
-
-                current = conversation.FindEntry(selectedTransition.TargetID);
-                UISystem.SetDialogueEntry(current);
             }
+        }
+
+        public DialogueActor GetCurrentActor()
+        {
+            if(current != null)
+            {
+                return actors[current.Speaker];
+            } else
+            {
+                return null;
+            }
+        }
+
+        public void AssignActor(string key, DialogueActor actor)
+        {
+            //TODO have some kind of serializable dictionary so it can be done in editor
+            actors[key] = actor;
         }
 
         public void SetFlag(string flag)
