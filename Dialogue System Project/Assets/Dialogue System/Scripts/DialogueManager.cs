@@ -16,19 +16,21 @@ namespace Dialogue
         //TODO have some way to save fields between scenes?
         FieldManager fields;
         //TODO figure out proper way to access name->actor map
-        public Dictionary<string, DialogueActor> actors;
+        [SerializeField]
+        private StringActorDict actorDictionary;
+        public Dictionary<string,DialogueActor> actors;
 
         private void Awake()
         {
             fields = new FieldManager();
-            actors = new Dictionary<string, DialogueActor>();
+            actors = actorDictionary.ToDictionary();
             UISystem.manager = this;
         }
 
         private void Reset()
         {
             fields = new FieldManager();
-            actors = new Dictionary<string, DialogueActor>();
+            actors = actorDictionary.ToDictionary();
         }
 
         // Use this for initialization

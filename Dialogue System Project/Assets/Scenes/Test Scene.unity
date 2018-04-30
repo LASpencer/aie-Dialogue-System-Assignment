@@ -767,9 +767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 1916832356}
-  player: {fileID: 1190141826}
-  skinner: {fileID: 1931826136}
-  mother: {fileID: 827981986}
 --- !u!4 &1793740967
 Transform:
   m_ObjectHideFlags: 0
@@ -823,6 +820,17 @@ MonoBehaviour:
     parent: {fileID: 0}
     Responses: []
     position: {x: 0, y: 0}
+  actorDictionary:
+    keys:
+    - superintendent
+    - principal
+    - mother
+    values:
+    - {fileID: 1190141826}
+    - {fileID: 1931826136}
+    - {fileID: 827981986}
+    - {fileID: 0}
+    - {fileID: 827981986}
 --- !u!4 &1916832357
 Transform:
   m_ObjectHideFlags: 0
