@@ -47,6 +47,8 @@ namespace Dialogue
         {
             dialogueText.text = entry.Text;
             actorName.text = uiManager.manager.GetCurrentActor().Name;
+
+            uiManager.manager.cutsceneManager.DoCutsceneEvents(entry.cutsceneEvents);
         }
 
         public override void DisplayResponse(Response response, int ID, bool possible)

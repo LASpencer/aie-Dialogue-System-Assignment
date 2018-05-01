@@ -8,6 +8,7 @@ namespace Dialogue {
     {
         // TODO figure out good interface
         public DialogueManager manager;
+        public CutsceneManager cutsceneManager;
         public UIDisplayStrategy displayStrategy;
 
         private void Awake()

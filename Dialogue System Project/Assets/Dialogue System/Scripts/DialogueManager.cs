@@ -8,6 +8,7 @@ namespace Dialogue
     public class DialogueManager : MonoBehaviour
     {
         public DialogueUI UISystem;
+        public CutsceneManager cutsceneManager;
         //HACK will later have multiple conversations to choose from
         public Conversation conversation;
         [HideInInspector] //HACK figure out how to display normally

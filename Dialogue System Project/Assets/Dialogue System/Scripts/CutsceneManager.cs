@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CutsceneManager : MonoBehaviour {
+namespace Dialogue {
+    public class CutsceneManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        [SerializeField]
+        StringAnimatorDict Animators;
+        Dictionary<string, Animator> AnimatorDictionary;
+
+        private void Awake()
+        {
+            AnimatorDictionary = Animators.ToDictionary();
+        }
+
+        public void DoCutsceneEvents(List<CutsceneEvent> events)
+        {
+            foreach(CutsceneEvent e in events)
+            {
+                Animator target = AnimatorDictionary[e.target];
+                if(target != null)
+                {
+                    target.Play(e.animation);
+                } else
+                {
+                    Debug.LogError("Animator \"" + e.target + "\" not found in Cutscene Manager");
+                }
+            }
+        }
+    }
 }

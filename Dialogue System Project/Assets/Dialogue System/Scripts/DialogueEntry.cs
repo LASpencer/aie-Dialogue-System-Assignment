@@ -25,7 +25,7 @@ namespace Dialogue {
 
         [TextArea]
         public string Text;     // HACK Replace with LocalizedString when created
-
+        public List<CutsceneEvent> cutsceneEvents;
         public TransitionList transitions;
         public bool isEnd;
         public Conversation parent;

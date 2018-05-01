@@ -11,14 +11,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4885efe881bb0794b8c9439ff478a019, type: 3}
   m_Name: TestConversation
   m_EditorClassIdentifier: 
-  nextID: 25
-  startingID: 0
+  nextID: 29
+  startingID: 28
   Entries:
   - ID: 0
-    Title: START
+    Title: 
     speakerIndex: 1
     Text: Doh, no, I said steamed hams. That's what I call hamburgers! It's a regional
       dialect.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Behind Chalmers
+    - target: skinner
+      animation: Serve Burgers
+    - target: tray
+      animation: Tray Served
     transitions:
       transitions: []
     isEnd: 0
@@ -32,7 +39,7 @@ MonoBehaviour:
         - transition:
             TargetID: 1
           condition: {fileID: 0}
-      Position: {x: 293, y: 150}
+      Position: {x: 187, y: 135}
     - Text: These taste familiar...
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -41,7 +48,7 @@ MonoBehaviour:
         - transition:
             TargetID: 14
           condition: {fileID: 0}
-      Position: {x: 219, y: 228}
+      Position: {x: 113, y: 213}
     - Text: Obviously grilled?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -50,12 +57,17 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: -2, y: 217}
-    position: {x: 56, y: 59}
+      Position: {x: -108, y: 202}
+    position: {x: -61, y: 109}
   - ID: 1
     Title: 
     speakerIndex: 0
     Text: Uh huh. What region?
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Focus
+    - target: skinner
+      animation: Idle
     transitions:
       transitions:
       - transition:
@@ -64,11 +76,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 550, y: 130}
+    position: {x: 444, y: 115}
   - ID: 2
     Title: 
     speakerIndex: 1
     Text: Upstate New York.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Skinner Focus
     transitions:
       transitions: []
     isEnd: 0
@@ -82,7 +97,7 @@ MonoBehaviour:
         - transition:
             TargetID: 13
           condition: {fileID: 0}
-      Position: {x: 766, y: 222}
+      Position: {x: 660, y: 207}
     - Text: They're not steamed
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -91,7 +106,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 544, y: 223}
+      Position: {x: 438, y: 208}
     - Text: I smell smoke!
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -100,12 +115,15 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-      Position: {x: 968, y: 236}
-    position: {x: 789, y: 138}
+      Position: {x: 864, y: 244}
+    position: {x: 683, y: 123}
   - ID: 3
     Title: 
     speakerIndex: 1
     Text: Oh, not in Utica, no. It's an Albany expression
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Skinner Focus
     transitions:
       transitions:
       - transition:
@@ -114,12 +132,19 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 637, y: 360}
+    position: {x: 531, y: 345}
   - ID: 4
     Title: 
     speakerIndex: 0
     Text: And you call them "Steamed Hams" despite the fact that they are obviously
       grilled.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Focus
+    - target: chalmers
+      animation: Burger Gesture
+    - target: skinner
+      animation: Idle
     transitions:
       transitions:
       - transition:
@@ -128,11 +153,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 25, y: 373}
+    position: {x: -81, y: 358}
   - ID: 5
     Title: 
     speakerIndex: 1
     Text: Uh, um, er...
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Behind Chalmers
     transitions:
       transitions:
       - transition:
@@ -141,11 +169,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 7, y: 437}
+    position: {x: -99, y: 422}
   - ID: 6
     Title: 
     speakerIndex: 1
     Text: well, the thing is...
+    cutsceneEvents:
+    - target: kitchen fire
+      animation: Fire On
     transitions:
       transitions:
       - transition:
@@ -154,11 +185,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 10, y: 491}
+    position: {x: -96, y: 476}
   - ID: 7
     Title: 
     speakerIndex: 1
     Text: Excuse me for one second.
+    cutsceneEvents:
+    - target: skinner
+      animation: Stand Up
     transitions:
       transitions:
       - transition:
@@ -167,11 +201,16 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 31, y: 549}
+    position: {x: -75, y: 534}
   - ID: 8
     Title: 
     speakerIndex: 0
     Text: Of course.
+    cutsceneEvents:
+    - target: kitchen door
+      animation: Open In
+    - target: skinner
+      animation: Enter Kitchen
     transitions:
       transitions:
       - transition:
@@ -180,11 +219,16 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 41, y: 604}
+    position: {x: -64, y: 589}
   - ID: 9
     Title: 
     speakerIndex: 1
     Text: '*yawns* That was wonderful. A good time was had by all, I''m pooped.'
+    cutsceneEvents:
+    - target: kitchen door
+      animation: Open Out To Swing
+    - target: skinner
+      animation: Leave Kitchen
     transitions:
       transitions:
       - transition:
@@ -193,11 +237,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 49, y: 665}
+    position: {x: -57, y: 650}
   - ID: 10
     Title: 
     speakerIndex: 0
     Text: Yes, I should be...
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Focus
     transitions:
       transitions:
       - transition:
@@ -206,11 +253,20 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 50, y: 726}
+    position: {x: -56, y: 711}
   - ID: 11
     Title: 
     speakerIndex: 0
     Text: Good lord, what is happening in there?
+    cutsceneEvents:
+    - target: kitchen fire
+      animation: Fire On
+    - target: kitchen door
+      animation: Swinging
+    - target: camera
+      animation: Kitchen Behind Chalmers
+    - target: chalmers
+      animation: Shocked
     transitions:
       transitions:
       - transition:
@@ -219,11 +275,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 597, y: 715}
+    position: {x: 491, y: 700}
   - ID: 12
     Title: 
     speakerIndex: 1
     Text: Aurora Borealis.
+    cutsceneEvents:
+    - target: kitchen door
+      animation: Swing Closed
     transitions:
       transitions:
       - transition:
@@ -232,12 +291,15 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 971, y: 400}
+    position: {x: 876, y: 368}
   - ID: 13
     Title: Utica
     speakerIndex: 0
     Text: Really. Well I'm from Utica and I've never heard anyone use the phrase "Steamed
       Hams"
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Focus
     transitions:
       transitions:
       - transition:
@@ -246,11 +308,16 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 639, y: 295}
+    position: {x: 533, y: 280}
   - ID: 14
     Title: Krustyburgers
     speakerIndex: 0
     Text: These hamburgers are quite similar to the ones they have at Krustyburger
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Focus
+    - target: chalmers
+      animation: Take Burger
     transitions:
       transitions:
       - transition:
@@ -259,11 +326,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 279, y: 351}
+    position: {x: 173, y: 336}
   - ID: 15
     Title: 
     speakerIndex: 1
     Text: Oh ho ho, no. Patented Skinnerburgers! Old family recipe.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Skinner Focus
     transitions:
       transitions:
       - transition:
@@ -272,11 +342,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 287, y: 405}
+    position: {x: 181, y: 390}
   - ID: 16
     Title: 
     speakerIndex: 0
     Text: For steamed hams.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Focus
     transitions:
       transitions:
       - transition:
@@ -285,11 +358,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 291, y: 460}
+    position: {x: 185, y: 445}
   - ID: 17
     Title: 
     speakerIndex: 1
     Text: Yes!
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Skinner Focus
     transitions:
       transitions: []
     isEnd: 0
@@ -303,7 +379,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 285, y: 602}
+      Position: {x: 179, y: 587}
     - Text: Is that fire?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -312,12 +388,17 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-      Position: {x: 524, y: 584}
-    position: {x: 298, y: 516}
+      Position: {x: 418, y: 569}
+    position: {x: 192, y: 501}
   - ID: 18
     Title: Aurora Borealis?
     speakerIndex: 0
     Text: Aurora Borealis?
+    cutsceneEvents:
+    - target: chalmers
+      animation: Idle
+    - target: camera
+      animation: Kitchen Chalmers Zoom Start
     transitions:
       transitions: []
     isEnd: 0
@@ -331,7 +412,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1185, y: 415}
+      Position: {x: 1108, y: 396}
     - Text: At this time of year?
       OnChosen: {fileID: 11400000, guid: 712f4c4db85761046a36ff765a3f028a, type: 2}
       Prerequisite: {fileID: 11400000, guid: 7ee580c99ed852f48a51f35bbc66fac9, type: 2}
@@ -340,7 +421,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1197, y: 479}
+      Position: {x: 1091, y: 464}
     - Text: In this part of the country?
       OnChosen: {fileID: 11400000, guid: d0fa49f2120cf6e44b42d92e173f8832, type: 2}
       Prerequisite: {fileID: 11400000, guid: 9e4c738877dd0fb42bbb8e203cf73a41, type: 2}
@@ -349,7 +430,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1202, y: 554}
+      Position: {x: 1096, y: 539}
     - Text: Localized entirely in your kitchen?
       OnChosen: {fileID: 0}
       Prerequisite: {fileID: 0}
@@ -358,12 +439,15 @@ MonoBehaviour:
         - transition:
             TargetID: 19
           condition: {fileID: 0}
-      Position: {x: 938, y: 546}
-    position: {x: 960, y: 476}
+      Position: {x: 832, y: 531}
+    position: {x: 854, y: 461}
   - ID: 19
     Title: 
     speakerIndex: 1
     Text: Yes.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Skinner Closeup
     transitions:
       transitions:
       - transition:
@@ -372,11 +456,14 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 931, y: 610}
+    position: {x: 825, y: 595}
   - ID: 20
     Title: 
     speakerIndex: 0
     Text: May I see it?
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Closeup
     transitions:
       transitions:
       - transition:
@@ -385,24 +472,30 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 922, y: 663}
+    position: {x: 821, y: 656}
   - ID: 21
     Title: 
     speakerIndex: 1
     Text: No.
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Skinner Closeup
     transitions:
       transitions:
       - transition:
-          TargetID: 23
+          TargetID: 25
         condition: {fileID: 0}
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 937, y: 723}
+    position: {x: 813, y: 727}
   - ID: 23
     Title: Compliment Hams
     speakerIndex: 0
     Text: Well Seymore you are an odd fellow but I must say you steam a good ham.
+    cutsceneEvents:
+    - target: camera
+      animation: Outside Behind Skinner
     transitions:
       transitions:
       - transition:
@@ -411,17 +504,106 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 928, y: 771}
+    position: {x: 1106, y: 749}
   - ID: 24
     Title: Mother calls for help
     speakerIndex: 2
     Text: Help! Help!
+    cutsceneEvents:
+    - target: upstairs fire
+      animation: Fire On
+    - target: camera
+      animation: Outside Pan Out
+    - target: chalmers
+      animation: Walk Away
     transitions:
       transitions: []
     isEnd: 1
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 943, y: 826}
+    position: {x: 1105, y: 822}
+  - ID: 25
+    Title: House on fire
+    speakerIndex: 2
+    Text: Seymore! The house is on fire!
+    cutsceneEvents:
+    - target: camera
+      animation: Outside Full Door
+    - target: front door
+      animation: Door Open
+    - target: skinner
+      animation: Leave House
+    - target: chalmers
+      animation: Leave House
+    transitions:
+      transitions:
+      - transition:
+          TargetID: 26
+        condition: {fileID: 0}
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+    position: {x: 1105, y: 618}
+  - ID: 26
+    Title: 
+    speakerIndex: 1
+    Text: No, mother, that's just the Northern Lights.
+    cutsceneEvents: []
+    transitions:
+      transitions:
+      - transition:
+          TargetID: 23
+        condition: {fileID: 0}
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+    position: {x: 1100, y: 692}
+  - ID: 27
+    Title: 
+    speakerIndex: 0
+    Text: I thought we were having steamed clams?
+    cutsceneEvents:
+    - target: camera
+      animation: Kitchen Chalmers Closeup
+    transitions:
+      transitions:
+      - transition:
+          TargetID: 0
+        condition: {fileID: 0}
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+    position: {x: 184, y: 38}
+  - ID: 28
+    Title: START
+    speakerIndex: 1
+    Text: Superintendent, I hope you're prepared for some mouthwatering hamburgers!
+    cutsceneEvents:
+    - target: skinner
+      animation: Carry Tray
+    - target: tray
+      animation: Tray Carried
+    - target: kitchen door
+      animation: Open Out
+    - target: camera
+      animation: Kitchen Wide Angle
+    - target: chalmers
+      animation: Idle
+    - target: kitchen fire
+      animation: Fire Off
+    - target: upstairs fire
+      animation: Fire Off
+    - target: front door
+      animation: Door Closed
+    transitions:
+      transitions:
+      - transition:
+          TargetID: 27
+        condition: {fileID: 0}
+    isEnd: 0
+    parent: {fileID: 11400000}
+    Responses: []
+    position: {x: -69, y: 2}
   Speakers:
   - superintendent
   - principal

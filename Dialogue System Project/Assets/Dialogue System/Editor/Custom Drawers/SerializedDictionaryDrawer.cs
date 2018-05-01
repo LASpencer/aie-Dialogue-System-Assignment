@@ -28,9 +28,9 @@ namespace Dialogue
                 {
                     SerializedProperty key = keys.GetArrayElementAtIndex(i);
                     SerializedProperty value = values.GetArrayElementAtIndex(i);
-                    height += Mathf.Max(ROW_HEIGHT, EditorGUI.GetPropertyHeight(key), EditorGUI.GetPropertyHeight(value));
+                    height += ROW_MARGIN + Mathf.Max(ROW_HEIGHT, EditorGUI.GetPropertyHeight(key), EditorGUI.GetPropertyHeight(value));
                 }
-                height += 2f * ROW_HEIGHT + 3f * ROW_MARGIN;
+                height += 2f * ROW_HEIGHT + 2f * ROW_MARGIN;
             }
             return height;
         }
@@ -126,4 +126,7 @@ namespace Dialogue
 
     [CustomPropertyDrawer(typeof(StringActorDict))]
     public class StringActorDictDrawer : SerializedDictionaryDrawer { }
+
+    [CustomPropertyDrawer(typeof(StringAnimatorDict))]
+    public class StringAnimatorDictDrawer : SerializedDictionaryDrawer { }
 }
