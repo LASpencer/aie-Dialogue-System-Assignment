@@ -47,4 +47,7 @@ namespace Dialogue
 
     [Serializable]
     public class StringActorDict : SerializedDictionary<string, DialogueActor> { };
+
+    [Serializable]
+    public class StringAnimatorDict : SerializedDictionary<string, Animator> { };
 }
