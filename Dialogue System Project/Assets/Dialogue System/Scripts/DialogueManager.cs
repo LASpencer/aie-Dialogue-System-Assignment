@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Dialogue
 {
@@ -20,6 +21,9 @@ namespace Dialogue
         [SerializeField]
         private StringActorDict actorDictionary;
         public Dictionary<string,DialogueActor> actors;
+
+        public UnityEvent OnConversationStart;
+        public UnityEvent OnConversationEnd;
 
         private void Awake()
         {
@@ -50,6 +54,7 @@ namespace Dialogue
             // TODO will need to be told which conversation to start
             current = conversation.Start;
             UISystem.OnConversationStart();
+            OnConversationStart.Invoke();
         }
 
         public void NextEntry()
@@ -83,6 +88,7 @@ namespace Dialogue
         {
             current = null;
             UISystem.OnConversationEnd();
+            OnConversationEnd.Invoke();
         }
 
         public void ResponseSelected(int id)

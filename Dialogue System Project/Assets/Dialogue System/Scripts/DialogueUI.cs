@@ -48,6 +48,8 @@ namespace Dialogue {
                     displayStrategy.DisplayResponse(response, i, response.CheckPrerequisite(manager));
                 }
             }
+            // Inform display strategy all responses have been sent
+            displayStrategy.FinishDisplayDialogueEntry();
         }
 
         public void OnConversationEnd()

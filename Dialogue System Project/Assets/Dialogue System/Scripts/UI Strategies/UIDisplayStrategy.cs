@@ -20,6 +20,11 @@ namespace Dialogue
             throw new System.NotImplementedException();
         }
 
+        public virtual void FinishDisplayDialogueEntry()
+        {
+
+        }
+
         public virtual void ClearResponses()
         {
             throw new System.NotImplementedException();

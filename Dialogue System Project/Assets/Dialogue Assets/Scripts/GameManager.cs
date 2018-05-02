@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        dialogue.OnConversationEnd.AddListener(EndGame);
         dialogue.StartConversation();
 	}
 	
@@ -19,4 +20,9 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void EndGame()
+    {
+        Application.Quit();
+    }
 }
