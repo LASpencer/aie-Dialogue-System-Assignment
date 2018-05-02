@@ -15,15 +15,15 @@ namespace Dialogue
         {
             //TODO just use standard csv parser
             
-            string[] fileLines = localizationData.text.Split(new string[] { "\n\r" },StringSplitOptions.RemoveEmptyEntries);
-            string[] header = fileLines[0].Split(',');  //TODO Fix this: breaks because quotes aren't escaped
+            string[] fileLines = localizationData.text.Split(new string[] { "\r\n" },StringSplitOptions.RemoveEmptyEntries);
+            string[] header = SplitCSVRow(fileLines[0]);
             int localeIndex = Array.IndexOf(header, locale);
             if(localeIndex >= 0)
             {
                 Dictionary<string, string> loadedLines = new Dictionary<string, string>();
                 for (int i = 1; i < fileLines.Length; ++i)
                 {
-                    string[] values = fileLines[i].Split(',');
+                    string[] values = SplitCSVRow(fileLines[i]);
                     try {
                         string key = values[0];
                         string translation = values[localeIndex];
@@ -41,6 +41,15 @@ namespace Dialogue
                 // Locale not found
                 return null;
             }
+        }
+
+        string[] SplitCSVRow(string row)
+        {
+            // TODO split by commas
+            // However, if entry starts with ", ignore commas until matching quote
+            // "" found withing " does not match, only single "
+            // Remove " from either end and change "" to "
+            throw new NotImplementedException();
         }
     }
 }
