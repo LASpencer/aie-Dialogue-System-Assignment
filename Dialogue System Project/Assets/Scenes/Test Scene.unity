@@ -1870,6 +1870,7 @@ GameObject:
   - component: {fileID: 368429593}
   - component: {fileID: 368429592}
   - component: {fileID: 368429594}
+  - component: {fileID: 368429595}
   m_Layer: 0
   m_Name: DialogueUI Manager
   m_TagString: Untagged
@@ -1930,6 +1931,19 @@ MonoBehaviour:
   buttonSpacing: 2
   buttonPadding: 20
   buttonBottomMargin: 20
+--- !u!114 &368429595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 368429591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4a39bebea96d24d8fc335e9d3ef563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loader: {fileID: 11400000, guid: 875eccc0233c22a429357d43fd9b2335, type: 2}
+  locale: en
 --- !u!1 &386997010
 GameObject:
   m_ObjectHideFlags: 0
