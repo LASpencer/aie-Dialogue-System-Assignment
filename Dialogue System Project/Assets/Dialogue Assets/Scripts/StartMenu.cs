@@ -9,6 +9,13 @@ public class StartMenu : MonoBehaviour {
     [SerializeField]
     Dialogue.LocalizationManager localizer;
 
+    [SerializeField]
+    Text titleText;
+    [SerializeField]
+    Text startText;
+    [SerializeField]
+    Text languageText;
+
     public GameManager manager;
 
     public UnityAction StartGame;
@@ -18,7 +25,7 @@ public class StartMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //TODO localize title + button text
+        Invoke("LocalizeMenu", 0.01f);
     }
 
     // Update is called once per frame
@@ -29,11 +36,18 @@ public class StartMenu : MonoBehaviour {
     public void LanguageChanged(Dropdown change)
     {
         localizer.SetLocale(localeCodes[change.value]);
-        //TODO reload title + button text from localizer
+        LocalizeMenu();
     }
 
     public void OnPressPlay()
     {
         StartGame.Invoke();
+    }
+
+    void LocalizeMenu()
+    {
+        titleText.text = localizer.GetLine("menu_title");
+        startText.text = localizer.GetLine("menu_play");
+        languageText.text = localizer.GetLine("menu_language");
     }
 }
