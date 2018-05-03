@@ -28,5 +28,21 @@ namespace Dialogue {
                 }
             }
         }
+
+        public void ActivateAnimators()
+        {
+            foreach (KeyValuePair<string, Animator> a in AnimatorDictionary)
+            {
+                a.Value.enabled = true;
+            }
+        }
+
+        public void DeactivateAnimators()
+        {
+            foreach(KeyValuePair<string,Animator> a in AnimatorDictionary)
+            {
+                a.Value.enabled = false;
+            }
+        }
     }
 }

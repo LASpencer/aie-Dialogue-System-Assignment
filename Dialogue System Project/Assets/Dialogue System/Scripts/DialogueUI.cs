@@ -34,6 +34,7 @@ namespace Dialogue {
         
         public void OnConversationStart()
         {
+            displayStrategy.OnConversationStart();
             SetDialogueEntry(manager.current);
         }
 

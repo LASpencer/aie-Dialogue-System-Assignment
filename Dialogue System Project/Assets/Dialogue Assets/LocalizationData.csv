@@ -1,41 +1,41 @@
-Key,en
-ready_for_burger,"Superintendent, I hope you're prepared for some mouthwatering hamburgers!"
-steamed_clams,I thought we were having steamed clams?
-res_region?,What region?
-res_taste_familiar,These taste familiar...
-res_grilled?,Obviously grilled?
-what_region,Uh huh. What region?
-upstate_ny,Upstate New York.
-res_utica,I'm from Utica
-res_not_steamed,They're not steamed
-res_smoke,I smell smoke!
-albany_expression,"Oh, not in Utica, no. It's an Albany expression."
-obviously_grilled,"And you call them ""Steamed Hams"" despite the fact that they are obviously grilled."
-um,"Uh, um, er..."
-well,"well, the thing is..."
-excuse_me,Excuse me for one second.
-of_course,Of course.
-pooped,"*yawns* That was wonderful. A good time was had by all, I'm pooped."
-should_go,"Yes, I should be..."
-good_lord,"Good lord, what is happening in there?"
-skinner_aurora,Aurora Borealis.
-from_utica,"Really. Well I'm from Utica and I've never heard anyone use the phrase ""Steamed Hams""."
-krustyburger,These hamburgers are quite similar to the ones they have at Krustyburger
-skinnerburgers,"Oh ho ho, no. Patented Skinnerburgers! Old family recipe."
-for_steamed_hams,For steamed hams.
-yes1,Yes!
-res_but_grilled?,But they're grilled
-res_fire?,Is that fire?
-chalmers_aurora,Aurora Borealis?
-res_this_time?,At this time of day?
-res_this_date?,At this time of year?
-res_this_part?,In this part of the country
-res_localized?,Localized entirely in your kitchen?
-yes2,Yes.
-see_it?,May I see it?
-no,No.
-good_ham,Well Seymore you are an odd fellow but I must say you steam a good ham.
-help,Help! Help!
-house_on_fire,Seymore! The house is on fire!
-northern_lights,"No, mother, that's just the Northern Lights."
-steamed_hams,"Doh, no, I said steamed hams. That's what I call hamburgers! It's a regional dialect."
+﻿Key,en,de,fr,it,es
+ready_for_burger,"Superintendent, I hope you're prepared for some mouthwatering hamburgers!","Superintendent, ich hoffe, Sie sind bereit für ein paar leckere Hamburger!","Surintendant, j'espère que vous êtes préparé pour quelques hamburgers mouthwatering!","Sovrintendente, spero che tu sia preparato per degli hamburger deliziosi!","Superintendente, ¡espero que esté preparado para algunas hamburguesas deliciosas!"
+steamed_clams,I thought we were having steamed clams?,"Ich dachte, wir hätten gedämpfte Muscheln gedünstet?",Je pensais que nous avions des palourdes cuites à la vapeur?,Pensavo avessimo delle vongole al vapore?,Pensé que estábamos teniendo almejas al vapor?
+res_region?,What region?,Welche Region?,Quelle région?,Quale regione?,¿Qué región?
+res_taste_familiar,These taste familiar...,Diese schmecken vertraut ...,Ces goûts familiers ...,Questi hanno un sapore familiare ...,Estos saben familiar ...
+res_grilled?,Obviously grilled?,Offensichtlich gegrillt?,Évidemment grillé?,Ovviamente grigliato?,Obviamente a la parrilla?
+what_region,Uh huh. What region?,Ach so. Welche Region?,Euh hein. Quelle région?,Uh Huh. Quale regione?,UH Huh. ¿Qué región?
+upstate_ny,Upstate New York.,Im Hinterland von New York.,New York.,Upstate New York.,Norte del estado de Nueva York.
+res_utica,I'm from Utica,Ich komme aus Utica,Je viens d'Utica,Vengo da Utica,Soy de Utica
+res_not_steamed,They're not steamed,Sie sind nicht gedämpft,Ils ne sont pas cuits à la vapeur,Non sono al vapore,No son cocidos al vapor
+res_smoke,I smell smoke!,Ich rieche Rauch!,Je sens la fumée!,Sento odore di fumo!,¡Huelo humo!
+albany_expression,"Oh, not in Utica, no. It's an Albany expression.","Oh, nicht in Utica, nein. Es ist ein Albany-Ausdruck.","Oh, pas à Utica, non. C'est une expression d'Albany.","Oh, non in Utica, no. È un'espressione di Albany.","Oh, no en Utica, no. Es una expresión de Albany."
+obviously_grilled,"And you call them ""Steamed Hams"" despite the fact that they are obviously grilled.","Und Sie nennen sie ""gedämpfte Huscheln"", obwohl sie offensichtlich gegrillt sind.","Et vous les appelez ""Stams Hams"" malgré le fait qu'ils sont évidemment grillés.","E tu li chiami ""Steamed Hams"", nonostante siano ovviamente alla griglia.","Y los llamas ""Hams al vapor"" a pesar del hecho de que obviamente están a la parrilla."
+um,"Uh, um, er...","Äh, ähm, äh ...","Euh, um, euh ...","Uh, um, ehm ...","Uh, um, er ..."
+well,"well, the thing is...","nun, das Ding ist ...","bien, la chose est ...","bene, il fatto è ...","bueno, la cosa es ..."
+excuse_me,Excuse me for one second.,Entschuldige mich für eine Sekunde.,Excusez-moi une seconde.,Mi scusi per un secondo.,Disculpa por un segundo.
+of_course,Of course.,Na sicher.,Bien sûr.,Ovviamente.,Por supuesto.
+pooped,"*yawns* That was wonderful. A good time was had by all, I'm pooped.","* gähnt * Das war wunderbar. Es war eine gute Zeit für alle, ich bin erledigt.","* bâillements * C'était merveilleux. Tout le monde a passé un bon moment, je suis caca.","* sbadigli * È stato meraviglioso. È stato un bel momento, sono stanco.","* bosteza * Eso fue maravilloso. Todos pasaron un buen momento, estoy vacío."
+should_go,"Yes, I should be...","Ja, ich sollte ...","Oui, je devrais être ...","Sì, dovrei essere ...","Sí, debería ser ..."
+good_lord,"Good lord, what is happening in there?","Mein Gott, was passiert da drinnen?","Bon dieu, que se passe-t-il là-bas?","Buon Dio, cosa sta succedendo lì dentro?","Dios mío, ¿qué está pasando allí?"
+skinner_aurora,Aurora Borealis.,Nordlicht.,Aurores boréales.,Aurora boreale.,Aurora boreal.
+from_utica,"Really. Well I'm from Utica and I've never heard anyone use the phrase ""Steamed Hams"".","Ja wirklich. Nun, ich komme aus Utica und ich habe noch nie jemanden den Ausdruck ""gedämpfte Huscheln"" gehört.","Vraiment. Eh bien, je viens d'Utica et je n'ai jamais entendu personne utiliser l'expression ""Stams Hams"".","Veramente. Beh, io vengo da Utica e non ho mai sentito nessuno usare la frase ""Prosciutti al vapore"".","De Verdad. Bueno, soy de Utica y nunca escuché a nadie usar la frase ""Steam Hams""."
+krustyburger,These hamburgers are quite similar to the ones they have at Krustyburger,Diese Hamburger sind denen in Krustyburger sehr ähnlich,Ces hamburgers sont assez similaires à ceux qu'ils ont à Krustyburger,Questi hamburger sono abbastanza simili a quelli che hanno a Krustyburger,Estas hamburguesas son bastante similares a las que tienen en Krustyburger
+skinnerburgers,"Oh ho ho, no. Patented Skinnerburgers! Old family recipe.","Oh ho ho, nein. Patentierte Skinnerburger! Altes Familienrezept.","Oh ho ho, non. Skinnerburgers brevetés! Ancienne recette de famille.","Oh ho ho, no. Skinnerburgers brevettati! Vecchia ricetta di famiglia","Oh ho ho, no. ¡Patentado Skinnerburgers! Vieja receta familiar"
+for_steamed_hams,For steamed hams.,Für gedämpfte Huscheln.,Pour les jambons cuits à la vapeur.,Per prosciutti cotti al vapore.,Para jamones al vapor.
+yes1,Yes!,Ja!,Oui!,Sì!,¡Sí!
+res_but_grilled?,But they're grilled,Aber sie sind gegrillt,Mais ils sont grillés,Ma sono alla griglia,Pero están a la parrilla
+res_fire?,Is that fire?,Ist das Feuer?,Est-ce le feu?,È questo fuoco?,Es ese fuego?
+chalmers_aurora,Aurora Borealis?,Nordlicht?,Aurores boréales?,Aurora boreale?,¿Aurora boreal?
+res_this_time?,At this time of day?,Zu dieser Tageszeit?,A cette heure de la journée?,A quest'ora del giorno?,A esta hora del día?
+res_this_date?,At this time of year?,Zu dieser Jahreszeit?,À cette époque de l'année?,In questo periodo dell'anno?,¿En esta época del año?
+res_this_part?,In this part of the country,In diesem Teil des Landes,Dans cette partie du pays,In questa parte del paese,En esta parte del país
+res_localized?,Localized entirely in your kitchen?,Ganz in Ihrer Küche lokalisiert?,Localisé entièrement dans votre cuisine?,Localizzato interamente nella tua cucina?,¿Localizado completamente en tu cocina?
+yes2,Yes.,Ja.,Oui.,Sì.,Sí.
+see_it?,May I see it?,Kann ich es sehen?,Puis-je le voir?,Posso vederlo?,¿Puedo verlo?
+no,No.,Nein.,Non.,No.,No.
+good_ham,Well Seymore you are an odd fellow but I must say you steam a good ham.,"Nun Seymore, du bist ein komischer Kerl, aber ich muss dir sagen, dass du einen guten Huschel dampfst.","Eh bien, Seymore, vous êtes un drôle de gars, mais je dois dire que vous fumez un bon jambon.","Beh, Seymore sei un tipo strano, ma devo dire che fai un buon prosciutto.","Bueno, Seymore, eres un tipo raro, pero debo decir que preparas un buen jamón."
+help,Help! Help!,Hilfe! Hilfe!,Aidez-moi! Aidez-moi!,Aiuto! Aiuto!,¡Ayuda! ¡Ayuda!
+house_on_fire,Seymore! The house is on fire!,Seymore! Das Haus brennt!,Seymore! La maison est en feu!,Seymore! La casa è in fiamme!,Seymore! La casa está en llamas!
+northern_lights,"No, mother, that's just the Northern Lights.","Nein, Mutter, das sind nur die Nordlichter.","Non, ma mère, c'est juste les aurores boréales.","No, madre, sono solo le aurore boreali.","No, madre, eso es solo la aurora boreal."
+steamed_hams,"Doh, no, I said steamed hams. That's what I call hamburgers! It's a regional dialect.","Doh, nein, ich sagte gedämpfte Huscheln. Das nenne ich Hamburger! Es ist ein regionaler Dialekt.","Doh, non, j'ai dit des jambons cuits à la vapeur. C'est ce que j'appelle les hamburgers! C'est un dialecte régional.","Doh, no, ho detto prosciutti cotti al vapore. Questo è quello che chiamo hamburger! È un dialetto regionale.","Doh, no, dije jamones al vapor. ¡Eso es lo que llamo hamburguesas! Es un dialecto regional."

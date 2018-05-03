@@ -169,12 +169,12 @@ namespace Dialogue
 
         public override void OnConversationEnd()
         {
-            base.OnConversationEnd();
+            dialoguePanel.gameObject.SetActive(false);
         }
 
         public override void OnConversationStart()
         {
-            base.OnConversationStart();
+            dialoguePanel.gameObject.SetActive(true);
         }
 
         string Localize(string key)
