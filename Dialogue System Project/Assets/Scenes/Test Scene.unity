@@ -1892,6 +1892,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   cutsceneManager: {fileID: 0}
   displayStrategy: {fileID: 0}
+  localizer: {fileID: 368429595}
 --- !u!4 &368429593
 Transform:
   m_ObjectHideFlags: 0
