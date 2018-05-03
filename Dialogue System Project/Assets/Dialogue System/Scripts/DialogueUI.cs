@@ -10,6 +10,7 @@ namespace Dialogue {
         public DialogueManager manager;
         public CutsceneManager cutsceneManager;
         public UIDisplayStrategy displayStrategy;
+        public LocalizationManager localizer;
 
         private void Awake()
         {

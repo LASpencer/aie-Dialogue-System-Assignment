@@ -82,7 +82,7 @@ namespace Dialogue
             
 
             // Dialogue panel
-            dialogueText.text = entry.Text;
+            dialogueText.text = Localize(entry.Text);
 
             uiManager.manager.cutsceneManager.DoCutsceneEvents(entry.cutsceneEvents);
         }
@@ -107,7 +107,7 @@ namespace Dialogue
                 buttonPos.y = numResponses * -(buttonTransform.rect.height + buttonSpacing);
                 buttonTransform.anchoredPosition = buttonPos;
 
-                buttonText.text = response.Text;
+                buttonText.text = Localize(response.Text);
 
                 buttonScript.onClick.AddListener(() => uiManager.manager.ResponseSelected(ID));
 
@@ -175,6 +175,11 @@ namespace Dialogue
         public override void OnConversationStart()
         {
             base.OnConversationStart();
+        }
+
+        string Localize(string key)
+        {
+            return uiManager.localizer.GetLine(key);
         }
     }
 }

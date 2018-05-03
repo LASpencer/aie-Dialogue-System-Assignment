@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a13b1b680e5844b92a5bf496966a40, type: 3}
   m_Name: TestCSVLoader
   m_EditorClassIdentifier: 
-  localizationData: {fileID: 0}
+  localizationData: {fileID: 4900000, guid: 1741abdee043280439bae4f694c1701b, type: 3}

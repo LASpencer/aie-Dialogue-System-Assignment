@@ -49,7 +49,75 @@ namespace Dialogue
             // However, if entry starts with ", ignore commas until matching quote
             // "" found withing " does not match, only single "
             // Remove " from either end and change "" to "
-            throw new NotImplementedException();
+            List<string> values = new List<string>();
+            System.Text.StringBuilder current = new System.Text.StringBuilder();
+            bool inQuotes = false;
+            bool maybeDoubleQuote = false;
+            foreach(char c in row)
+            {
+                switch (c)
+                {
+                    case ',':
+                        bool escape = false; // Should it be escaped or treated as delimiter?
+                        if (inQuotes)
+                        {
+                            if (maybeDoubleQuote)
+                            {
+                                // If in quote and last was quote, quote has ended so don't escape
+                                inQuotes = false;
+                                escape = false;
+                            } else
+                            {
+                                // If last wasn't quote (or second of double quote) still quoting so escape
+                                escape = true;
+                            }
+                        }
+                        if (escape)
+                        {
+                            // If still in quote, write ,
+                            current.Append(',');
+                        } else
+                        {
+                            // If outside quote, copy current to list and start new entry
+                            values.Add(current.ToString());
+                            current = new System.Text.StringBuilder();
+                            inQuotes = false;
+                        }
+                        maybeDoubleQuote = false;
+                        break;
+                    case '"':
+                        if (inQuotes)
+                        {
+                            if (maybeDoubleQuote)
+                            {
+                                // Double quote inside a quote, so write "
+                                maybeDoubleQuote = false;
+                                current.Append('"');
+                            } else
+                            {
+                                // Quote inside quote might be first of pair
+                                maybeDoubleQuote = true;
+                            }
+                        } else
+                        {
+                            // If not in quotes, must be start of quote
+                            inQuotes = true;
+                            maybeDoubleQuote = false;
+                        }
+                        break;
+                    default:
+                        current.Append(c);
+                        if (maybeDoubleQuote)
+                        {
+                            inQuotes = false;
+                        }
+                        maybeDoubleQuote = false;
+                        break;
+                }
+            }
+            // Add last entry to list
+            values.Add(current.ToString());
+            return values.ToArray();
         }
     }
 }
