@@ -15,7 +15,7 @@ namespace Dialogue
             //TODO fix this up so it can appear both in editor and the custom window
             EditorGUILayout.BeginVertical();
             EditorGUILayout.PropertyField(property.FindPropertyRelative("Text"));
-            EditorGUILayout.PropertyField(property.FindPropertyRelative("OnChosen"));
+            EditorGUILayout.PropertyField(property.FindPropertyRelative("OnChosen"),true);
             EditorGUILayout.PropertyField(property.FindPropertyRelative("Prerequisite"));
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(property.FindPropertyRelative("transitions"));

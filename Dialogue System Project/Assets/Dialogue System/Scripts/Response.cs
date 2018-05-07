@@ -9,7 +9,7 @@ namespace Dialogue
     public class Response
     {
         public string Text;
-        public DialogueEvent OnChosen; //HACK maybe make a collection?
+        public List<DialogueEventInstance> OnChosen;
         public Condition Prerequisite;
         public TransitionList transitions;
 

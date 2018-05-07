@@ -7,6 +7,6 @@ namespace Dialogue
     public abstract class DialogueEvent : ScriptableObject
     {
 
-        public abstract void Execute(DialogueManager manager);
+        public abstract void Execute(DialogueManager manager, string target, string parameters);
     }
 }

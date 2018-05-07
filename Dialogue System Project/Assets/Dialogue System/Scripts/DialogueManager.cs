@@ -16,7 +16,8 @@ namespace Dialogue
         public DialogueEntry current;
 
         //TODO have some way to save fields between scenes?
-        FieldManager fields;
+
+        public FieldManager fields;
         //TODO figure out proper way to access name->actor map
         [SerializeField]
         private StringActorDict actorDictionary;
@@ -98,12 +99,10 @@ namespace Dialogue
                 Response response = current.Responses[id];
                 if (response.CheckPrerequisite(this))
                 {
-                    DialogueEvent e = response.OnChosen;
-                    if (e != null)
+                    foreach(DialogueEventInstance e in response.OnChosen)
                     {
                         e.Execute(this);
                     }
-
                     Transition selectedTransition = response.transitions.SelectTransition(this);
 
                     current = conversation.FindEntry(selectedTransition.TargetID);
