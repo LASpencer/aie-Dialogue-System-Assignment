@@ -13,6 +13,7 @@ namespace Dialogue
         {
             SerializedProperty transitions = entry.FindPropertyRelative("transitions");
             SerializedProperty responses = entry.FindPropertyRelative("Responses");
+            SerializedProperty cutsceneEvents = entry.FindPropertyRelative("cutsceneEvents");
 
             entry.FindPropertyRelative("parent").objectReferenceValue = parent;
             entry.FindPropertyRelative("ID").intValue = ID;
@@ -26,6 +27,10 @@ namespace Dialogue
             if (responses.isArray)
             {
                 responses.ClearArray();
+            }
+            if (cutsceneEvents.isArray)
+            {
+                cutsceneEvents.ClearArray();
             }
             entry.FindPropertyRelative("position").vector2Value = Vector2.zero;
         }
@@ -41,13 +46,18 @@ namespace Dialogue
                 newResponse = responses.GetArrayElementAtIndex(oldSize);
                 //TODO extract to some SerializedResponseUtility
                 newResponse.FindPropertyRelative("Text").stringValue = "";
-                newResponse.FindPropertyRelative("OnChosen").objectReferenceValue = null;
                 newResponse.FindPropertyRelative("Prerequisite").objectReferenceValue = null;
                 SerializedProperty transitionList = newResponse.FindPropertyRelative("transitions");
                 if (transitionList.isArray)
                 {
                     transitionList.ClearArray();
                 }
+                SerializedProperty onChosen = newResponse.FindPropertyRelative("OnChosen");
+                if (onChosen.isArray)
+                {
+                    onChosen.ClearArray();
+                }
+
                 Vector2 entryPosition = entry.FindPropertyRelative("position").vector2Value;
                 // HACK figure out best rule for initial position
                 // position based on index rule

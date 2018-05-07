@@ -12,7 +12,7 @@ namespace Dialogue
         public override void Execute(DialogueManager manager, string target, string parameters)
         {
             FieldManager fields;
-            if (string.IsNullOrEmpty(target))
+            if (target == "")
             {
                 fields = manager.fields;
             } else
@@ -22,12 +22,22 @@ namespace Dialogue
                 }
                 catch (KeyNotFoundException)
                 {
-                    Debug.LogWarning("Actor \'" + target + "\' not found in dialogue manager");
+                    Debug.LogWarning("Actor '" + target + "' not found in dialogue manager");
                     return;
                 }
             }
             //TODO parse parameters as saying flags to set/unset
             fields.SetFlag(parameters);
+        }
+        
+        public override string Describe(string target, string parameters)
+        {
+            string description = "Set flag '" + parameters + "'";
+            if (target == "")
+            {
+                description += " on " + target;
+            }
+            return description;
         }
     }
 }

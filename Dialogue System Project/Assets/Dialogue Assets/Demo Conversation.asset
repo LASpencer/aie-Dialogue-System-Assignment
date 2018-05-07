@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4885efe881bb0794b8c9439ff478a019, type: 3}
-  m_Name: TestConversation
+  m_Name: Demo Conversation
   m_EditorClassIdentifier: 
   nextID: 29
   startingID: 28
@@ -31,7 +31,7 @@ MonoBehaviour:
     parent: {fileID: 11400000}
     Responses:
     - Text: res_region?
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -40,7 +40,7 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 187, y: 135}
     - Text: res_taste_familiar
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -49,7 +49,7 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 113, y: 213}
     - Text: res_grilled?
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -89,7 +89,7 @@ MonoBehaviour:
     parent: {fileID: 11400000}
     Responses:
     - Text: res_utica
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -98,7 +98,7 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 660, y: 207}
     - Text: res_not_steamed
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -107,7 +107,7 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 438, y: 208}
     - Text: res_smoke
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -115,7 +115,7 @@ MonoBehaviour:
             TargetID: 11
           condition: {fileID: 0}
       Position: {x: 864, y: 244}
-    position: {x: 683, y: 123}
+    position: {x: 690, y: 122}
   - ID: 3
     Title: 
     speakerIndex: 1
@@ -369,7 +369,7 @@ MonoBehaviour:
     parent: {fileID: 11400000}
     Responses:
     - Text: res_but_grilled?
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -378,7 +378,7 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 179, y: 587}
     - Text: res_fire?
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:
@@ -402,7 +402,11 @@ MonoBehaviour:
     parent: {fileID: 11400000}
     Responses:
     - Text: res_this_time?
-      OnChosen: {fileID: 11400000, guid: b955ca02180b8854ea12dd86ac96ac9e, type: 2}
+      OnChosen:
+      - target: 
+        parameters: Aurora Time Asked
+        dialogueEvent: {fileID: 11400000, guid: fd4b6d5b8b24a4e41b09e54152d2ff9f,
+          type: 2}
       Prerequisite: {fileID: 11400000, guid: 9836a0b1e5364d9419537923a53afd5e, type: 2}
       transitions:
         transitions:
@@ -411,7 +415,11 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 1108, y: 396}
     - Text: res_this_date?
-      OnChosen: {fileID: 11400000, guid: 712f4c4db85761046a36ff765a3f028a, type: 2}
+      OnChosen:
+      - target: 
+        parameters: Aurora Date Asked
+        dialogueEvent: {fileID: 11400000, guid: fd4b6d5b8b24a4e41b09e54152d2ff9f,
+          type: 2}
       Prerequisite: {fileID: 11400000, guid: 7ee580c99ed852f48a51f35bbc66fac9, type: 2}
       transitions:
         transitions:
@@ -420,7 +428,11 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 1091, y: 464}
     - Text: res_this_part?
-      OnChosen: {fileID: 11400000, guid: d0fa49f2120cf6e44b42d92e173f8832, type: 2}
+      OnChosen:
+      - target: 
+        parameters: Aurora Location Asked
+        dialogueEvent: {fileID: 11400000, guid: fd4b6d5b8b24a4e41b09e54152d2ff9f,
+          type: 2}
       Prerequisite: {fileID: 11400000, guid: 9e4c738877dd0fb42bbb8e203cf73a41, type: 2}
       transitions:
         transitions:
@@ -429,7 +441,7 @@ MonoBehaviour:
           condition: {fileID: 0}
       Position: {x: 1096, y: 539}
     - Text: res_localized?
-      OnChosen: {fileID: 0}
+      OnChosen: []
       Prerequisite: {fileID: 0}
       transitions:
         transitions:

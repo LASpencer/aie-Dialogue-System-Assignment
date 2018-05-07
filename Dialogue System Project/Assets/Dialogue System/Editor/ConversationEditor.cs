@@ -26,8 +26,6 @@ namespace Dialogue
         {
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("nextID"));//HACK
-
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Starting Entry");
             NameIDListPair popupLists = SerializedConversationUtility.GetEntryNameAndID(serializedObject, true);

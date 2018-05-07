@@ -8,5 +8,7 @@ namespace Dialogue
     {
 
         public abstract void Execute(DialogueManager manager, string target, string parameters);
+
+        public abstract string Describe(string target, string parameters);
     }
 }

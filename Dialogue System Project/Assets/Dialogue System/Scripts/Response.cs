@@ -9,7 +9,7 @@ namespace Dialogue
     public class Response
     {
         public string Text;
-        public List<DialogueEventInstance> OnChosen;
+        public List<DialogueEventInstance> OnChosen = new List<DialogueEventInstance>();
         public Condition Prerequisite;
         public TransitionList transitions;
 

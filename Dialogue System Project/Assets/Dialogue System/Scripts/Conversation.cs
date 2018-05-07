@@ -7,7 +7,7 @@ namespace Dialogue
     [CreateAssetMenu(menuName ="Dialogue/Conversation")]
     public class Conversation : ScriptableObject
     {
-        [SerializeField]//[HideInInspector]
+        [SerializeField][HideInInspector]
         int nextID = 0;
 
         public int NextID { get { return nextID; } }
@@ -16,9 +16,9 @@ namespace Dialogue
         private int startingID;
 
         //HACK maybe write a serializable dictionary?
-        public List<DialogueEntry> Entries;
+        public List<DialogueEntry> Entries = new List<DialogueEntry>();
 
-        public List<string> Speakers;
+        public List<string> Speakers = new List<string>();
 
         public DialogueEntry Start { get { return FindEntry(startingID); } }
 
