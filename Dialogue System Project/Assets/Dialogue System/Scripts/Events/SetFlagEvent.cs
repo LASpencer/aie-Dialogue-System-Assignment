@@ -7,11 +7,10 @@ namespace Dialogue
     [CreateAssetMenu(menuName = "Dialogue/Event/Set Flag")]
     public class SetFlagEvent : DialogueEvent
     {
-        public string flag;
-
         public override void Execute(DialogueManager manager, string target, string parameters)
         {
             FieldManager fields;
+            // If no target, target is manager
             if (string.IsNullOrEmpty(target))
             {
                 fields = manager.fields;

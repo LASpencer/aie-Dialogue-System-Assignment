@@ -61,9 +61,6 @@ namespace Dialogue
 
         public override void ClearResponses()
         {
-            // TODO show "Next button"
-            //TODO clear Response buttons
-
             numResponses = 0;
             maxResponseWidth = ButtonPrototype.GetComponent<RectTransform>().rect.width;
             foreach(Transform child in responsePanel)
@@ -121,7 +118,7 @@ namespace Dialogue
             }
         }
 
-        public override void FinishDisplayDialogueEntry()
+        public override void FinishedDisplayResponses()
         {
             // TODO resize panels to fit dialogue and buttons
 

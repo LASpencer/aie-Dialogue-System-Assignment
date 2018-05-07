@@ -21,10 +21,11 @@ public class StartMenu : MonoBehaviour {
     public UnityAction StartGame;
 
     [SerializeField]
-    List<string> localeCodes;
+    List<string> localeCodes;   //Locale codes matching entries in language selection dropdown
 
 	// Use this for initialization
 	void Start () {
+        // wait a short time to allow localizer's start to be called
         Invoke("LocalizeMenu", 0.01f);
     }
 

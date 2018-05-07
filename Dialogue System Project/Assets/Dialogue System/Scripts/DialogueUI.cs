@@ -51,7 +51,7 @@ namespace Dialogue {
                 }
             }
             // Inform display strategy all responses have been sent
-            displayStrategy.FinishDisplayDialogueEntry();
+            displayStrategy.FinishedDisplayResponses();
         }
 
         public void OnConversationEnd()

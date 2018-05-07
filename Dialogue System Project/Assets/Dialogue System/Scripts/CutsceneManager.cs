@@ -14,6 +14,7 @@ namespace Dialogue {
             AnimatorDictionary = Animators.ToDictionary();
         }
 
+        // Plays all animations indicated by CutsceneEvents in list
         public void DoCutsceneEvents(List<CutsceneEvent> events)
         {
             foreach(CutsceneEvent e in events)

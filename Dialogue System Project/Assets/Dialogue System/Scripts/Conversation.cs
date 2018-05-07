@@ -8,18 +8,20 @@ namespace Dialogue
     public class Conversation : ScriptableObject
     {
         [SerializeField][HideInInspector]
-        int nextID = 0;
+        int nextID = 0;     // Next unused ID
 
         public int NextID { get { return nextID; } }
 
         [SerializeField]
-        private int startingID;
+        private int startingID; // ID of dialogue entry to start the conversation
 
         //HACK maybe write a serializable dictionary?
         public List<DialogueEntry> Entries = new List<DialogueEntry>();
 
+        // Keys for Speakers in this conversation, used by DialogueManager to select actor
         public List<string> Speakers = new List<string>();
 
+        // Returns dialogue entry identified by startingID
         public DialogueEntry Start { get { return FindEntry(startingID); } }
 
         public DialogueEntry FindEntry(int id)
@@ -34,6 +36,7 @@ namespace Dialogue
             return entry;
         }
 
+        // Adds DialogueEntry to conversation with unique ID
         public DialogueEntry AddEntry()
         {
             DialogueEntry newEntry = new DialogueEntry(this, nextID);

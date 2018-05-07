@@ -13,18 +13,18 @@ namespace Dialogue
 
         public override Dictionary<string, string> LoadLanguage(string locale)
         {
-            //TODO just use standard csv parser
-            
             string[] fileLines = localizationData.text.Split(new string[] { "\r\n" },StringSplitOptions.RemoveEmptyEntries);
             string[] header = SplitCSVRow(fileLines[0]);
             int localeIndex = Array.IndexOf(header, locale);
             if(localeIndex >= 0)
             {
                 Dictionary<string, string> loadedLines = new Dictionary<string, string>();
+                // Start at 1 because index 0 was header
                 for (int i = 1; i < fileLines.Length; ++i)
                 {
                     string[] values = SplitCSVRow(fileLines[i]);
                     try {
+                        // Key is first entry in line, value wanted has same index as locale code had in header
                         string key = values[0];
                         string translation = values[localeIndex];
                         loadedLines.Add(key, translation);
@@ -34,6 +34,7 @@ namespace Dialogue
                         Debug.LogWarning("Translation not found on line " + i.ToString());
                     }
                 }
+                // Return dictionary of lines
                 return loadedLines;
             }
             else
@@ -45,14 +46,14 @@ namespace Dialogue
 
         string[] SplitCSVRow(string row)
         {
-            // TODO split by commas
+            // split by commas
             // However, if entry starts with ", ignore commas until matching quote
-            // "" found withing " does not match, only single "
+            // "" found within " does not match, only single "
             // Remove " from either end and change "" to "
             List<string> values = new List<string>();
             System.Text.StringBuilder current = new System.Text.StringBuilder();
             bool inQuotes = false;
-            bool maybeDoubleQuote = false;
+            bool maybeDoubleQuote = false;  // last character was ", and is either first of "" or a close quote
             foreach(char c in row)
             {
                 switch (c)

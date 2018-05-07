@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace Dialogue
 {
+    // Copies lines given to text objects and gets response from keyboard input
     public class DefaultTextStrategy : UIDisplayStrategy
     {
         public Text dialogueText;

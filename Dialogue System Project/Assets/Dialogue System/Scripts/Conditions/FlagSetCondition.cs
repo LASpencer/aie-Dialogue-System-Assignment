@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Dialogue
 {
+    // True if flag set on dialogue manager
     [CreateAssetMenu(menuName ="Dialogue/Condition/Flag Set")]
     public class FlagSetCondition : Condition
     {
