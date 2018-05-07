@@ -45,7 +45,6 @@ namespace Dialogue
             Entries.Add(newEntry);
             return newEntry;
         }
-        // TODO AddEntry to create a new entry with unique ID, add to end of list
 
         public void RemoveEntry(DialogueEntry entry)
         {

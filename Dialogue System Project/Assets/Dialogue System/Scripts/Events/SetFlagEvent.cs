@@ -12,7 +12,7 @@ namespace Dialogue
         public override void Execute(DialogueManager manager, string target, string parameters)
         {
             FieldManager fields;
-            if (target == "")
+            if (string.IsNullOrEmpty(target))
             {
                 fields = manager.fields;
             } else
@@ -33,7 +33,7 @@ namespace Dialogue
         public override string Describe(string target, string parameters)
         {
             string description = "Set flag '" + parameters + "'";
-            if (target == "")
+            if (!string.IsNullOrEmpty(target))
             {
                 description += " on " + target;
             }

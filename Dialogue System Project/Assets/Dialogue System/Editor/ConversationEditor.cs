@@ -65,9 +65,7 @@ namespace Dialogue
             // Show selected entry
             if (entries.arraySize != 0 && entrySelectedIndex < entries.arraySize)
             {
-                //TODO check selectedEntry within bounds
                 selectedEntry = entries.GetArrayElementAtIndex(entrySelectedIndex);
-                // TODO expand or hide selectedEntry
                 EditorGUILayout.PropertyField(selectedEntry, GUIContent.none, true);
             } else
             {

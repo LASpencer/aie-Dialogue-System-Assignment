@@ -7,7 +7,6 @@ namespace Dialogue
     public class Condition : ScriptableObject
     {
         public bool Not;
-        // TODO figure out what should be passed
         virtual public bool Evaluate(DialogueManager dialogue)
         {
 
