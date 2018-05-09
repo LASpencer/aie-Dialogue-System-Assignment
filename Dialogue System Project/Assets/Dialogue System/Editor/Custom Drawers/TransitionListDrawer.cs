@@ -94,7 +94,7 @@ namespace Dialogue
                 addItem = GUILayout.Button("Add Transition");
                 using (new EditorGUI.DisabledScope(optionSize == 0))
                 {
-                    clearItems = GUILayout.Button("Clear Transtions");
+                    clearItems = GUILayout.Button("Clear Transitions");
                 }
                 GUILayout.EndHorizontal();
                 if (addItem)

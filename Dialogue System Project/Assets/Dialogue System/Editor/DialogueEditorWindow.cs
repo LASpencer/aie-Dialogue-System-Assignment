@@ -9,6 +9,8 @@ using System.Linq;
 // TODO test REsponseEditorNode functionality once displayed
 // TODO expand/collapse response nodes?
 
+
+    //TODO when Selected Conversation changes, errors from selected things bieng out of range
 namespace Dialogue
 {
     public class DialogueEditorWindow : EditorWindow
@@ -22,7 +24,7 @@ namespace Dialogue
         const int NODE_FONT_SIZE = 14;
 
         Conversation conversation;                  // Conversation selected in Unity Editor
-        public Conversation SelectedConversation { get { return SelectedConversation; } }
+        public Conversation SelectedConversation { get { return conversation; } }
         SerializedObject serializedConversation;    // Serialized object created from conversation
         public SerializedObject SerializedConversation { get { return serializedConversation; } }
 
@@ -487,6 +489,8 @@ namespace Dialogue
 
         void ChangeConversation(Conversation newConversation)
         {
+            selectedConnector = null;
+            selectedNode = null;
             if (nodes != null)
             {
                 nodes.Clear();

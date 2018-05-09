@@ -35,6 +35,7 @@ namespace Dialogue
             SerializedProperty speaker = property.FindPropertyRelative("speakerIndex");
             SerializedProperty isEnd = property.FindPropertyRelative("isEnd");
             SerializedProperty text = property.FindPropertyRelative("Text");
+            SerializedProperty onEnter = property.FindPropertyRelative("OnEnter");
             SerializedProperty cutsceneEvents = property.FindPropertyRelative("cutsceneEvents");
             SerializedProperty transitions = property.FindPropertyRelative("transitions");
             SerializedProperty responsesList = property.FindPropertyRelative("Responses");
@@ -57,6 +58,7 @@ namespace Dialogue
             EditorGUILayout.PropertyField(isEnd);
             EditorGUILayout.PropertyField(text);
             EditorGUILayout.Separator();
+            EditorGUILayout.PropertyField(onEnter, true);
             EditorGUILayout.PropertyField(cutsceneEvents, true);
             EditorGUILayout.Separator();
             EditorGUILayout.PropertyField(transitions,true);

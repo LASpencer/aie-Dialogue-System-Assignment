@@ -14,6 +14,7 @@ namespace Dialogue
             SerializedProperty transitions = entry.FindPropertyRelative("transitions");
             SerializedProperty responses = entry.FindPropertyRelative("Responses");
             SerializedProperty cutsceneEvents = entry.FindPropertyRelative("cutsceneEvents");
+            SerializedProperty onEnter = entry.FindPropertyRelative("OnEnter");
 
             entry.FindPropertyRelative("parent").objectReferenceValue = parent;
             entry.FindPropertyRelative("ID").intValue = ID;
@@ -31,6 +32,10 @@ namespace Dialogue
             if (cutsceneEvents.isArray)
             {
                 cutsceneEvents.ClearArray();
+            }
+            if (onEnter.isArray)
+            {
+                onEnter.ClearArray();
             }
             entry.FindPropertyRelative("position").vector2Value = Vector2.zero;
         }

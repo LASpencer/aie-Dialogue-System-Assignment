@@ -72,6 +72,10 @@ namespace Dialogue
                         if(nextEntry != null)
                         {
                             current = nextEntry;
+                            foreach(DialogueEventInstance e in current.OnEnter)
+                            {
+                                e.Execute(this);
+                            }
                             UISystem.SetDialogueEntry(current);
                             entryFound = true;
                         }
