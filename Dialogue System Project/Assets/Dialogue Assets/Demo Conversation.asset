@@ -18,6 +18,7 @@ MonoBehaviour:
     Title: I said "Steamed Hams"
     speakerIndex: 1
     Text: steamed_hams
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Behind Chalmers
@@ -38,7 +39,7 @@ MonoBehaviour:
         - transition:
             TargetID: 1
           condition: {fileID: 0}
-      Position: {x: 187, y: 135}
+      Position: {x: -101, y: 108}
     - Text: res_taste_familiar
       OnChosen: []
       Prerequisite: {fileID: 0}
@@ -47,7 +48,7 @@ MonoBehaviour:
         - transition:
             TargetID: 14
           condition: {fileID: 0}
-      Position: {x: 113, y: 213}
+      Position: {x: -175, y: 186}
     - Text: res_grilled?
       OnChosen: []
       Prerequisite: {fileID: 0}
@@ -56,12 +57,13 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: -108, y: 202}
-    position: {x: -61, y: 109}
+      Position: {x: -396, y: 175}
+    position: {x: -349, y: 82}
   - ID: 1
     Title: 
     speakerIndex: 0
     Text: what_region
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Focus
@@ -75,11 +77,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 444, y: 115}
+    position: {x: 156, y: 88}
   - ID: 2
     Title: 
     speakerIndex: 1
     Text: upstate_ny
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Skinner Focus
@@ -96,7 +99,7 @@ MonoBehaviour:
         - transition:
             TargetID: 13
           condition: {fileID: 0}
-      Position: {x: 660, y: 207}
+      Position: {x: 372, y: 180}
     - Text: res_not_steamed
       OnChosen: []
       Prerequisite: {fileID: 0}
@@ -105,7 +108,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 438, y: 208}
+      Position: {x: 150, y: 181}
     - Text: res_smoke
       OnChosen: []
       Prerequisite: {fileID: 0}
@@ -114,12 +117,13 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-      Position: {x: 864, y: 244}
-    position: {x: 690, y: 122}
+      Position: {x: 576, y: 217}
+    position: {x: 402, y: 95}
   - ID: 3
     Title: 
     speakerIndex: 1
     Text: albany_expression
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Skinner Focus
@@ -131,11 +135,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 531, y: 345}
+    position: {x: 243, y: 318}
   - ID: 4
     Title: 
     speakerIndex: 0
     Text: obviously_grilled
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Focus
@@ -151,11 +156,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -81, y: 358}
+    position: {x: -369, y: 331}
   - ID: 5
     Title: 
     speakerIndex: 1
     Text: um
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Behind Chalmers
@@ -167,11 +173,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -99, y: 422}
+    position: {x: -387, y: 395}
   - ID: 6
     Title: 
     speakerIndex: 1
     Text: well
+    OnEnter: []
     cutsceneEvents:
     - target: kitchen fire
       animation: Fire On
@@ -183,11 +190,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -96, y: 476}
+    position: {x: -384, y: 449}
   - ID: 7
     Title: 
     speakerIndex: 1
     Text: excuse_me
+    OnEnter: []
     cutsceneEvents:
     - target: skinner
       animation: Stand Up
@@ -199,11 +207,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -75, y: 534}
+    position: {x: -363, y: 507}
   - ID: 8
     Title: 
     speakerIndex: 0
     Text: of_course
+    OnEnter: []
     cutsceneEvents:
     - target: kitchen door
       animation: Open In
@@ -217,11 +226,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -64, y: 589}
+    position: {x: -352, y: 562}
   - ID: 9
     Title: 
     speakerIndex: 1
     Text: pooped
+    OnEnter: []
     cutsceneEvents:
     - target: kitchen door
       animation: Open Out To Swing
@@ -235,11 +245,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -57, y: 650}
+    position: {x: -345, y: 623}
   - ID: 10
     Title: 
     speakerIndex: 0
     Text: should_go
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Focus
@@ -251,11 +262,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -56, y: 711}
+    position: {x: -344, y: 684}
   - ID: 11
     Title: 
     speakerIndex: 0
     Text: good_lord
+    OnEnter: []
     cutsceneEvents:
     - target: kitchen fire
       animation: Fire On
@@ -273,11 +285,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 491, y: 700}
+    position: {x: 203, y: 673}
   - ID: 12
     Title: 
     speakerIndex: 1
     Text: skinner_aurora
+    OnEnter: []
     cutsceneEvents:
     - target: kitchen door
       animation: Swing Closed
@@ -289,11 +302,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 876, y: 368}
+    position: {x: 588, y: 341}
   - ID: 13
     Title: Utica
     speakerIndex: 0
     Text: from_utica
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Focus
@@ -305,11 +319,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 533, y: 280}
+    position: {x: 245, y: 253}
   - ID: 14
     Title: Krustyburgers
     speakerIndex: 0
     Text: krustyburger
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Focus
@@ -323,11 +338,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 173, y: 336}
+    position: {x: -115, y: 309}
   - ID: 15
     Title: 
     speakerIndex: 1
     Text: skinnerburgers
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Skinner Focus
@@ -339,11 +355,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 181, y: 390}
+    position: {x: -107, y: 363}
   - ID: 16
     Title: 
     speakerIndex: 0
     Text: for_steamed_hams
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Focus
@@ -355,11 +372,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 185, y: 445}
+    position: {x: -103, y: 418}
   - ID: 17
     Title: 
     speakerIndex: 1
     Text: yes1
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Skinner Focus
@@ -376,7 +394,7 @@ MonoBehaviour:
         - transition:
             TargetID: 4
           condition: {fileID: 0}
-      Position: {x: 179, y: 587}
+      Position: {x: -109, y: 560}
     - Text: res_fire?
       OnChosen: []
       Prerequisite: {fileID: 0}
@@ -385,12 +403,13 @@ MonoBehaviour:
         - transition:
             TargetID: 11
           condition: {fileID: 0}
-      Position: {x: 418, y: 569}
-    position: {x: 192, y: 501}
+      Position: {x: 130, y: 542}
+    position: {x: -96, y: 474}
   - ID: 18
     Title: Aurora Borealis?
     speakerIndex: 0
     Text: chalmers_aurora
+    OnEnter: []
     cutsceneEvents:
     - target: chalmers
       animation: Idle
@@ -403,7 +422,8 @@ MonoBehaviour:
     Responses:
     - Text: res_this_time?
       OnChosen:
-      - target: 
+      - description: Set flag 'Aurora Time Asked'
+        target: 
         parameters: Aurora Time Asked
         dialogueEvent: {fileID: 11400000, guid: fd4b6d5b8b24a4e41b09e54152d2ff9f,
           type: 2}
@@ -413,10 +433,11 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1108, y: 396}
+      Position: {x: 820, y: 369}
     - Text: res_this_date?
       OnChosen:
-      - target: 
+      - description: Set flag 'Aurora Date Asked'
+        target: 
         parameters: Aurora Date Asked
         dialogueEvent: {fileID: 11400000, guid: fd4b6d5b8b24a4e41b09e54152d2ff9f,
           type: 2}
@@ -426,10 +447,11 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1091, y: 464}
+      Position: {x: 803, y: 437}
     - Text: res_this_part?
       OnChosen:
-      - target: 
+      - description: Set flag 'Aurora Location Asked'
+        target: 
         parameters: Aurora Location Asked
         dialogueEvent: {fileID: 11400000, guid: fd4b6d5b8b24a4e41b09e54152d2ff9f,
           type: 2}
@@ -439,7 +461,7 @@ MonoBehaviour:
         - transition:
             TargetID: 18
           condition: {fileID: 0}
-      Position: {x: 1096, y: 539}
+      Position: {x: 808, y: 512}
     - Text: res_localized?
       OnChosen: []
       Prerequisite: {fileID: 0}
@@ -448,12 +470,13 @@ MonoBehaviour:
         - transition:
             TargetID: 19
           condition: {fileID: 0}
-      Position: {x: 832, y: 531}
-    position: {x: 854, y: 461}
+      Position: {x: 544, y: 504}
+    position: {x: 566, y: 434}
   - ID: 19
     Title: 
     speakerIndex: 1
     Text: yes2
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Skinner Closeup
@@ -465,11 +488,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 825, y: 595}
+    position: {x: 537, y: 568}
   - ID: 20
     Title: 
     speakerIndex: 0
     Text: see_it?
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Closeup
@@ -481,11 +505,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 821, y: 656}
+    position: {x: 533, y: 629}
   - ID: 21
     Title: 
     speakerIndex: 1
     Text: no
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Skinner Closeup
@@ -497,11 +522,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 813, y: 727}
+    position: {x: 525, y: 700}
   - ID: 23
     Title: Compliment Hams
     speakerIndex: 0
     Text: good_ham
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Outside Behind Skinner
@@ -513,11 +539,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1106, y: 749}
+    position: {x: 818, y: 722}
   - ID: 24
     Title: Mother calls for help
     speakerIndex: 2
     Text: help
+    OnEnter: []
     cutsceneEvents:
     - target: upstairs fire
       animation: Fire On
@@ -530,11 +557,12 @@ MonoBehaviour:
     isEnd: 1
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1105, y: 822}
+    position: {x: 817, y: 795}
   - ID: 25
     Title: House on fire
     speakerIndex: 2
     Text: house_on_fire
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Outside Full Door
@@ -552,11 +580,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1105, y: 618}
+    position: {x: 817, y: 591}
   - ID: 26
     Title: 
     speakerIndex: 1
     Text: northern_lights
+    OnEnter: []
     cutsceneEvents: []
     transitions:
       transitions:
@@ -566,11 +595,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 1100, y: 692}
+    position: {x: 812, y: 665}
   - ID: 27
     Title: 
     speakerIndex: 0
     Text: steamed_clams
+    OnEnter: []
     cutsceneEvents:
     - target: camera
       animation: Kitchen Chalmers Closeup
@@ -582,11 +612,12 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: 184, y: 38}
+    position: {x: -104, y: 11}
   - ID: 28
     Title: START
     speakerIndex: 1
     Text: ready_for_burger
+    OnEnter: []
     cutsceneEvents:
     - target: skinner
       animation: Carry Tray
@@ -612,7 +643,7 @@ MonoBehaviour:
     isEnd: 0
     parent: {fileID: 11400000}
     Responses: []
-    position: {x: -69, y: 2}
+    position: {x: -345, y: -25}
   Speakers:
   - superintendent
   - principal
