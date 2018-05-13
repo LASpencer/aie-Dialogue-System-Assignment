@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Dialogue
 {
+    /// <summary>
+    /// Loads dialogue lines from a .csv file with the first row having the locale codes
+    /// </summary>
     [CreateAssetMenu(menuName = "Dialogue/Localization/CSV Loader")]
     public class CSVLoader : LocalizationLoader
     {
@@ -13,7 +16,9 @@ namespace Dialogue
 
         public override Dictionary<string, string> LoadLanguage(string locale)
         {
+            // Split file into rows
             string[] fileLines = localizationData.text.Split(new string[] { "\r\n" },StringSplitOptions.RemoveEmptyEntries);
+            // Find column for locale code
             string[] header = SplitCSVRow(fileLines[0]);
             int localeIndex = Array.IndexOf(header, locale);
             if(localeIndex >= 0)
@@ -22,9 +27,10 @@ namespace Dialogue
                 // Start at 1 because index 0 was header
                 for (int i = 1; i < fileLines.Length; ++i)
                 {
+                    // Split row into entries
                     string[] values = SplitCSVRow(fileLines[i]);
                     try {
-                        // Key is first entry in line, value wanted has same index as locale code had in header
+                        // Key is first entry in line, value wanted is in column selected
                         string key = values[0];
                         string translation = values[localeIndex];
                         loadedLines.Add(key, translation);

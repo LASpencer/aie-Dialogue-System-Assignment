@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script to make a light flicker randomly
 [RequireComponent(typeof(Light))]
 public class Flicker : MonoBehaviour {
 
     public bool on;
     public float maxIncrease = 1f;
     public float maxDecrease = 1f;
-    public float rate = 0.1f;
+    public float rate = 0.1f;       // Time between flickers
     public float strength = 300f;
 
     private Light lightSource;

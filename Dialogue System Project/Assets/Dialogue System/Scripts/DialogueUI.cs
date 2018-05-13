@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Dialogue {
+    // Class to connect dialogue manager and the game's UI
     public class DialogueUI : MonoBehaviour
     {
-        // TODO figure out good interface
         public DialogueManager manager;
         public CutsceneManager cutsceneManager;
         public UIDisplayStrategy displayStrategy;
@@ -19,25 +19,15 @@ namespace Dialogue {
                 displayStrategy = gameObject.GetComponent<UIDisplayStrategy>();
             }
         }
-
-        // Use this for initialization
-        void Start()
-        {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
         
+        // Called when the DialogueManager starts a conversation
         public void OnConversationStart()
         {
             displayStrategy.OnConversationStart();
             SetDialogueEntry(manager.current);
         }
 
+        // Called when a new DialogueEntry is entered
         public void SetDialogueEntry(DialogueEntry entry)
         {
             displayStrategy.DisplayDialogueEntry(entry);
@@ -54,6 +44,7 @@ namespace Dialogue {
             displayStrategy.FinishedDisplayResponses();
         }
 
+        // Called when DialogueManager ends conversation
         public void OnConversationEnd()
         {
             displayStrategy.OnConversationEnd();

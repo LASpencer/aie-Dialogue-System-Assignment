@@ -15,7 +15,6 @@ namespace Dialogue
         [SerializeField]
         private int startingID; // ID of dialogue entry to start the conversation
 
-        //HACK maybe write a serializable dictionary?
         public List<DialogueEntry> Entries = new List<DialogueEntry>();
 
         // Keys for Speakers in this conversation, used by DialogueManager to select actor

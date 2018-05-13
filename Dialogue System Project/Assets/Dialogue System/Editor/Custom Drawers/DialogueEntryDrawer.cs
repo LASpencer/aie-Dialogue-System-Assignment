@@ -69,10 +69,10 @@ namespace Dialogue
             int responsesSize = responsesList.arraySize;
             ListActions action = ListActions.Nothing;
             int selectedIndex = -1;
-            //EditorGUILayout.LabelField("Responses", EditorStyles.boldLabel);
             responsesList.isExpanded = EditorGUILayout.Foldout(responsesList.isExpanded, "Responses", true, EditorStyles.boldLabel);
             if (responsesList.isExpanded)
             {
+                // Display each response
                 for (int i = 0; i < responsesSize; ++i)
                 {
                     response = responsesList.GetArrayElementAtIndex(i);
@@ -85,12 +85,14 @@ namespace Dialogue
 
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.BeginVertical();
+                    // Display response details if expanded
                     response.isExpanded = EditorGUILayout.Foldout(response.isExpanded, responseTitle);
                     if (response.isExpanded)
                     {
                         EditorGUILayout.PropertyField(response, new GUIContent(responseTitle), true); //TODO get text from response, use as label
                     }
                     EditorGUILayout.EndVertical();
+                    // Buttons for moving or deleting response
                     bool moveUp = false, moveDown = false, deleteResponse = false;
                     using (new EditorGUI.DisabledScope(i <= 0))     // Disable if first in array
                     {
@@ -104,7 +106,7 @@ namespace Dialogue
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.Separator();
-
+                    // Set button action based on buttons clicked
                     if (moveUp)
                     {
                         action = ListActions.MoveUp;
@@ -120,11 +122,11 @@ namespace Dialogue
                         selectedIndex = i;
                     }
                 }
-                //TODO put buttons to expand list here
                 GUILayout.BeginHorizontal();
                 bool addItem = GUILayout.Button("Add Response");
                 bool clearItems = GUILayout.Button("Clear Responses");
                 GUILayout.EndHorizontal();
+                // Perform action based on buttons clicked
                 if (addItem)
                 {
                     responsesList.InsertArrayElementAtIndex(responsesSize);
@@ -148,7 +150,6 @@ namespace Dialogue
                         }
                         break;
                     case ListActions.Delete:
-                        //TODO delete at selected index
                         if(selectedIndex >= 0 && selectedIndex < (responsesSize))
                         {
                             responsesList.DeleteArrayElementAtIndex(selectedIndex);
@@ -165,9 +166,6 @@ namespace Dialogue
             }
 
             EditorGUILayout.EndVertical();
-
-            //EditorGUI.EndProperty();
-            //base.OnGUI(position, property, label);
         }
 
     }

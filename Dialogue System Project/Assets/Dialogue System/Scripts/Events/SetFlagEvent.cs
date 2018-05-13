@@ -4,9 +4,13 @@ using UnityEngine;
 
 namespace Dialogue
 {
+    /// <summary>
+    /// Sets a flag on the indicated DialogueActor, or on the DialogueManager
+    /// </summary>
     [CreateAssetMenu(menuName = "Dialogue/Event/Set Flag")]
     public class SetFlagEvent : DialogueEvent
     {
+
         public override void Execute(DialogueManager manager, string target, string parameters)
         {
             FieldManager fields;
@@ -25,7 +29,6 @@ namespace Dialogue
                     return;
                 }
             }
-            //TODO parse parameters as saying flags to set/unset
             fields.SetFlag(parameters);
         }
         

@@ -7,7 +7,7 @@ namespace Dialogue {
 
     [System.Serializable]
     public class DialogueEntry  {
-        public int ID;          //HACK needs some system to detect/resolve collisions
+        public int ID;
         public string Title;
         [SerializeField]
         private int speakerIndex;
@@ -24,7 +24,7 @@ namespace Dialogue {
             } }
 
         [TextArea]
-        public string Text;     // HACK Replace with LocalizedString when created
+        public string Text;
         public List<DialogueEventInstance> OnEnter = new List<DialogueEventInstance>();
         public List<CutsceneEvent> cutsceneEvents = new List<CutsceneEvent>();
         public TransitionList transitions;
@@ -44,12 +44,7 @@ namespace Dialogue {
             transitions = new TransitionList();
         }
 
-        /// <summary>
-        /// Returns a name for the 
-        /// </summary>
-        /// <param name="maxChars">If greater than zero, truncate if more than this many characters</param>
-        /// <param name="truncator">Appended to show name is truncated</param>
-        /// <returns></returns>
+        // Returns a name for the entry
         public string Name(bool prependID = false)
         {
             string name;

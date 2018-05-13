@@ -10,15 +10,11 @@ namespace Dialogue
     {
         public DialogueUI UISystem;
         public CutsceneManager cutsceneManager;
-        //HACK will later have multiple conversations to choose from
         public Conversation conversation;
-        [HideInInspector] //HACK figure out how to display normally
+        [HideInInspector]
         public DialogueEntry current;
-
-        //TODO have some way to save fields between scenes?
-
+        
         public FieldManager fields;
-        //TODO figure out proper way to access name->actor map
         [SerializeField]
         private StringActorDict actorDictionary;
         public Dictionary<string,DialogueActor> actors;
@@ -39,20 +35,8 @@ namespace Dialogue
             actors = actorDictionary.ToDictionary();
         }
 
-        // Use this for initialization
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void StartConversation()
         {
-            // TODO will need to be told which conversation to start
             current = conversation.Start;
             UISystem.OnConversationStart();
             OnConversationStart.Invoke();
@@ -63,7 +47,6 @@ namespace Dialogue
             bool entryFound = false;
             if (current != null)
             {
-                // HACK 
                 if (!current.isEnd)
                 {
                     Transition selectedTransition = current.transitions.SelectTransition(this);
@@ -124,12 +107,6 @@ namespace Dialogue
             {
                 return null;
             }
-        }
-
-        public void AssignActor(string key, DialogueActor actor)
-        {
-            //TODO have some kind of serializable dictionary so it can be done in editor
-            actors[key] = actor;
         }
 
         public void SetFlag(string flag)

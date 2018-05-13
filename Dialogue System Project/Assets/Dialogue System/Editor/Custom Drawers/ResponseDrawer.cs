@@ -12,7 +12,6 @@ namespace Dialogue
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            //TODO fix this up so it can appear both in editor and the custom window
             EditorGUILayout.BeginVertical();
             EditorGUILayout.PropertyField(property.FindPropertyRelative("Text"));
             EditorGUILayout.PropertyField(property.FindPropertyRelative("OnChosen"),true);

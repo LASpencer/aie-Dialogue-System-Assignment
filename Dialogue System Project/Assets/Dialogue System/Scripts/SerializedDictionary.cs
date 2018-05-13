@@ -7,6 +7,11 @@ using UnityEngine;
 
 namespace Dialogue
 {
+    /// <summary>
+    /// Generic class which can be used to make serializable dictionary classes
+    /// </summary>
+    /// <typeparam name="TKey">Key type</typeparam>
+    /// <typeparam name="TValue">Value type</typeparam>
     [Serializable]
     public class SerializedDictionary<TKey, TValue>
     {
@@ -21,6 +26,7 @@ namespace Dialogue
             values = new List<TValue>();
         }
 
+        // Converts Serialized Dictionary to a Dictionary object
         public Dictionary<TKey, TValue> ToDictionary()
         {
             Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
@@ -32,6 +38,7 @@ namespace Dialogue
             return dict;
         }
 
+        // Copies keys and values from a Dictionary object
         public void CopyDictionary(Dictionary<TKey,TValue> dictionary)
         {
             keys.Clear();

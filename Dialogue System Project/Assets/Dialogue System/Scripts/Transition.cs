@@ -8,6 +8,5 @@ namespace Dialogue
     public class Transition
     {
         public int TargetID;
-        // TODO include OnTransition event
     }
 }

@@ -8,8 +8,6 @@ namespace Dialogue
     {
 
         HashSet<string> flags;
-        // Might change all fields to a single hashtable, do boxing/unboxing here?
-        // What to do about collisions though?
         Dictionary<string, float> numbers;
 
         public FieldManager()
