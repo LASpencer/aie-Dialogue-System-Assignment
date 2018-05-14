@@ -19,8 +19,6 @@ namespace Dialogue
         
         public Action<EditorConnector> OnStartMakeTransition;
 
-        //TODO figure out how best to display, link nodes with dialogue entries + responses
-
         public bool isDragged;
 
         public List<EditorConnector> Connections;
@@ -55,7 +53,6 @@ namespace Dialogue
 
         public void ProcessEvents(Event e, DialogueEditorWindow window)
         {
-            // TODO clicking starts dragging , unclick stops, drag while dragging moves by delta
             switch (e.type)
             {
                 case EventType.MouseDown:
@@ -92,7 +89,7 @@ namespace Dialogue
                 case EventType.MouseUp:
                     switch (e.button)
                     {
-                        case 0: //LMB up
+                        case 0: //LMB up, stop dragging
                             isDragged = false;
                             break;
                         default:
@@ -102,6 +99,7 @@ namespace Dialogue
                 case EventType.MouseDrag:
                     if(e.button == 0 && isDragged)  // LMB
                     {
+                        // Drag the event
                         Drag(e.delta);
                         e.Use();
                         GUI.changed = true;

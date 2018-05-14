@@ -22,7 +22,7 @@ namespace Dialogue
 
         public void Draw()
         {
-            //TODO use handles to draw line from start to end, with triangle in middle
+            // use handles to draw line from start to end, with triangle in middle
             //TODO if target has connector to parent, offset start and end (relative to direction, so other line offset opposite way)
             // Selected connector is different colour
 
@@ -47,9 +47,6 @@ namespace Dialogue
 
         public void ProcessEvents(Event e, DialogueEditorWindow window)
         {
-            //TODO clicking selects the connection
-            // knows if it was clicked by checking mouse position min distance to line is small enough
-            
 
         }
 

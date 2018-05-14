@@ -27,7 +27,7 @@ namespace Dialogue
         public override void Drag(Vector2 delta)
         {
             base.Drag(delta);
-            response.Position = rect.position;
+            response.Position = rect.position;  // Save position of response
         }
 
         public override void Draw(bool selected)
@@ -53,6 +53,7 @@ namespace Dialogue
             SerializedObject conversation = window.SerializedConversation;
             if(conversation != null)
             {
+                // Delete response from conversation
                 conversation.Update();
                 SerializedProperty entry = SerializedConversationUtility.FindEntry(conversation, entryID);
                 entry.FindPropertyRelative("Responses").DeleteArrayElementAtIndex(index);
@@ -62,6 +63,7 @@ namespace Dialogue
 
         protected override void ProcessContextMenu(DialogueEditorWindow window)
         {
+            // Make context menu for right click
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Add Transition"), false, OnClickNewTransition);
             menu.AddItem(new GUIContent("Delete"), false, () => OnClickDelete(window));
@@ -70,7 +72,6 @@ namespace Dialogue
 
         protected internal override bool ConnectObjectToDialogueEntry(DialogueEditorWindow window, int targetID)
         {
-            //
             SerializedObject conversation = window.SerializedConversation;
             bool success = false;
             if(conversation != null)

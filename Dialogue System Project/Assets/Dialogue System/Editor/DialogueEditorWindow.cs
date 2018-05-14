@@ -276,7 +276,6 @@ namespace Dialogue
 
         private void ProcessResizeBarEvents(Event e)
         {
-            // 
             switch (e.type)
             {
                 case EventType.MouseDown:
@@ -320,12 +319,14 @@ namespace Dialogue
                         case 0:
                         if (selectedNode != null)
                         {
+                            // Unselect nodes when mouse up
                             selectedNode.isDragged = false;
                         }
                             break;
                         case 1:
                             break;
                         case 2:
+                            // Stop dragging canvas on mouse up
                             isMovingCanvas = false;
                             break;
                     }
@@ -368,7 +369,6 @@ namespace Dialogue
                     {
                         case 0: //LMB
                         case 1: //RMB
-                            // Don't think these matter to it
                             break;
                         case 2: // middle
                             // stop dragging canvas
@@ -380,8 +380,6 @@ namespace Dialogue
                     if (isMovingCanvas)
                     {
                         // If canvas being dragged, move the nodes
-
-                        //TODO drag applies offset to grid
                         foreach (EditorNode node in nodes)
                         {
                             node.Drag(e.delta);
@@ -408,7 +406,6 @@ namespace Dialogue
                     // If the node's consumed the event, break loop
                     if (e.type == EventType.Used)
                     {
-                        //TODO clicking on the node selects it, if node was selected move to end of list after iterating
                         break;
                     }
                 }
@@ -438,7 +435,6 @@ namespace Dialogue
 
         private void OnClickAddNode(Vector2 pos)
         {
-            // HACK will need to change once binding data to conversation entries
             if(serializedConversation != null)
             {
                 serializedConversation.Update();
@@ -447,20 +443,11 @@ namespace Dialogue
                 newEntry.FindPropertyRelative("position").vector2Value = pos;
                 serializedConversation.ApplyModifiedProperties();
             }
-
-            //EditorNode newNode = new EditorNode(pos, NODE_WIDTH, NODE_HEIGHT, dialogueNodeStyle, dialogueSelectedNodeStyle);
-            //SetupNodeActions(newNode);
-            
-            //// TODO add to coversation
-
-            //nodes.Add(newNode);
         }
 
         public void SelectNode(EditorNode node)
         {
             selectedNode = node;
-            //TODO deselect connection if one selected
-            
         }
 
 
@@ -515,8 +502,6 @@ namespace Dialogue
 
         void UpdateNodes()
         {
-            //TODO check if any nodes need to be created or destroyed
-            //TODO check if any transitions were changed
             HashSet<int> seenIDs = new HashSet<int>();
             List<EditorNode> toRemove = new List<EditorNode>();
             List<EditorNode> nodeToAdd = new List<EditorNode>();
@@ -526,6 +511,7 @@ namespace Dialogue
                 ResponseEditorNode responseNode = node as ResponseEditorNode;
                 if(dialogueNode != null)
                 {
+                    // Check if node is removed from conversation
                     seenIDs.Add(dialogueNode.entryID);
                     DialogueEntry entry = conversation.FindEntry(dialogueNode.entryID);
                     if (entry == null)
@@ -543,11 +529,12 @@ namespace Dialogue
                     }
                     else
                     {
+                        // Check responses on node
                         dialogueNode.entry = entry;
                         int maxIndexSeen = -1;
                         foreach (EditorConnector connection in dialogueNode.Connections)
                         {
-                            //todo check if there's responses to remove?
+                            //check if there's responses to remove
                             ResponseEditorNode childNode = connection.Target as ResponseEditorNode;
                             if(childNode != null)
                             {
@@ -579,9 +566,6 @@ namespace Dialogue
                             nodeToAdd.Add(newNode);
                         }
                     }
-                } else if (responseNode != null)
-                {
-                    //TODO maybe response needs removing if parent not found?
                 }
             }
             // Remove nodes and any connections to them
@@ -621,7 +605,6 @@ namespace Dialogue
                     targetsRequired = responseNode.response.transitions.transitions.Select(o => o.transition.TargetID).ToList();
                 } else 
                 {
-                    //TODO if node is response instead get values from that
                     targetsRequired = new List<int>();
                 }
 
@@ -765,7 +748,6 @@ namespace Dialogue
                 }
             }
             return startNode;
-            //TODO connections from responses to nodes
         }
     }
 }

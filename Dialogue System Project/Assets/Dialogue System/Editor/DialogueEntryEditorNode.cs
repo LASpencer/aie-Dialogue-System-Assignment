@@ -22,7 +22,6 @@ namespace Dialogue
         {
             title = StringUtility.TruncateString(entry.Name(), MAX_TITLE_CHARACTERS);//HACK may belong in OnGUI?
             base.Draw(selected);
-            // Now a box is drawn, draw the rest
         }
 
         public override void Drag(Vector2 delta)
@@ -35,7 +34,6 @@ namespace Dialogue
         {
             GenericMenu menu = new GenericMenu();
             menu.AddItem(new GUIContent("Add Transition"), false, OnClickNewTransition);
-            //TODO add response option
             menu.AddItem(new GUIContent("Add Response"), false, () => OnClickAddResponse(window));
             menu.AddSeparator("");
             menu.AddItem(new GUIContent("Delete"), false, () => OnClickDelete(window));
@@ -100,7 +98,6 @@ namespace Dialogue
                 SerializedProperty serializedEntry = SerializedArrayUtility.FindPropertyByValue(entries, "ID", entryID);
                 SerializedProperty serializedTarget = SerializedArrayUtility.FindPropertyByValue(entries, "ID", targetID);
                 SerializedProperty transitions = serializedEntry.FindPropertyRelative("transitions.transitions");
-                //TODO write some SerializedTransitionListUtility with an insert new transition function
                 int oldSize = transitions.arraySize;
                 transitions.InsertArrayElementAtIndex(oldSize);
                 SerializedProperty newTransition = transitions.GetArrayElementAtIndex(oldSize);
